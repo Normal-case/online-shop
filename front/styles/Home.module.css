@@ -2,6 +2,24 @@
   padding: 0 2rem;
 }
 
+.headerBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navBar {
+
+}
+
+.socialIcon {
+  display: flex;
+}
+
+.socialIcon li {
+  font-size: 2rem;
+}
+
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
