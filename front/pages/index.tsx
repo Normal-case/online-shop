@@ -33,6 +33,10 @@ export default function Home() {
         <li>팬츠</li>
         <li>언더웨어</li>
       </ul>
+
+      <div className={styles.mainCard}>
+        <Image src='/img/banner.webp' layout='fill' alt='' objectFit='contain' />
+      </div>
     </div>
   )
 }
