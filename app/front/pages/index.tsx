@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { InstagramFilled, TwitterOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
 
@@ -19,7 +20,7 @@ export default function Home() {
         <ul className={styles.socialIcon}>
           <li><SearchOutlined /></li>
           <li><ShoppingCartOutlined /></li>
-          <li><UserOutlined /></li>
+          <li><Link href="/user/login"><UserOutlined /></Link></li>
         </ul>
       </div>
       <ul className={styles.navBar}>

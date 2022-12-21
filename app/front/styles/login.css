@@ -9,7 +9,8 @@
 
 .user_option_container {
     position: relative;
-    width: 80%
+    width: 80%;
+    max-width: 1000px;
 }
 
 .user_option_register {
@@ -83,6 +84,10 @@
     color: #e8716d;
     letter-spacing: .1rem;
     font-family: 'Comfortaa', cursive;
+}
+
+.login_form {
+    text-align: center;
 }
 
 .forms_field {
