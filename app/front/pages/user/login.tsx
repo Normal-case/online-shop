@@ -1,19 +1,17 @@
 import React from 'react'
-import axios from 'axios'
+import API from '../../api-server'
 
 export default function Login() {
 
     const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = e.target as HTMLFormElement
-        console.log(formData.email.value)
-        axios.post('http://localhost:8000/login', {
+        const body = {
             email: formData.email.value,
             password: formData.password.value
-        }, {
-            headers: { "Content-Type": "application/json" }
-        })
-        .then(console.log)
+        }
+        API.loginPost(body)
+            .then(console.log)
     }
 
     return (
