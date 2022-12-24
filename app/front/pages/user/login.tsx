@@ -7,7 +7,7 @@ export default function Login() {
         e.preventDefault()
         const formData = e.target as HTMLFormElement
         const body = {
-            email: formData.email.value,
+            username: formData.username.value,
             password: formData.password.value
         }
         API.loginPost(body)
@@ -30,7 +30,7 @@ export default function Login() {
                         <form className="login_form" onSubmit={sendLoginForm}>
                             <div className="forms_fieldset">
                                 <div className="forms_field">
-                                    <input type="email" placeholder="Email" className="form_field_input" name="email" />
+                                    <input type="text" placeholder="username" className="form_field_input" name="username" />
                                 </div>
                                 <div className="forms_field">
                                     <input type="password" placeholder="Password" className="form_field_input" name="password" />
