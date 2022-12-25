@@ -17,14 +17,13 @@ const corsOption = {
     }
 }
 
+// routing
+const route = require('./routes')
+
 // middleware
 app.use(bodyParser.json())
 app.use(cors(corsOption))
-
-app.post('/login', (req, res) => {
-    console.log(req.body)
-    return res.json(req.body)
-})
+app.use('/', route)
 
 app.listen(PORT, () => {
     console.log(`Express server on ${PORT}`)
