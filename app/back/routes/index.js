@@ -1,15 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const dbo = require('../bin/db/connect')
-dbo.connectToServer()
+const ctrl = require('./route.ctrl')
 
-router.post('/login', (req, res) => {
-    console.log(req.body)
-    const dbConnect = dbo.getDB()
-    dbConnect.collection('user').findOne({ username: 'chan' }, (error, result) => {
-        console.log(result)
-    })
-    return res.json(req.body)
-})
+router.post('/login', ctrl.process.login)
 
 module.exports = router

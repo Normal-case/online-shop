@@ -4,6 +4,10 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 require('dotenv').config({ path: __dirname + '/../.env'})
 
+// custom module
+const dbo = require('./bin/db/connect')
+dbo.connectToServer()
+
 const PORT = process.env.PORT
 const app = express()
 
