@@ -2,13 +2,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const { MongoClient } = require('mongodb')
 require('dotenv').config({ path: __dirname + '/../.env'})
 
 const PORT = process.env.PORT
 const app = express()
 
-const whitelist = ["http://localhost:3000"]
+const whitelist = [process.env.CLIENT_DOMAIN]
 const corsOption = {
     origin: (origin, callback) => {
         if(whitelist.indexOf(origin) !== -1) {
