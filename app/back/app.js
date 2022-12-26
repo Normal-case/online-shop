@@ -2,8 +2,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const { MongoClient } = require('mongodb')
+require('dotenv').config({ path: __dirname + '/../.env'})
 
-const PORT = 8000
+const PORT = process.env.PORT
 const app = express()
 
 const whitelist = ["http://localhost:3000"]
