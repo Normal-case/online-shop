@@ -11,7 +11,13 @@ export default function Login() {
             password: formData.password.value
         }
         API.loginPost(body)
-            .then(console.log)
+            .then(res => {
+                if (res.data.success) {
+                    location.href = '/'
+                } else {
+                    alert(res.data.msg)
+                }
+            })
     }
 
     return (

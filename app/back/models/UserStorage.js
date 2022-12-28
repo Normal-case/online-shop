@@ -3,8 +3,8 @@ const dbo = require('../bin/db/connect')
 class UserStorage {
     static getUserInfo(username) {
         const dbConnect = dbo.getDB()
-        const data = dbConnect.collection('user').findOne({ username: username })
-        return data
+        const user = dbConnect.collection('user').findOne({ username: username })
+        return user
     }
 }
 

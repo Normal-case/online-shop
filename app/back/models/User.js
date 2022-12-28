@@ -9,7 +9,6 @@ class User {
     async login() {
         const body = this.body
         const data = await UserStorage.getUserInfo(body.username)
-        
         if (data) {
             if (data.password == body.password) {
                 return { success: true }
