@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import API from '../../api-server'
 
 export default function Login() {
@@ -46,6 +47,11 @@ export default function Login() {
                                 <input type="submit" value="LOG IN" className="form_login_button" />
                             </div>
                         </form>
+                        <div className='user_register_link'>
+                            <p className='user_register_url'>
+                                아직 회원이 아니신가요? <Link href="/user/register" legacyBehavior><a>회원가입하기</a></Link>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

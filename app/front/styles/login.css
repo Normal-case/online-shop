@@ -126,3 +126,19 @@
 .form_login_button:hover {
     filter: brightness(95%)
 }
+
+.user_register_link {
+    text-align: center;
+}
+
+.user_register_url {
+    margin-top: 50px;
+    font-family: 'NanumSquareNeo';
+    color: #b3b3b3;
+    
+}
+
+.user_register_url a {
+    color: #1EA4FF;
+    cursor: pointer;
+}
