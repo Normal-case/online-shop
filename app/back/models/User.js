@@ -19,6 +19,12 @@ class User {
             return { success: false, msg: "username does not exist" }
         }
     }
+
+    async register() {
+        const body = this.body
+        const response = await UserStorage.save(body)
+        return response
+    }
 }
 
 module.exports = User

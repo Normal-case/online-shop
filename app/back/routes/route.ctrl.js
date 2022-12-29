@@ -7,9 +7,10 @@ const process = {
         return res.json(response)
     },
 
-    register: (req, res) => {
-        console.log(req.body)
-        return res.send('get data')
+    register: async (req, res) => {
+        const user = new User(req.body)
+        const response = await user.register()
+        return res.json(response)
     }
 }
 
