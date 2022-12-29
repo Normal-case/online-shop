@@ -5,6 +5,11 @@ const process = {
         const user = new User(req.body)
         const response = await user.login()
         return res.json(response)
+    },
+
+    register: (req, res) => {
+        console.log(req.body)
+        return res.send('get data')
     }
 }
 

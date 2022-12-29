@@ -7,4 +7,8 @@ export default class API {
             headers: { "Content-Type": "application/json" }
         })
     }
+
+    static registerPost(body: Object) {
+        return axios.post(`${domain}/register`, body)
+    }
 }

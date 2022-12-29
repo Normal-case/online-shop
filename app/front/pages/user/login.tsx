@@ -7,7 +7,7 @@ export default function Login() {
     const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = e.target as HTMLFormElement
-        const body = {
+        const body: Object = {
             username: formData.username.value,
             password: formData.password.value
         }

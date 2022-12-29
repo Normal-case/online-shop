@@ -65,3 +65,8 @@
     color: #1EA4FF;
     cursor: pointer;
 }
+
+.error-message {
+    color: #FF6A89;
+    font-family: 'NanumSquareNeo';
+}
