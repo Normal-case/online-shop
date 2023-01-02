@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 const UserStorage = require('./UserStorage')
 const dbo = require('../bin/db/connect')
 
@@ -10,7 +12,7 @@ class User {
         const body = this.body
         const data = await UserStorage.getUserInfo(body.username)
         if (data) {
-            if (data.password == body.password) {
+            if (bcrypt.compareSync(body.password, data.password)) {
                 return { success: true }
             } else {
                 return { success: false, msg: "password is different" }
