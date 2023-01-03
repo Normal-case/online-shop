@@ -14,7 +14,8 @@ export default function Login() {
         API.loginPost(body)
             .then(res => {
                 if (res.data.success) {
-                    location.href = '/'
+                    // location.href = '/'
+                    console.log(res)
                 } else {
                     alert(res.data.msg)
                 }
