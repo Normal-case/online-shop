@@ -1,5 +1,12 @@
 const User = require("../models/User")
 
+const output = {
+    login: (req, res) => {
+        console.log(req.headers.authoriztion)
+        return res.send('hello')
+    }
+}
+
 const process = {
     login: async (req, res) => {
         const user = new User(req.body)
@@ -15,5 +22,6 @@ const process = {
 }
 
 module.exports = {
+    output,
     process
 }
