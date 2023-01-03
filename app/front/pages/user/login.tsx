@@ -9,7 +9,13 @@ export default function Login() {
     const router = useRouter()
     
     useEffect(() => {
-        API.loginGet().then(console.log)
+        API.loginGet().then(res => {
+            if(res.data.success) {
+                router.push('/user/profile', undefined, { shallow: true })
+            } else {
+                router.push('/user/login', undefined, { shallow: true })
+            }
+        })
     }, [])
 
     const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {

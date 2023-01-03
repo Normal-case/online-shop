@@ -1,9 +1,10 @@
 const User = require("../models/User")
 
 const output = {
-    login: (req, res) => {
-        console.log(req.headers.authoriztion)
-        return res.send('hello')
+    login: async (req, res) => {
+        const user = new User({})
+        const response = await user.accesstoken(req.headers.authoriztion)
+        return res.json(response)
     }
 }
 
