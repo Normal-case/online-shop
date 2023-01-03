@@ -1,8 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import API from '../../api-server'
+import { setCookie, getCookie } from 'cookies-next'
 
 export default function Login() {
+    const router = useRouter()
 
     const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -14,8 +17,8 @@ export default function Login() {
         API.loginPost(body)
             .then(res => {
                 if (res.data.success) {
-                    // location.href = '/'
-                    console.log(res)
+                    setCookie('accesstoken', res.data.accesstoken)
+                    router.push('/')
                 } else {
                     alert(res.data.msg)
                 }
