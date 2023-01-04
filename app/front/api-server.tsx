@@ -1,9 +1,13 @@
 import axios from 'axios'
+import { getCookie } from 'cookies-next'
 
 const domain: string = "http://localhost:8000"
 export default class API {
     static loginGet() {
-        return axios.get(`${domain}/login`)
+        const accesstoken = getCookie('accesstoken')
+        return axios.get(`${domain}/login`, {
+            headers: { 'Authorization': 'Bearer ' + accesstoken }
+        })
     }
 
     static loginPost(body: Object) {

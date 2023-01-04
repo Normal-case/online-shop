@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState ,useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -7,15 +7,17 @@ import { setToken } from '../../module/Token'
 
 export default function Login() {
     const router = useRouter()
-    
+    const [calledPush, setCalledPush] = useState(false)
+
     useEffect(() => {
+        if(calledPush) return
         API.loginGet().then(res => {
             if(res.data.success) {
-                router.push('/user/profile', undefined, { shallow: true })
-            } else {
-                router.push('/user/login', undefined, { shallow: true })
+                router.push('/user/profile')
             }
         })
+        setCalledPush(true)
+
     }, [])
 
     const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
