@@ -14,7 +14,9 @@ class User {
         if (data) {
             if (bcrypt.compareSync(body.password, data.password)) {
                 const payload = { username: body.username }
-                return { success: true, accesstoken: Token.manager.generateToken(payload) }
+                const AToken = Token.manager.generateToken(payload, true)
+                const RToken = Token.manager.generateToken(payload, false)
+                return { success: true, accesstoken: AToken, refreshtoken: RToken}
             } else {
                 return { success: false, msg: "password is different" }
             }
@@ -27,10 +29,10 @@ class User {
         if(!token) return { success: false, msg: "Token is empty"}
         const accesstoken = token.split(' ')[1]
         try {
-            const decoded = Token.manager.verifyToken(accesstoken)
+            const decoded = Token.manager.verifyToken(accesstoken, true)
             return { success: true }
         } catch {
-            return { success: false, msg: "Token is expired" }
+            return { success: false, msg: "Token is expired or invalid token" }
         }
     }
 

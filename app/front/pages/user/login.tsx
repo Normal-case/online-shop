@@ -12,6 +12,7 @@ export default function Login() {
     useEffect(() => {
         if(calledPush) return
         API.loginGet().then(res => {
+            console.log(res.data)
             if(res.data.success) {
                 router.replace('/user/profile')
             }
@@ -29,6 +30,7 @@ export default function Login() {
         }
         API.loginPost(body)
             .then(res => {
+                console.log(res.data)
                 if (res.data.success) {
                     setToken(res.data.accesstoken)
                     router.push('/')
