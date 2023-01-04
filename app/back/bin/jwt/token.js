@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const expireTime = 60 * 60
+const expireTime = '1h'
 
 const manager = {
     generateToken: (body) => {

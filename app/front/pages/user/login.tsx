@@ -13,7 +13,7 @@ export default function Login() {
         if(calledPush) return
         API.loginGet().then(res => {
             if(res.data.success) {
-                router.push('/user/profile')
+                router.replace('/user/profile')
             }
         })
         setCalledPush(true)
