@@ -5,10 +5,10 @@ const manager = {
         var secret, expiredTime
         if(isAccess) {
             secret = process.env.ACCESSTOKEN_SECRET
-            expiredTime = 30
+            expiredTime = '1h'
         } else {
             secret = process.env.REFRESHTOKEN_SECRET
-            expiredTime = 60 * 60 * 24 * 30
+            expiredTime = '30d'
         }
         return jwt.sign(body, secret, { expiresIn: expiredTime })
     },
