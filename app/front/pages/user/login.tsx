@@ -11,10 +11,14 @@ export default function Login() {
 
     useEffect(() => {
         if(calledPush) return
-        API.tokenVerify().then(res => {
+        API.tokenVerify()
+        .then(res => {
             if(res.data.success) {
                 router.replace('/user/profile')
             }
+        })
+        .catch(error => {
+            console.log(error)
         })
         setCalledPush(true)
 
@@ -30,7 +34,7 @@ export default function Login() {
         API.loginPost(body)
             .then(res => {
                 if (res.data.success) {
-                    setToken(res.data.accesstoken, res.data.refreshtoken)
+                    //setToken(res.data.accesstoken, res.data.refreshtoken)
                     router.push('/')
                 } else {
                     alert(res.data.msg)

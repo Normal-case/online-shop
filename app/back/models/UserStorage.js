@@ -25,6 +25,25 @@ class UserStorage {
             return { success: true }
         }
     }
+
+    static saveRefresh(username, refreshtoken) {
+        const dbConnect = dbo.getDB()
+        const current = new Date()
+        const body = {
+            username: username,
+            refresh: refreshtoken,
+            expiredAt: new Date(current.getTime() + 30000)
+        }
+        dbConnect.collection('refresh').findOne({ username: username }, (err, result) => {
+            if(err) { console.log (err)}
+            
+            if(result) {
+                // refresh token is already exist
+                dbConnect.collection('refresh').remove({ username: username })
+            }
+            dbConnect.collection('refresh').insertOne(body)
+        })
+    }
 }
 
 module.exports = UserStorage

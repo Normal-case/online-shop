@@ -16,6 +16,8 @@ class User {
                 const payload = { username: body.username }
                 const AToken = Token.manager.generateToken(payload, true)
                 const RToken = Token.manager.generateToken(payload, false)
+                // refresh token database save
+                UserStorage.saveRefresh(body.username, RToken)
                 return { success: true, accesstoken: AToken, refreshtoken: RToken}
             } else {
                 return { success: false, msg: "password is different" }
@@ -25,16 +27,16 @@ class User {
         }
     }
 
-    accesstoken(token) {
-        if(!token) return { success: false, msg: "Token is empty"}
-        const accesstoken = token.split(' ')[1]
-        try {
-            const decoded = Token.manager.verifyToken(accesstoken, true)
-            return { success: true }
-        } catch {
-            return { success: false, msg: "Token is expired or invalid token" }
-        }
-    }
+    // accesstoken(token) {
+    //     if(!token) return { success: false, msg: "Token is empty"}
+    //     const accesstoken = token.split(' ')[1]
+    //     try {
+    //         const decoded = Token.manager.verifyToken(accesstoken, true)
+    //         return { success: true }
+    //     } catch {
+    //         return { success: false, msg: "Token is expired or invalid token" }
+    //     }
+    // }
 
     async register() {
         const body = this.body
