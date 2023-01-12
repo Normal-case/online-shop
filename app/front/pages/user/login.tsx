@@ -34,7 +34,7 @@ export default function Login() {
         API.loginPost(body)
             .then(res => {
                 if (res.data.success) {
-                    //setToken(res.data.accesstoken, res.data.refreshtoken)
+                    setToken(res.data.accesstoken, res.data.refreshtoken)
                     router.push('/')
                 } else {
                     alert(res.data.msg)
