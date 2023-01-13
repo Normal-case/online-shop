@@ -27,17 +27,6 @@ class User {
         }
     }
 
-    // accesstoken(token) {
-    //     if(!token) return { success: false, msg: "Token is empty"}
-    //     const accesstoken = token.split(' ')[1]
-    //     try {
-    //         const decoded = Token.manager.verifyToken(accesstoken, true)
-    //         return { success: true }
-    //     } catch {
-    //         return { success: false, msg: "Token is expired or invalid token" }
-    //     }
-    // }
-
     async register() {
         const body = this.body
         const response = await UserStorage.save(body)

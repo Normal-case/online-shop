@@ -1,10 +1,15 @@
 const User = require("../models/User")
+const Token = require('../bin/jwt/token')
 
 const output = {
     auth: async (req, res) => {
-        // const user = new User({})
-        // const response = await user.accesstoken(req.headers.authorization)
         const response = { success: true }
+        return res.status(200).json(response)
+    },
+
+    refresh: async (req, res) => {
+        const AToken = Token.manager.generateToken({ username: req.username }, true)
+        const response = { success: true, accesstoken: AToken }
         return res.status(200).json(response)
     }
 }

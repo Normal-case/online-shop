@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
-const rounds = 10
-const dbo = require('../bin/db/connect')
+const rounds = 10 // hash amount
+const dbo = require('../bin/db/connect') // call database
+const refreshExpiredTime = 1000 * 60 * 60 * 24 * 30 * 1
 
 class UserStorage {
     static getUserInfo(username) {
@@ -32,7 +33,7 @@ class UserStorage {
         const body = {
             username: username,
             refresh: refreshtoken,
-            expiredAt: new Date(current.getTime() + 30000)
+            expiredAt: new Date(current.getTime() + refreshExpiredTime)
         }
         dbConnect.collection('refresh').findOne({ username: username }, (err, result) => {
             if(err) { console.log (err)}
