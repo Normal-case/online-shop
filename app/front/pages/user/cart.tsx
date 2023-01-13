@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { deleteCookie } from 'cookies-next'
 
 import API from '../../api-server'
 
-export default function Profile() {
+export default function Cart() {
+
     const router = useRouter()
 
     useEffect(() => {
@@ -16,18 +16,10 @@ export default function Profile() {
                 }
             })
     }, [])
-
-    const logout = () => {
-        deleteCookie('accesstoken')
-        deleteCookie('refreshtoken')
-        router.replace('/user/login')
-    }
-
     return (
         <div>
-            <h1>프로필 페이지입니다.</h1>
+            <h1>쇼핑카트</h1>
             <button><Link href='/'>Home</Link></button>
-            <button onClick={logout}>log out</button>
         </div>
     )
 }

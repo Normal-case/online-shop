@@ -5,7 +5,7 @@ const domain: string = "http://localhost:8000"
 export default class API {
     static tokenVerify() {
         const accesstoken = getCookie('accesstoken')
-        return axios.get(`${domain}/login`, {
+        return axios.get(`${domain}/user/auth`, {
             headers: { 'Authorization': 'Bearer ' + accesstoken }
         })
     }
