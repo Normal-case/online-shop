@@ -40,7 +40,7 @@ class UserStorage {
             
             if(result) {
                 // refresh token is already exist
-                dbConnect.collection('refresh').remove({ username: username })
+                dbConnect.collection('refresh').deleteOne({ username: username })
             }
             dbConnect.collection('refresh').insertOne(body)
         })

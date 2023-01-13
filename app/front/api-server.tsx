@@ -10,6 +10,13 @@ export default class API {
         })
     }
 
+    static refreshVerify() {
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.get(`${domain}/user/auth/refresh`, {
+            headers: { 'Authorization': 'Bearer ' + refreshtoken }
+        })
+    }
+
     static loginPost(body: Object) {
         return axios.post(`${domain}/login`, body, {
             headers: { "Content-Type": "application/json" }

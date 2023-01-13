@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { deleteCookie } from 'cookies-next'
 
 import API from '../../api-server'
+import { setToken } from '../../module/Token'
 
 export default function Profile() {
     const router = useRouter()
@@ -12,7 +13,16 @@ export default function Profile() {
         API.tokenVerify()
             .catch(error => {
                 if(error) {
-                    router.replace('/user/login')
+                    API.refreshVerify()
+                        .then(res => {
+                            setToken(res.data.accesstoken, null)
+                        })
+                        .catch(error => {
+                            if(error) {
+                                router.replace('/user/login')
+                            }
+                        })
+                    // router.replace('/user/login')
                 }
             })
     }, [])
