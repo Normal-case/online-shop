@@ -1,29 +1,27 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { deleteCookie } from 'cookies-next'
+import { deleteCookie, getCookie } from 'cookies-next'
 
 import API from '../../api-server'
-import { setToken } from '../../module/Token'
+import { setToken, tokenCheck } from '../../module/Token'
 
 export default function Profile() {
     const router = useRouter()
 
     useEffect(() => {
         API.tokenVerify()
-            .catch(error => {
-                if(error) {
-                    API.refreshVerify()
-                        .then(res => {
-                            setToken(res.data.accesstoken, null)
-                        })
-                        .catch(error => {
-                            if(error) {
-                                router.replace('/user/login')
-                            }
-                        })
-                    // router.replace('/user/login')
-                }
+            .catch(err => {
+                const RToken = getCookie('refreshtoken')
+                if(!RToken) router.replace('/user/login')
+
+                API.refreshVerify()
+                    .then(res => {
+                        setToken(res.data.accesstoken, '')
+                    })
+                    .catch(err => {
+                        router.replace('/user/login')
+                    })
             })
     }, [])
 
