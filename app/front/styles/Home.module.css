@@ -4,7 +4,7 @@
 
 .headerBar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 12rem;
   align-items: center;
 }
@@ -17,6 +17,7 @@
 .navBar {
   display: flex;
   justify-content: center;
+  padding: 0;
 }
 
 .navBar li {
@@ -25,6 +26,7 @@
 }
 
 .socialIcon {
+  padding: 0;
   display: flex;
 }
 

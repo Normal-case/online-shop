@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { deleteCookie } from 'cookies-next'
 
 import { tokenCheck } from '../../module/Token'
+import Header from '../../component/header'
 
 export default function Profile() {
     const router = useRouter()
@@ -27,6 +28,7 @@ export default function Profile() {
 
     return (
         <div>
+            <Header />
             <h1>프로필 페이지입니다.</h1>
             <button><Link href='/'>Home</Link></button>
             <button onClick={logout}>log out</button>
