@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import { useRouter } from 'next/router'
 import { InstagramFilled, TwitterOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
+
 import { tokenCheck } from '../module/Token'
 
 export default function Header() {
-
+    const router = useRouter()
     const [loginFlag, setLoginFlag] = useState('로그인')
 
     const checkAuth = async () => {
@@ -16,6 +18,15 @@ export default function Header() {
     useEffect(() => {
         checkAuth()
     }, [])
+
+    const loginOrOut = () => {
+        if(loginFlag === '로그인') {
+            router.replace('/user/login')
+        } else {
+            
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.headerBar}>
@@ -30,7 +41,7 @@ export default function Header() {
                 </div>
 
                 <ul className={styles.functionIcon}>
-                    <li><div>{loginFlag}</div></li>
+                    <li><div onClick={loginOrOut}>{loginFlag}</div></li>
                     <li><SearchOutlined /></li>
                     <li><Link href="/user/cart"><ShoppingCartOutlined /></Link></li>
                     <li><Link href="/user/login"><UserOutlined /></Link></li>

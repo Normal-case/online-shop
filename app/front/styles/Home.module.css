@@ -53,6 +53,11 @@
   line-height: 0;
 }
 
+.functionIcon li div:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .navBar {
   display: flex;
   justify-content: center;

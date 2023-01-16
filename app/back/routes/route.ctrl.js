@@ -11,6 +11,11 @@ const output = {
         const AToken = Token.manager.generateToken({ username: req.username }, true)
         const response = { success: true, accesstoken: AToken }
         return res.status(200).json(response)
+    },
+
+    logout: (req, res) => {
+        const response = { success: true }
+        return res.status(200).json(response)
     }
 }
 

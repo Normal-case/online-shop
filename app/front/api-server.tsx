@@ -26,4 +26,8 @@ export default class API {
     static registerPost(body: Object) {
         return axios.post(`${domain}/register`, body)
     }
+
+    static logOut() {
+        return axios.get()
+    }
 }
