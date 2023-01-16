@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { InstagramFilled, TwitterOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
+import { tokenCheck } from '../module/Token'
 
 export default function Header() {
+
+    const [loginFlag, setLoginFlag] = useState('로그인')
+
+    const checkAuth = async () => {
+        const result = await tokenCheck()
+        if(result.success) setLoginFlag('로그아웃')
+    }
+
+    useEffect(() => {
+        checkAuth()
+    }, [])
     return (
         <div className={styles.container}>
             <div className={styles.headerBar}>
@@ -17,9 +29,10 @@ export default function Header() {
                     <h1>Online Shop</h1>
                 </div>
 
-                <ul className={styles.socialIcon}>
+                <ul className={styles.functionIcon}>
+                    <li><div>{loginFlag}</div></li>
                     <li><SearchOutlined /></li>
-                    <li><ShoppingCartOutlined /></li>
+                    <li><Link href="/user/cart"><ShoppingCartOutlined /></Link></li>
                     <li><Link href="/user/login"><UserOutlined /></Link></li>
                 </ul>
                 

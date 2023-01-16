@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { setCookie, getCookie } from 'cookies-next'
+import { setCookie, getCookie, deleteCookie } from 'cookies-next'
 
 import API from '../api-server'
 
@@ -17,7 +17,9 @@ const tokenCheck = async () => {
         return { success: true }
     } catch {
         const RToken = getCookie('refreshtoken')
-        if(!RToken) return { success: false, msg: 'refresh token empty' }
+        if(!RToken) {
+            return { success: false, msg: 'refresh token empty' }
+        }
 
         try {
             const RTVerify = await API.refreshVerify()
