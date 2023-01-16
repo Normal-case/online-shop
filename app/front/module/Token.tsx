@@ -27,31 +27,6 @@ const tokenCheck = async () => {
             return { success: false, msg: 'refresh token unverify' }
         }
     }
-    
-    // if(!ATVerify.data.success) {
-    //     const RToken = getCookie('refreshtoken')
-    //     if(!RToken) return false
-    //     const RTVerify = await API.refreshVerify()
-    //     if(!RTVerify.data.success) return false
-    //     setToken(RTVerify.data.accesstoken, '')
-
-    // }
-    // API.tokenVerify()
-    //     .catch(error => {
-    //         const RToken = getCookie('refreshtoken')
-    //         if(!RToken) {
-    //             boolV = false
-    //             console.log(`catch inner ${boolV}`)
-    //         } 
-    //         API.refreshVerify()
-    //             .then(res => {
-    //                 setToken(res.data.accesstoken, '')
-    //             })
-    //             .catch(error => {
-    //                 boolV = false
-    //             })
-    //     })
-    // console.log(`return front ${boolV}`)
 }
 
 export { setToken, tokenCheck }

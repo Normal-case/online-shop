@@ -2,20 +2,23 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import API from '../../api-server'
+import { tokenCheck } from '../../module/Token'
 
 export default function Cart() {
 
     const router = useRouter()
 
+    const checkAuth = async () => {
+        const result = await tokenCheck()
+        if(!result.success) {
+            router.replace('/user/login')
+        }
+    }
+
     useEffect(() => {
-        API.tokenVerify()
-            .catch(error => {
-                if(error) {
-                    router.replace('/user/login')
-                }
-            })
+        checkAuth()
     }, [])
+    
     return (
         <div>
             <h1>쇼핑카트</h1>

@@ -1,27 +1,23 @@
-import React, { useState ,useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import API from '../../api-server'
-import { setToken } from '../../module/Token'
+import { setToken, tokenCheck } from '../../module/Token'
 
 export default function Login() {
     const router = useRouter()
-    const [calledPush, setCalledPush] = useState(false)
+
+    const checkAuth = async () => {
+        /* useEffect couldn't use async function */
+        const result = await tokenCheck()
+        if (result.success) {
+            router.replace('/user/profile')
+        }
+    }
 
     useEffect(() => {
-        if(calledPush) return
-        API.tokenVerify()
-        .then(res => {
-            if(res.data.success) {
-                router.replace('/user/profile')
-            }
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        setCalledPush(true)
-
+        checkAuth()
     }, [])
 
     const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {

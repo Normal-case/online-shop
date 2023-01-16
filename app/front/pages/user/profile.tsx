@@ -1,28 +1,22 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { deleteCookie, getCookie } from 'cookies-next'
+import { deleteCookie } from 'cookies-next'
 
-import API from '../../api-server'
-import { setToken, tokenCheck } from '../../module/Token'
+import { tokenCheck } from '../../module/Token'
 
 export default function Profile() {
     const router = useRouter()
 
+    const checkAuth = async () => {
+        /* useEffect couldn't use async function */
+        const result = await tokenCheck()
+        if (!result.success) {
+            router.replace('/user/login')
+        }
+    }
     useEffect(() => {
-        API.tokenVerify()
-            .catch(err => {
-                const RToken = getCookie('refreshtoken')
-                if(!RToken) router.replace('/user/login')
-
-                API.refreshVerify()
-                    .then(res => {
-                        setToken(res.data.accesstoken, '')
-                    })
-                    .catch(err => {
-                        router.replace('/user/login')
-                    })
-            })
+        checkAuth()
     }, [])
 
     const logout = () => {
