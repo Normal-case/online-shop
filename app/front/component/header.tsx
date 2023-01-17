@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { InstagramFilled, TwitterOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
 
 import { tokenCheck } from '../module/Token'
+import API from '../api-server'
 
 export default function Header() {
     const router = useRouter()
@@ -20,11 +21,10 @@ export default function Header() {
     }, [])
 
     const loginOrOut = () => {
-        if(loginFlag === '로그인') {
-            router.replace('/user/login')
-        } else {
-            
+        if(loginFlag === '로그아웃') {
+            API.logout()
         }
+        router.replace('/user/login')
     }
 
     return (
