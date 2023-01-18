@@ -21,8 +21,26 @@
 
 .user_option_register_contents {
     width: 50%;
-    padding: 75px 45px;
-    color: #fff;
+    padding: 45px 45px;
+}
+
+.social_login_button {
+    background-color: #fff;
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px 0;
+    border-radius: 1rem;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 1.3rem;
+}
+
+.anticon-google {
+    color: #CD1039;
+}
+
+.anticon-facebook {
+    color: #0064FF;
 }
 
 .user_register_title {
@@ -142,3 +160,4 @@
     color: #1EA4FF;
     cursor: pointer;
 }
+
