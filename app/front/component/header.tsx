@@ -37,7 +37,7 @@ export default function Header() {
                 </ul>
 
                 <div className={styles.mainName}>
-                    <h1>Online Shop</h1>
+                    <h1><Link href="/">Online Shop</Link></h1>
                 </div>
 
                 <ul className={styles.functionIcon}>

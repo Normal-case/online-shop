@@ -1,0 +1,37 @@
+.main_container {
+    text-align: center;
+}
+
+.main_title {
+    margin-top: 4rem;
+    font-family: 'NanumSquareNeo';
+}
+
+.profile_layout {
+    display: flex;
+    width: 70%;
+    height: 50vh;
+    margin: 0 auto;
+    border-top: 1px solid #dcdcdc;
+}
+
+.layout_menubar {
+    background-color: #6482FF;
+    color: #fff;
+}
+
+.layout_menubar ul {
+    padding: 0;
+}
+
+.layout_menubar ul li {
+    padding: 1rem 1rem;
+    cursor: pointer;
+
+    font-size: 20px;
+    font-family: 'NanumSquareNeo';
+}
+
+.layout_menubar ul li:hover {
+    background-color: #14148C;
+}
