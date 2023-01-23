@@ -46,10 +46,12 @@ export default function Login() {
                 {/* 소셜 로그인을 하는 공간 */}
                 <div className="user_option_register">
                     <div className="user_option_register_contents">
+                        <a href='http://localhost:8000/auth/google'>
                         <div className='social_login_button google'>
                             <GoogleOutlined /> &nbsp;
                             <span>구글 로그인</span>
                         </div>
+                        </a>
                         <div className='social_login_button facebook'>
                             <FacebookOutlined /> &nbsp;
                             <span>페이스북 로그인</span>
