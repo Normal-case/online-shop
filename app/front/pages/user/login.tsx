@@ -3,14 +3,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { GoogleOutlined, FacebookOutlined } from '@ant-design/icons'
-import { signIn, useSession } from 'next-auth/react'
 
 import API from '../../api-server'
 import { setToken, tokenCheck } from '../../module/Token'
 
 export default function Login() {
     const router = useRouter()
-    const { data, status } = useSession()
 
     const checkAuth = async () => {
         /* useEffect couldn't use async function */
@@ -21,7 +19,6 @@ export default function Login() {
     }
 
     useEffect(() => {
-        console.log(data)
         checkAuth()
     }, [])
 
@@ -49,7 +46,7 @@ export default function Login() {
                 {/* 소셜 로그인을 하는 공간 */}
                 <div className="user_option_register">
                     <div className="user_option_register_contents">
-                        <div className='social_login_button google' onClick={() => signIn()}>
+                        <div className='social_login_button google'>
                             <GoogleOutlined /> &nbsp;
                             <span>구글 로그인</span>
                         </div>
