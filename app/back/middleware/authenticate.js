@@ -47,7 +47,6 @@ const refreshAuth = ((req, res, next) => {
 
 const logout = ((req, res, next) => {
     if(req.headers.access && req.headers.refresh) {
-        console.log('1')
         const AToken = req.headers.access.split(' ')[1]
         const RToken = req.headers.refresh.split(' ')[1]
         jwt.verify(AToken, process.env.ACCESSTOKEN_SECRET, (err, decoded) => {
@@ -77,7 +76,6 @@ const logout = ((req, res, next) => {
             }
         })
     } else if (!req.headers.access && req.headers.refresh) {
-        console.log('2')
         const RToken = req.headers.refresh.split(' ')[1]
         jwt.verify(RToken, process.env.REFRESHTOKEN_SECRET, async (err, decoded) => {
             if(err) return res.status(400).json({ success: false, msg: 'token is unverify'})
@@ -94,7 +92,6 @@ const logout = ((req, res, next) => {
             }
         })
     } else if (req.headers.access && !req.headers.refresh) {
-        console.log('3')
         const AToken = req.headers.access.split(' ')[1]
         jwt.verify(AToken, process.env.ACCESSTOKEN_SECRET, (err, decoded) => {
             if(err) return res.status(400).json({ success: false, msg: 'token is unverify'})
@@ -106,7 +103,6 @@ const logout = ((req, res, next) => {
             }
         })
     } else {
-        console.log('4')
         return res.status(400).json({ success: false, msg: 'token is empty'})
     }
 })

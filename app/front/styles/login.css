@@ -21,40 +21,8 @@
 
 .user_option_register_contents {
     width: 50%;
-    padding: 45px 45px;
-}
-
-.social_login_button {
-    background-color: #fff;
-    color: #787878;
-    text-align: center;
-    margin: 20px 0;
-    padding: 15px 0;
-    border-radius: 1rem;
-    cursor: pointer;
-
-    font-family: 'NanumSquareNeo';
-    font-size: 1.3rem;
-}
-
-.social_login_button:hover {
-    background-color: #d2d2d2;
-}
-
-/* .google:hover {
-    background-color: #FF8E99;
-}
-
-.facebook:hover {
-    background-color: #289AFF;
-} */
-
-.anticon-google {
-    color: #CD1039;
-}
-
-.anticon-facebook {
-    color: #0064FF;
+    padding: 75px 45px;
+    color: #fff;
 }
 
 .user_register_title {
@@ -174,4 +142,3 @@
     color: #1EA4FF;
     cursor: pointer;
 }
-

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { setCookie, getCookie, deleteCookie } from 'cookies-next'
+import { setCookie, getCookie } from 'cookies-next'
 
 import API from '../api-server'
 

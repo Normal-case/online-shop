@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { GoogleOutlined, FacebookOutlined } from '@ant-design/icons'
 
 import API from '../../api-server'
 import { setToken, tokenCheck } from '../../module/Token'
@@ -43,26 +41,13 @@ export default function Login() {
     return (
         <div className="user">
             <div className="user_option_container">
-                {/* 소셜 로그인을 하는 공간 */}
                 <div className="user_option_register">
                     <div className="user_option_register_contents">
-                        <a href='http://localhost:8000/auth/google'>
-                        <div className='social_login_button google'>
-                            <GoogleOutlined /> &nbsp;
-                            <span>구글 로그인</span>
-                        </div>
-                        </a>
-                        <div className='social_login_button facebook'>
-                            <FacebookOutlined /> &nbsp;
-                            <span>페이스북 로그인</span>
-                        </div>
-                        <div className='social_login_button facebook'>
-                            <Image src='/img/btnG_naver.png' width={20} height={20} alt='' /> &nbsp;
-                            <span>네이버 로그인</span>
-                        </div>
+                        <h2 className="user_register_title">아직 회원이 아니신가요?</h2>
+                        <p className="user_register_description">회원가입 후 다양한 이벤트를 체험해보세요. 많은 혜택을 통해 저렴한 가격으로 예쁜 옷을 구매할 수 있습니다.</p>
+                        <button className="user_register_button">회원가입</button>
                     </div>
                 </div>
-                {/* 아이디와 비밀번호를 입력하는 div */}
                 <div className="user_login_form">
                     <div className="user_login_form_container">
                         <h2 className="login_form_title">LOGIN</h2>
