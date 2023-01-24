@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { deleteCookie, getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next'
 
 const domain: string = "http://localhost:8000"
 export default class API {
@@ -27,13 +27,7 @@ export default class API {
         return axios.post(`${domain}/register`, body)
     }
 
-    static logout() {
-        const accesstoken = getCookie('accesstoken')
-        const refreshtoken = getCookie('refreshtoken')
-        deleteCookie('accesstoken')
-        deleteCookie('refreshtoken')
-        return axios.get(`${domain}/user/logout`, {
-            headers: { 'access': 'Bearer ' + accesstoken, 'refresh': 'Bearer ' + refreshtoken}
-        })
+    static logOut() {
+        return axios.get()
     }
 }
