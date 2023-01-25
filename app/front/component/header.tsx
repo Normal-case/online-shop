@@ -23,6 +23,8 @@ export default function Header() {
     const loginOrOut = () => {
         if(loginFlag === '로그아웃') {
             API.logout()
+                .then(console.log)
+                .catch(console.log)
         }
         router.replace('/user/login')
     }

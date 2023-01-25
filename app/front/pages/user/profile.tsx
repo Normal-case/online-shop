@@ -36,8 +36,13 @@ export default function Profile() {
                         <li>배송중</li>
                     </ul>
                 </div>
-                <div>
-                    <p>아직 정보가 없습니다.</p>
+                <div className={styles.layout_body}>
+                    <div className={styles.body_contents}>
+                        <p>아직 프로필이 없습니다. 프로필 등록을 해주세요</p>
+                        <div className={styles.profile_button}>
+                            프로필 등록하기
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

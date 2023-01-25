@@ -22,6 +22,7 @@
 
 .layout_menubar ul {
     padding: 0;
+    min-width: 130px;
 }
 
 .layout_menubar ul li {
@@ -34,4 +35,36 @@
 
 .layout_menubar ul li:hover {
     background-color: #14148C;
+}
+
+.layout_body {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.body_contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-family: 'NanumSquareNeo';
+}
+
+.profile_button {
+    border: 1px solid #6482FF;
+    border-radius: 20px;
+    padding: 1rem 1rem;
+    background-color: #6482FF;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    color: #fff;
+}
+
+.profile_button:hover {
+    background-color: #14148C;
+    border: 1px solid #14148C;
 }

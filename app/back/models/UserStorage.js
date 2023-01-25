@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const { ObjectId } = require('mongodb')
 const rounds = 10 // hash amount
 const dbo = require('../bin/db/connect') // call database
 const refreshExpiredTime = 1000 * 60 * 60 * 24 * 30 * 1
@@ -17,12 +18,21 @@ class UserStorage {
             return { success: false, msg: "username is already exist" }
         } else {
             const encryptedPs = bcrypt.hashSync(userInfo.password, rounds)
+            const id = ObjectId()
             const body = {
                 name: userInfo.name,
                 username: userInfo.username,
-                password: encryptedPs
+                password: encryptedPs,
+                _id: id
+            }
+            const profile = {
+                name: userInfo.name,
+                point: 0,
+                address: '',
+                _id: id
             }
             dbConnect.collection('user').insertOne(body)
+            dbConnect.collection('profile').insertOne(profile)
             return { success: true }
         }
     }
