@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import DaumPostcodeEmbed from 'react-daum-postcode'
 
 import { tokenCheck } from '../../module/Token'
 import Header from '../../component/header'
@@ -57,8 +58,14 @@ export default function Profile() {
                                 <p>보유쿠폰: 0개</p>
                             </div>
                         </div>
-                        <div>
-                            주소: 
+                        <div className={styles.address}>
+                            <div className={styles.address_head}>
+                                주소: <input type='text' placeholder='우편번호' disabled></input><button>우편번호 찾기</button>
+                            </div>
+                            <div className={styles.address_tail}>
+                                <input type='text' placeholder='주소' disabled></input><br />
+                                <input type='text' placeholder='상세주소' disabled></input>
+                            </div>
                         </div>
                         <div className={styles.profile_button}>
                             프로필 수정하기

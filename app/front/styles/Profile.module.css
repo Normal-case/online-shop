@@ -83,3 +83,31 @@
     padding: 1rem 1rem;
     padding-left: 9rem;
 }
+
+.address input {
+    padding: .5rem .2rem;
+    border: 1px solid #aaaaaa;
+    outline: 0;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+}
+
+.address button {
+    border: 1px solid #aaaaaa;
+    padding: .5rem .5rem;
+    margin-left: 5px;
+    background-color: #aaaaaa;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+}
+
+.address_head {
+    margin-bottom: .6rem;
+}
+
+.address_tail input {
+    width: 100%;
+    margin: .5rem 0;
+}

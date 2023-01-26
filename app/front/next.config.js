@@ -7,14 +7,6 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
   },
-  remotePatterns: [
-    {
-      protocol: 'http',
-      hostname: 'example.com',
-      port: '',
-      pathname: '/profile/**'
-    }
-  ],
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
