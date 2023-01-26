@@ -28,3 +28,7 @@ ul {
     background: black;
   }
 }
+
+#profile_image_active {
+  cursor: pointer;
+}

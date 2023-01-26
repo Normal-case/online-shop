@@ -56,6 +56,7 @@
     border: 1px solid #6482FF;
     border-radius: 20px;
     padding: 1rem 1rem;
+    margin-top: 3rem;
     background-color: #6482FF;
     cursor: pointer;
 
@@ -77,11 +78,27 @@
 .profile_image {
     display: inline-block;
     margin-top: 30px;
+    
+}
+
+.profile_image img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
 }
 
 .card_contents {
     padding: 1rem 1rem;
     padding-left: 9rem;
+}
+
+.card_contents input {
+    padding: .5rem .2rem;
+    border: 1px solid #aaaaaa;
+    outline: 0;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
 }
 
 .address input {
@@ -93,11 +110,22 @@
     font-size: 20px;
 }
 
-.address button {
+.address_button {
     border: 1px solid #aaaaaa;
     padding: .5rem .5rem;
     margin-left: 5px;
     background-color: #aaaaaa;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+}
+
+.address_button_active {
+    border: 1px solid #FFA01E;
+    padding: .5rem .5rem;
+    margin-left: 5px;
+    background-color: #FFA01E;
+    cursor: pointer;
 
     font-family: 'NanumSquareNeo';
     font-size: 20px;
@@ -110,4 +138,52 @@
 .address_tail input {
     width: 100%;
     margin: .5rem 0;
+}
+
+.open_modal {
+    width: 700px;
+    z-index: 99;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid #aaaaaa;
+}
+
+.modal {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal_header {
+    position: relative;
+    padding: 1rem 1rem;
+    background-color: #f1f1f1;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.modal_header button {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    font-size: 21px;
+    font-weight: 700;
+    text-align: center;
+    color: #999;
+    background-color: transparent;
 }

@@ -11,7 +11,13 @@ import API from '../../api-server'
 export default function Profile() {
     const router = useRouter()
     const [profile, profileSet] = useState()
-    const [src, srcSet] = useState('')
+    const [src, setSrc] = useState('')
+    const [profileImage, setProfileImage] = useState()
+    const [updateProfile, setUpdateProfile] = useState(false)
+    const [modal, setModal] = useState(false)
+    const [zoneCode, setZoneCode] = useState()
+    const [address, setAddress] = useState()
+    const [detail, setDetail] = useState()
 
     const checkAuth = async () => {
         /* useEffect couldn't use async function */
@@ -25,10 +31,33 @@ export default function Profile() {
         API.profile()
             .then(res => {
                 profileSet(res.data.profile)
-                srcSet(res.data.profile.pImage)
+                setSrc(res.data.profile.pImage)
             })
             .catch(console.log)
     }, [])
+
+    const profileUpdate = () => {
+        if(updateProfile) {
+            setUpdateProfile(false)
+        } else {
+            setUpdateProfile(true)
+        }
+    }
+
+    const addressInput = () => {
+        if(!updateProfile) return
+        setModal(true)
+    }
+
+    const handleComplete = (data: Object) => {
+        setModal(false)
+        setAddress(data.address)
+        setZoneCode(data.zonecode)
+    }
+
+    const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setProfileImage(URL.createObjectURL(e.target.files[0]))
+    }
 
     return (
         <div className={styles.main_container}>
@@ -44,35 +73,63 @@ export default function Profile() {
                         <li>상품준비중</li>
                         <li>출고시작</li>
                         <li>배송중</li>
+                        <li>배송완료</li>
                     </ul>
                 </div>
                 <div className={styles.layout_body}>
                     <div className={styles.body_contents}>
                         <div className={styles.profile_card}>
                             <div className={styles.profile_image}>
-                                <Image loader={() => src} src={src} width={70} height={70} alt='' />
+                                {
+                                    updateProfile ?  
+                                    <div><label htmlFor='input-image' id='profile_image_active'>
+                                    { profileImage ?
+                                        <img src={profileImage} width={70} height={70} alt='' /> :
+                                        <Image loader={() => src} src={src} width={70} height={70} alt='' />
+                                    }</label>
+                                    <input type='file' id='input-image' accept='image/*' style={{ display: 'none'}} onChange={(e) => handleProfileImage(e)} /></div> :
+                                    <Image loader={() => src} src={src} width={70} height={70} alt='' />
+                                }
+                                
                             </div>
+                            <input type='file' style={{ display: 'none'}} />
                             <div className={styles.card_contents}>
-                                <p>{profile?.name}님</p>
+                                <p>
+                                    {updateProfile 
+                                    ? <input type='text' placeholder='닉네임' value={profile.name}></input> 
+                                    : profile?.name + '님' }
+                                </p>
                                 <p>적립포인트: {profile?.point}p</p>
                                 <p>보유쿠폰: 0개</p>
                             </div>
                         </div>
                         <div className={styles.address}>
                             <div className={styles.address_head}>
-                                주소: <input type='text' placeholder='우편번호' disabled></input><button>우편번호 찾기</button>
+                                주소: <input type='text' placeholder='우편번호' value={zoneCode} disabled></input><button className={updateProfile ? styles.address_button_active : styles.address_button} onClick={addressInput}>우편번호 찾기</button>
                             </div>
                             <div className={styles.address_tail}>
-                                <input type='text' placeholder='주소' disabled></input><br />
-                                <input type='text' placeholder='상세주소' disabled></input>
+                                <input type='text' placeholder='주소' value={address} disabled></input><br />
+                                <input type='text' placeholder='상세주소' disabled={updateProfile ? false : true}></input>
                             </div>
                         </div>
-                        <div className={styles.profile_button}>
-                            프로필 수정하기
+                        <div className={styles.profile_button} onClick={() => profileUpdate()}>
+                            {updateProfile ? '저장' : '프로필 수정하기'}
                         </div>
                     </div>
                 </div>
             </div>
+            {
+                modal ? 
+                <div className={styles.modal}>
+                    <div className={styles.open_modal}>
+                        <div className={styles.modal_header}>
+                            주소를 입력해주세요. <button onClick={() => setModal(false)}>&times;</button>
+                        </div>
+                        <DaumPostcodeEmbed onComplete={handleComplete} />
+                    </div>
+                </div>
+                : null
+            }
         </div>
     )
 }
