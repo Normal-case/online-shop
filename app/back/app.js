@@ -28,6 +28,7 @@ const route = require('./routes')
 // middleware
 app.use(bodyParser.json())
 app.use(cors(corsOption))
+app.use(express.static('files'))
 app.use('/', route)
 
 app.listen(PORT, () => {

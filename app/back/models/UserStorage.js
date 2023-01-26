@@ -3,6 +3,7 @@ const { ObjectId } = require('mongodb')
 const rounds = 10 // hash amount
 const dbo = require('../bin/db/connect') // call database
 const refreshExpiredTime = 1000 * 60 * 60 * 24 * 30 * 1
+const domain = process.env.SERVER_DOMAIN
 
 class UserStorage {
     static getUserInfo(username) {
@@ -26,9 +27,11 @@ class UserStorage {
                 _id: id
             }
             const profile = {
+                username: userInfo.username,
                 name: userInfo.name,
                 point: 0,
                 address: '',
+                pImage: `${domain}/profile/profile.png`,
                 _id: id
             }
             dbConnect.collection('user').insertOne(body)
@@ -54,6 +57,12 @@ class UserStorage {
             }
             dbConnect.collection('refresh').insertOne(body)
         })
+    }
+
+    static profileGet(username) {
+        const dbConnect = dbo.getDB()
+        const profile = dbConnect.collection('profile').findOne({ username: username })
+        return profile
     }
 }
 

@@ -36,4 +36,11 @@ export default class API {
             headers: { 'access': 'Bearer ' + accesstoken, 'refresh': 'Bearer ' + refreshtoken}
         })
     }
+
+    static profile() {
+        const user = getCookie('user')
+        return axios.get(`${domain}/user/profile`, {
+            headers: { 'user': user }
+        })
+    }
 }

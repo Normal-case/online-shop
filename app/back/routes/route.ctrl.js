@@ -1,4 +1,5 @@
 const User = require("../models/User")
+const UserStorage = require('../models/UserStorage')
 const Token = require('../bin/jwt/token')
 
 const output = {
@@ -15,6 +16,13 @@ const output = {
 
     logout: (req, res) => {
         const response = { success: true }
+        return res.status(200).json(response)
+    },
+
+    profile: async (req, res) => {
+        //const user = new User(req.headers.user)
+        const profile = await UserStorage.profileGet(req.headers.user)
+        const response = { success: true, profile: profile }
         return res.status(200).json(response)
     }
 }

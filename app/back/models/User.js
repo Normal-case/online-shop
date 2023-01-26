@@ -18,7 +18,7 @@ class User {
                 const RToken = Token.manager.generateToken(payload, false)
                 // refresh token database save
                 UserStorage.saveRefresh(body.username, RToken)
-                return { success: true, accesstoken: AToken, refreshtoken: RToken}
+                return { success: true, accesstoken: AToken, refreshtoken: RToken, user: body.username }
             } else {
                 return { success: false, msg: "password is different" }
             }

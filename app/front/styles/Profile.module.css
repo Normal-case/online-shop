@@ -68,3 +68,18 @@
     background-color: #14148C;
     border: 1px solid #14148C;
 }
+
+.profile_card {
+    display: flex;
+    font-size: 20px;
+}
+
+.profile_image {
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.card_contents {
+    padding: 1rem 1rem;
+    padding-left: 9rem;
+}
