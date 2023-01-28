@@ -30,7 +30,9 @@ class UserStorage {
                 username: userInfo.username,
                 name: userInfo.name,
                 point: 0,
+                zoneCode: '',
                 address: '',
+                detail: '',
                 pImage: `${domain}/profile/profile.png`,
                 _id: id
             }
@@ -62,6 +64,32 @@ class UserStorage {
     static profileGet(username) {
         const dbConnect = dbo.getDB()
         const profile = dbConnect.collection('profile').findOne({ username: username })
+        return profile
+    }
+
+    static async profileUpdate(file, body) {
+        /* profile update function */
+        const dbConnect = dbo.getDB()
+
+        // find original profile
+        const profile = await dbConnect.collection('profile').findOne({ username: body.username })
+        var imagePath = profile.pImage
+        if(file) {
+            imagePath = `${domain}/profile/${file.filename}.jpg`
+        }
+
+        // update profile using orm
+        dbConnect.collection('profile').update(
+            { username: body.username },
+            { $set: {
+                name: body.nickname,
+                zoneCode: body.zoneCode,
+                address: body.address,
+                detail: body.detail,
+                pImage: imagePath
+            }},
+            { upsert: true } // 변경사항이 있으면 변경
+        )
         return profile
     }
 }

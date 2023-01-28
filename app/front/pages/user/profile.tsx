@@ -7,10 +7,11 @@ import { tokenCheck } from '../../module/Token'
 import Header from '../../component/header'
 import styles from '../../styles/Profile.module.css'
 import API from '../../api-server'
+import { getCookie } from 'cookies-next'
 
 export default function Profile() {
     const router = useRouter()
-    const [profile, profileSet] = useState()
+    const [profile, setProfile] = useState()
     const [src, setSrc] = useState('')
     const [profileImage, setProfileImage] = useState()
     const [updateProfile, setUpdateProfile] = useState(false)
@@ -18,6 +19,8 @@ export default function Profile() {
     const [zoneCode, setZoneCode] = useState()
     const [address, setAddress] = useState()
     const [detail, setDetail] = useState()
+    const [nickname, setNickname] = useState()
+    const [file, setFile] = useState()
 
     const checkAuth = async () => {
         /* useEffect couldn't use async function */
@@ -30,8 +33,13 @@ export default function Profile() {
         checkAuth()
         API.profile()
             .then(res => {
-                profileSet(res.data.profile)
+                setProfile(res.data.profile)
                 setSrc(res.data.profile.pImage)
+                setNickname(res.data.profile.name)
+                setZoneCode(res.data.profile.zoneCode)
+                setAddress(res.data.profile.address)
+                setDetail(res.data.profile.detail)
+                setNickname(res.data.profile.name)
             })
             .catch(console.log)
     }, [])
@@ -39,6 +47,17 @@ export default function Profile() {
     const profileUpdate = () => {
         if(updateProfile) {
             setUpdateProfile(false)
+            let formData = new FormData()
+            const username = getCookie('user')
+            formData.append('img', file)
+            formData.append('zoneCode', zoneCode)
+            formData.append('address', address)
+            formData.append('detail', detail)
+            formData.append('nickname', nickname)
+            formData.append('username', username)
+            API.profileUpdate(formData)
+                .then(console.log)
+                .catch(console.log)
         } else {
             setUpdateProfile(true)
         }
@@ -56,7 +75,16 @@ export default function Profile() {
     }
 
     const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFile(e.target.files[0])
         setProfileImage(URL.createObjectURL(e.target.files[0]))
+    }
+
+    const detailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDetail(e.target.value)
+    }
+
+    const changeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNickname(e.target.value)
     }
 
     return (
@@ -88,7 +116,12 @@ export default function Profile() {
                                         <Image loader={() => src} src={src} width={70} height={70} alt='' />
                                     }</label>
                                     <input type='file' id='input-image' accept='image/*' style={{ display: 'none'}} onChange={(e) => handleProfileImage(e)} /></div> :
-                                    <Image loader={() => src} src={src} width={70} height={70} alt='' />
+                                    <div>
+                                    { profileImage ?
+                                        <img src={profileImage} width={70} height={70} alt='' /> :
+                                        <Image loader={() => src} src={src} width={70} height={70} alt='' />
+                                    }
+                                    </div>
                                 }
                                 
                             </div>
@@ -96,8 +129,8 @@ export default function Profile() {
                             <div className={styles.card_contents}>
                                 <p>
                                     {updateProfile 
-                                    ? <input type='text' placeholder='닉네임' value={profile.name}></input> 
-                                    : profile?.name + '님' }
+                                    ? <input type='text' placeholder='닉네임' value={nickname} onChange={changeNickname}></input> 
+                                    : nickname + '님' }
                                 </p>
                                 <p>적립포인트: {profile?.point}p</p>
                                 <p>보유쿠폰: 0개</p>
@@ -109,7 +142,7 @@ export default function Profile() {
                             </div>
                             <div className={styles.address_tail}>
                                 <input type='text' placeholder='주소' value={address} disabled></input><br />
-                                <input type='text' placeholder='상세주소' disabled={updateProfile ? false : true}></input>
+                                <input type='text' placeholder='상세주소' disabled={updateProfile ? false : true} value={detail} onChange={detailChange}></input>
                             </div>
                         </div>
                         <div className={styles.profile_button} onClick={() => profileUpdate()}>

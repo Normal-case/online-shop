@@ -43,4 +43,10 @@ export default class API {
             headers: { 'user': user }
         })
     }
+
+    static profileUpdate(body: any) {
+        return axios.post(`${domain}/profile`, body, {
+            headers: { "Content-Type": "multipart/form-data" }
+        })
+    }
 }
