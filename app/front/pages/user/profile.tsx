@@ -11,6 +11,9 @@ import { getCookie } from 'cookies-next'
 
 export default function Profile() {
     const router = useRouter()
+    let menuData = ['내정보', '결제완료', '상품준비중', '출고시작', '배송중', '배송완료']
+    const [menuIdx, setMenuIdx] = useState(0)
+
     const [profile, setProfile] = useState()
     const [src, setSrc] = useState('')
     const [profileImage, setProfileImage] = useState()
@@ -32,29 +35,32 @@ export default function Profile() {
     useEffect(() => {
         checkAuth()
         API.profile()
-            .then(res => {
-                setProfile(res.data.profile)
-                setSrc(res.data.profile.pImage)
-                setNickname(res.data.profile.name)
-                setZoneCode(res.data.profile.zoneCode)
-                setAddress(res.data.profile.address)
-                setDetail(res.data.profile.detail)
-                setNickname(res.data.profile.name)
-            })
+            .then(res => handleResponse(res))
             .catch(console.log)
     }, [])
+
+    const handleResponse = (res: any) => {
+        const profile = res.data.profile
+        setProfile(profile)
+        setSrc(profile.pImage)
+        setNickname(profile.name)
+        setZoneCode(profile.zoneCode)
+        setAddress(profile.address)
+        setDetail(profile.detail)
+        setNickname(profile.name)
+    }
 
     const profileUpdate = () => {
         if(updateProfile) {
             setUpdateProfile(false)
             let formData = new FormData()
             const username = getCookie('user')
+            const key = ['zoneCode', 'address', 'detail', 'nickname', 'username']
+            const value = [zoneCode, address, detail, nickname, username]
             formData.append('img', file)
-            formData.append('zoneCode', zoneCode)
-            formData.append('address', address)
-            formData.append('detail', detail)
-            formData.append('nickname', nickname)
-            formData.append('username', username)
+            for (var i=0;i<key.length;i++) {
+                formData.append(key[i], value[i])
+            }
             API.profileUpdate(formData)
                 .then(console.log)
                 .catch(console.log)
@@ -87,6 +93,10 @@ export default function Profile() {
         setNickname(e.target.value)
     }
 
+    const menuActive = (e) => {
+        setMenuIdx(e.target.value)
+    }
+
     return (
         <div className={styles.main_container}>
             <Header />
@@ -96,12 +106,17 @@ export default function Profile() {
             <div className={styles.profile_layout}>
                 <div className={styles.layout_menubar}>
                     <ul>
-                        <li>내정보</li>
-                        <li>결제완료</li>
-                        <li>상품준비중</li>
-                        <li>출고시작</li>
-                        <li>배송중</li>
-                        <li>배송완료</li>
+                        {menuData.map((menu, idx) => {
+                            return (
+                                <li
+                                    value={idx}
+                                    onClick={menuActive}
+                                    className={idx===menuIdx ? styles.active : ''}
+                                >
+                                    {menu}
+                                </li>
+                            )
+                        })}
                     </ul>
                 </div>
                 <div className={styles.layout_body}>
