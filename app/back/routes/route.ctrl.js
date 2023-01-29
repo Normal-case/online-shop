@@ -49,12 +49,13 @@ const process = {
 
             // file rename
             fs.rename(req.file.path, 'files/profile/' + req.file.filename + '.jpg', (err) => {
-                if(err) console.log(err)
+                if(err) throw err
             })
 
             // remove legacy image file
-            if(legacyImage[0] !== 'profile.png') {
-                fs.unlinkSync('files/profile/' + legacyImage)
+            var legacyPath = 'files/profile/' + legacyImage
+            if(legacyImage[0] !== 'profile.png' && fs.existsSync(legacyPath)) {
+                fs.unlinkSync(legacyPath)
             }
             
         }
