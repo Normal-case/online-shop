@@ -24,6 +24,7 @@ class UserStorage {
                 name: userInfo.name,
                 username: userInfo.username,
                 password: encryptedPs,
+                authority: 'user', // defalt is user.
                 _id: id
             }
             const profile = {
@@ -67,12 +68,12 @@ class UserStorage {
         return profile
     }
 
-    static async profileUpdate(file, body) {
+    static profileUpdate(file, body) {
         /* profile update function */
         const dbConnect = dbo.getDB()
 
         // find original profile
-        const profile = await dbConnect.collection('profile').findOne({ username: body.username })
+        const profile = dbConnect.collection('profile').findOne({ username: body.username })
         var imagePath = profile.pImage
         if(file) {
             imagePath = `${domain}/profile/${file.filename}.jpg`
