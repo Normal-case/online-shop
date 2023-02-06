@@ -2,7 +2,6 @@ const User = require("../models/User")
 const UserStorage = require('../models/UserStorage')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
-const { moveMessagePortToContext } = require("worker_threads")
 
 const output = {
     auth: async (req, res) => {
@@ -23,6 +22,8 @@ const output = {
 
     profile: async (req, res) => {
         //const user = new User(req.headers.user)
+        console.log('profile here???')
+        console.log(req.headers.user)
         const profile = await UserStorage.profileGet(req.headers.user)
         const response = { success: true, profile: profile }
         return res.status(200).json(response)

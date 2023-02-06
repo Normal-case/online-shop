@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import DaumPostcodeEmbed from 'react-daum-postcode'
 
-import { tokenCheck } from '../../module/Token'
 import Header from '../../component/header'
 import styles from '../../styles/Profile.module.css'
 import API from '../../api-server'
@@ -25,21 +24,19 @@ export default function Profile() {
     const [nickname, setNickname] = useState()
     const [file, setFile] = useState()
 
-    const checkAuth = async () => {
-        /* useEffect couldn't use async function */
-        const result = await tokenCheck()
-        if (!result.success) {
-            router.replace('/user/login')
-        }
-    }
     useEffect(() => {
-        checkAuth()
         API.profile()
             .then(res => handleResponse(res))
-            .catch(console.log)
+            .catch(err => {
+                if(err.response && !err.response.data.success) {
+                    // router.replace('/user/login')
+                    console.log(err.response.data)
+                }
+            })
     }, [])
 
     const handleResponse = (res: any) => {
+        console.log(res.data)
         const profile = res.data.profile
         setProfile(profile)
         setSrc(profile.pImage)

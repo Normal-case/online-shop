@@ -11,13 +11,21 @@ export default function Header() {
     const router = useRouter()
     const [loginFlag, setLoginFlag] = useState('로그인')
 
-    const checkAuth = async () => {
-        const result = await tokenCheck()
-        if(result.success) setLoginFlag('로그아웃')
-    }
+    // const checkAuth = async () => {
+    //     const result = await tokenCheck()
+    //     if(result.success) setLoginFlag('로그아웃')
+    // }
 
     useEffect(() => {
-        checkAuth()
+        API.tokenVerify()
+            .then(res => {
+                console.log(res.data)
+                if(res.data.success) {
+                    setLoginFlag('로그아웃')
+                } else {
+                    setLoginFlag('로그인')
+                }
+            })
     }, [])
 
     const loginOrOut = () => {

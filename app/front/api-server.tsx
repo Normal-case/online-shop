@@ -2,16 +2,16 @@ import axios from 'axios'
 import { deleteCookie, getCookie } from 'cookies-next'
 
 const domain: string = "http://localhost:8000"
+const accesstoken = getCookie('accesstoken')
+const refreshtoken = getCookie('refreshtoken')
 export default class API {
     static tokenVerify() {
-        const accesstoken = getCookie('accesstoken')
         return axios.get(`${domain}/user/auth`, {
-            headers: { 'Authorization': 'Bearer ' + accesstoken }
+            headers: { 'access': 'Bearer ' + accesstoken, 'refresh': 'Bearer ' + refreshtoken }
         })
     }
 
     static refreshVerify() {
-        const refreshtoken = getCookie('refreshtoken')
         return axios.get(`${domain}/user/auth/refresh`, {
             headers: { 'Authorization': 'Bearer ' + refreshtoken }
         })
@@ -28,8 +28,6 @@ export default class API {
     }
 
     static logout() {
-        const accesstoken = getCookie('accesstoken')
-        const refreshtoken = getCookie('refreshtoken')
         deleteCookie('accesstoken')
         deleteCookie('refreshtoken')
         return axios.get(`${domain}/user/login`, {
@@ -40,7 +38,11 @@ export default class API {
     static profile() {
         const user = getCookie('user')
         return axios.get(`${domain}/user/profile`, {
-            headers: { 'user': user }
+            headers: {
+                'user': user,
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
         })
     }
 

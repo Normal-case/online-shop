@@ -8,16 +8,15 @@ import { setToken, tokenCheck } from '../../module/Token'
 export default function Login() {
     const router = useRouter()
 
-    const checkAuth = async () => {
-        /* useEffect couldn't use async function */
-        const result = await tokenCheck()
-        if (result.success) {
-            router.replace('/user/profile')
-        }
-    }
-
     useEffect(() => {
-        checkAuth()
+        API.tokenVerify()
+            .then(res => {
+                if(res.data.success) {
+                    console.log(res.data)
+                    // router.replace('/user/profile')
+                }
+            })
+            .catch(console.log)
     }, [])
 
     const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
