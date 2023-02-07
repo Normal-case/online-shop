@@ -46,8 +46,14 @@ export default class API {
     }
 
     static profileUpdate(body: any) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
         return axios.post(`${domain}/profile`, body, {
-            headers: { "Content-Type": "multipart/form-data" }
+            headers: {
+                "Content-Type": "multipart/form-data",
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
         })
     }
 }

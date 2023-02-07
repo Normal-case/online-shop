@@ -15,24 +15,5 @@ const setToken = (accesstoken: string, refreshtoken: string = '', user: string =
     }
 }
 
-const tokenCheck = async () => {
-    try {
-        const ATVerify = await API.tokenVerify()
-        return { success: true }
-    } catch {
-        const RToken = getCookie('refreshtoken')
-        if(!RToken) {
-            return { success: false, msg: 'refresh token empty' }
-        }
 
-        try {
-            const RTVerify = await API.refreshVerify()
-            setToken(RTVerify.data.accesstoken, '',  '')
-            return { success: true, msg: 'new accesstoken generate' }
-        } catch {
-            return { success: false, msg: 'refresh token unverify' }
-        }
-    }
-}
-
-export { setToken, tokenCheck }
+export { setToken }

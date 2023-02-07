@@ -23,7 +23,7 @@ export default function Profile() {
     const [address, setAddress] = useState()
     const [detail, setDetail] = useState()
     const [nickname, setNickname] = useState()
-    const [file, setFile] = useState()
+    const [file, setFile] = useState('http://localhost:8000/profile/profile.png')
 
     useEffect(() => {
         API.profile()
@@ -39,9 +39,11 @@ export default function Profile() {
         if(res.data.accesstoken) {
             setToken(res.data.accesstoken)
         }
+        console.log(res.data)
         const profile = res.data.profile
         setProfile(profile)
         setSrc(profile.pImage)
+        setFile(profile.pImage)
         setNickname(profile.name)
         setZoneCode(profile.zoneCode)
         setAddress(profile.address)
@@ -56,13 +58,15 @@ export default function Profile() {
             const username = getCookie('user')
             const key = ['zoneCode', 'address', 'detail', 'nickname', 'username']
             const value = [zoneCode, address, detail, nickname, username]
+            console.log(file)
+            console.log(src)
             formData.append('img', file)
             for (var i=0;i<key.length;i++) {
                 formData.append(key[i], value[i])
             }
-            API.profileUpdate(formData)
-                .then(console.log)
-                .catch(console.log)
+            // API.profileUpdate(formData)
+            //     .then(console.log)
+            //     .catch(console.log)
         } else {
             setUpdateProfile(true)
         }

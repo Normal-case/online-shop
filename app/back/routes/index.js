@@ -12,6 +12,6 @@ router.get('/user/profile', authenticate, ctrl.output.profile)
 
 router.post('/login', ctrl.process.login)
 router.post('/register', ctrl.process.register)
-router.post('/profile', upload.single('img'), ctrl.process.profile)
+router.post('/profile', authenticate, upload.single('img'), ctrl.process.profile)
 
 module.exports = router

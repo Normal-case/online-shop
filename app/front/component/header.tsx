@@ -4,7 +4,6 @@ import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { InstagramFilled, TwitterOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
 
-import { tokenCheck } from '../module/Token'
 import API from '../api-server'
 
 export default function Header() {
