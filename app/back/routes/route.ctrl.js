@@ -22,10 +22,12 @@ const output = {
 
     profile: async (req, res) => {
         //const user = new User(req.headers.user)
-        console.log('profile here???')
-        console.log(req.headers.user)
+        var AToken
+        if(req.access) {
+            AToken = req.access
+        }
         const profile = await UserStorage.profileGet(req.headers.user)
-        const response = { success: true, profile: profile }
+        const response = { success: true, profile: profile, accesstoken: AToken }
         return res.status(200).json(response)
     }
 }

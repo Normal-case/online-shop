@@ -13,7 +13,7 @@ export default function Login() {
             .then(res => {
                 if(res.data.success) {
                     console.log(res.data)
-                    // router.replace('/user/profile')
+                    router.replace('/user/profile')
                 }
             })
             .catch(console.log)
@@ -30,7 +30,7 @@ export default function Login() {
             .then(res => {
                 if (res.data.success) {
                     setToken(res.data.accesstoken, res.data.refreshtoken, res.data.user)
-                    router.push('/')
+                    router.replace('/')
                 } else {
                     alert(res.data.msg)
                 }

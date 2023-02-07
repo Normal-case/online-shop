@@ -7,6 +7,7 @@ import Header from '../../component/header'
 import styles from '../../styles/Profile.module.css'
 import API from '../../api-server'
 import { getCookie } from 'cookies-next'
+import { setToken } from '../../module/Token'
 
 export default function Profile() {
     const router = useRouter()
@@ -29,14 +30,15 @@ export default function Profile() {
             .then(res => handleResponse(res))
             .catch(err => {
                 if(err.response && !err.response.data.success) {
-                    // router.replace('/user/login')
-                    console.log(err.response.data)
+                    router.replace('/user/login')
                 }
             })
     }, [])
 
     const handleResponse = (res: any) => {
-        console.log(res.data)
+        if(res.data.accesstoken) {
+            setToken(res.data.accesstoken)
+        }
         const profile = res.data.profile
         setProfile(profile)
         setSrc(profile.pImage)
