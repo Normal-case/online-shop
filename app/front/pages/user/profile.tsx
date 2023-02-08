@@ -23,7 +23,7 @@ export default function Profile() {
     const [address, setAddress] = useState()
     const [detail, setDetail] = useState()
     const [nickname, setNickname] = useState()
-    const [file, setFile] = useState('http://localhost:8000/profile/profile.png')
+    var [file, setFile] = useState('http://localhost:8000/profile/profile.png')
 
     useEffect(() => {
         API.profile()
@@ -51,15 +51,25 @@ export default function Profile() {
         setNickname(profile.name)
     }
 
-    const profileUpdate = () => {
+    const convertURLtoFile = async (url: string) => {
+        const response = await fetch(url)
+        const data = await response.blob()
+        const filename = url.split('/').pop()
+        const metadata = { type: 'image/jpeg' }
+        return new File([data], filename!, metadata)
+    }
+
+    const profileUpdate = async () => {
         if(updateProfile) {
             setUpdateProfile(false)
             let formData = new FormData()
             const username = getCookie('user')
             const key = ['zoneCode', 'address', 'detail', 'nickname', 'username']
             const value = [zoneCode, address, detail, nickname, username]
+            if(typeof(file) === 'string') {
+                file = await convertURLtoFile(file)
+            }
             console.log(file)
-            console.log(src)
             formData.append('img', file)
             for (var i=0;i<key.length;i++) {
                 formData.append(key[i], value[i])
