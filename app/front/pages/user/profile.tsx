@@ -39,7 +39,6 @@ export default function Profile() {
         if(res.data.accesstoken) {
             setToken(res.data.accesstoken)
         }
-        console.log(res.data)
         const profile = res.data.profile
         setProfile(profile)
         setSrc(profile.pImage)
@@ -69,14 +68,13 @@ export default function Profile() {
             if(typeof(file) === 'string') {
                 file = await convertURLtoFile(file)
             }
-            console.log(file)
             formData.append('img', file)
             for (var i=0;i<key.length;i++) {
                 formData.append(key[i], value[i])
             }
-            // API.profileUpdate(formData)
-            //     .then(console.log)
-            //     .catch(console.log)
+            API.profileUpdate(formData)
+                .then(console.log)
+                .catch(console.log)
         } else {
             setUpdateProfile(true)
         }
@@ -123,6 +121,7 @@ export default function Profile() {
                             return (
                                 <li
                                     value={idx}
+                                    key={idx}
                                     onClick={menuActive}
                                     className={idx===menuIdx ? styles.active : ''}
                                 >
