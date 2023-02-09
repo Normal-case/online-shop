@@ -22,7 +22,7 @@ const authenticate = ((req, res, next) => {
                         const user = await dbConnect.collection('refresh').findOne({ refresh: RToken })
                         // access token expired
                         // if middleware send status 200 I couldn't use next() so I have to fix it
-                        if(user.username === decoded.username) {
+                        if(user && user.username === decoded.username) {
                             const AToken = Token.manager.generateToken({ username: user.username }, true)
                             req.access = AToken
                             next()
@@ -48,7 +48,7 @@ const authenticate = ((req, res, next) => {
             if(decoded) {
                 const dbConnect = dbo.getDB()
                 const user = await dbConnect.collection('refresh').findOne({ refresh: RToken })
-                if(user.username === decoded.username) {
+                if(user && user.username === decoded.username) {
                     const AToken = Token.manager.generateToken({ username: user.username }, true)
                     req.access = AToken
                     next()

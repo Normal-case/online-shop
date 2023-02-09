@@ -24,7 +24,7 @@ class UserStorage {
                 name: userInfo.name,
                 username: userInfo.username,
                 password: encryptedPs,
-                authority: 'user', // defalt is user.
+                authority: 'user', // default is user.
                 _id: id
             }
             const profile = {
@@ -35,6 +35,7 @@ class UserStorage {
                 address: '',
                 detail: '',
                 pImage: `${domain}/profile/profile.png`,
+                authority: 'user', // default is user
                 _id: id
             }
             dbConnect.collection('user').insertOne(body)

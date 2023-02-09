@@ -17,19 +17,38 @@ client.connect((err, db) => {
 
     console.log('please choose options')
     console.log('1. delete all users and profiles')
-    console.log('2. delete all users')
-    console.log('3. delete all profiles')
+    console.log('2. update user authority. Plz input username with spacebar')
     rl.on('line', async (line) => {
-        if(Number(line)) {
-            const option = Number(line)
+        const inputLine = line.split(' ')
+        var option, data
+        if(inputLine.length === 1) {
+            option = Number(inputLine[0])
+        } else if(inputLine.length === 2) {
+            option = Number(inputLine[0])
+            data = inputLine[1]
+        } else {
+            console.log('wrong input')
+            return
+        }
+        
+        if(option) {
             if(option === 1) {
-
                 await dbo.collection('user').deleteMany({})
                 await dbo.collection('profile').deleteMany({})
                 await dbo.collection('refresh').deleteMany({})
                 console.log('success delete all users and profiles')
             } else if (option === 2) {
-                // other options
+                await dbo.collection('user').update(
+                    { username: data },
+                    { $set: { authority: 'manager' } },
+                    { upsert: true }
+                )
+                await dbo.collection('profile').update(
+                    { username: data },
+                    { $set: { authority: 'manager' } },
+                    { upsert: true }
+                )
+                console.log('success update')
             } else if (option === 3) {
                 // other options
             } else {

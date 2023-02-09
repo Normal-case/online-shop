@@ -13,7 +13,6 @@ export default function Header() {
     useEffect(() => {
         API.tokenVerify()
             .then(res => {
-                console.log(res.data)
                 if(res.data.success) {
                     setLoginFlag('로그아웃')
                 } else {
