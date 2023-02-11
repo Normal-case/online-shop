@@ -11,7 +11,7 @@ import { setToken } from '../../module/Token'
 
 export default function Profile() {
     const router = useRouter()
-    let menuData = ['내정보', '결제완료', '상품준비중', '출고시작', '배송중', '배송완료']
+    const [menuData, setMenuData] = useState(['내정보', '결제완료', '상품준비중', '출고시작', '배송중', '배송완료'])
     const [menuIdx, setMenuIdx] = useState(0)
 
     const [profile, setProfile] = useState()
@@ -40,6 +40,10 @@ export default function Profile() {
             setToken(res.data.accesstoken)
         }
         const profile = res.data.profile
+        if(profile.authority === 'manager') {
+            let tmpMenu = [...menuData]
+            setMenuData([...tmpMenu, '물품등록'])
+        }
         setProfile(profile)
         setSrc(profile.pImage)
         setFile(profile.pImage)
@@ -133,7 +137,8 @@ export default function Profile() {
                 </div>
                 <div className={styles.layout_body}>
                     <div className={styles.body_contents}>
-                        <div className={styles.profile_card}>
+                        {/* 이 부분을 컴포넌트로 바꿔서 변경해야할듯 */}
+                        <div className={styles.profile_card}>    
                             <div className={styles.profile_image}>
                                 {
                                     updateProfile ?  
@@ -150,7 +155,6 @@ export default function Profile() {
                                     }
                                     </div>
                                 }
-                                
                             </div>
                             <input type='file' style={{ display: 'none'}} />
                             <div className={styles.card_contents}>
