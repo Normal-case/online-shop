@@ -8,6 +8,7 @@ import API from '../../api-server'
 import { getCookie } from 'cookies-next'
 import { setToken } from '../../module/Token'
 import ProfileInfo from '../../component/profile/profileInfo'
+import CreateProduct from '../../component/profile/createProduct'
 
 export default function Profile() {
     const router = useRouter()
@@ -44,7 +45,7 @@ export default function Profile() {
         const profile = res.data.profile
         if(profile.authority === 'manager') {
             let tmpMenu = [...menuData]
-            setMenuData([...tmpMenu, '물품등록'])
+            if(tmpMenu.length === 6) setMenuData([...tmpMenu, '물품등록'])
         }
         setProfile(profile)
         setSrc(profile.pImage)
@@ -71,9 +72,6 @@ export default function Profile() {
             const username = getCookie('user')
             const key = ['zoneCode', 'address', 'detail', 'nickname', 'username']
             const value = [zoneCode, address, detail, nickname, username]
-            if(typeof(file) === 'string') {
-                file = await convertURLtoFile(file)
-            }
             formData.append('img', file)
             for (var i=0;i<key.length;i++) {
                 formData.append(key[i], value[i])
@@ -159,7 +157,9 @@ export default function Profile() {
                 <div className={styles.layout_body}>
                     <div className={styles.body_contents}>
                         { menuIdx === 0 ?
-                            <ProfileInfo variable={profileInfoVariable} function={profileInfoFunction} /> : null
+                            <ProfileInfo variable={profileInfoVariable} function={profileInfoFunction} /> :
+                          menuIdx === 6 ?
+                            <CreateProduct /> : null
                         }
                     </div>
                 </div>

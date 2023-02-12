@@ -69,15 +69,15 @@ class UserStorage {
         return profile
     }
 
-    static profileUpdate(file, body) {
+    static async profileUpdate(file, body) {
         /* profile update function */
         const dbConnect = dbo.getDB()
 
         // find original profile
-        const profile = dbConnect.collection('profile').findOne({ username: body.username })
+        const profile = await dbConnect.collection('profile').findOne({ username: body.username })
         var imagePath = profile.pImage
         if(file) {
-            imagePath = `${domain}/profile/${file.filename}.jpg`
+            imagePath = `${domain}/profile/${profile.username}Profile.jpg`
         }
 
         // update profile using orm

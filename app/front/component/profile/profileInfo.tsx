@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 
 import styles from '../../styles/Profile.module.css'
@@ -60,7 +60,7 @@ export default function ProfileInfo(props: any) {
             </div>
             <div className={styles.address}>
                 <div className={styles.address_head}>
-                    주소: <input type='text' placeholder='우편번호' value={props.variable.zoneCode} disabled></input><button className={props.variable.updateProfile ? styles.address_button_active : styles.address_button} onClick={props.function.addressInput}>우편번호 찾기</button>
+                    <span>주소: </span><input type='text' placeholder='우편번호' value={props.variable.zoneCode} disabled></input><button className={props.variable.updateProfile ? styles.address_button_active : styles.address_button} onClick={props.function.addressInput}>우편번호 찾기</button>
                 </div>
                 <div className={styles.address_tail}>
                     <input type='text' placeholder='주소' value={props.variable.address} disabled /><br />

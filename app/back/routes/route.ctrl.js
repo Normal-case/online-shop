@@ -47,20 +47,11 @@ const process = {
 
     profile: async (req, res) => {
         const profile = await UserStorage.profileUpdate(req.file, req.body)
-        const legacyImage = profile.pImage.split('/').slice(-1)
         if(req.file) {
-
             // file rename
-            fs.rename(req.file.path, 'files/profile/' + req.file.filename + '.jpg', (err) => {
+            fs.rename(req.file.path, 'files/profile/' + profile.username + 'Profile.jpg', (err) => {
                 if(err) throw err
             })
-
-            // remove legacy image file
-            var legacyPath = 'files/profile/' + legacyImage
-            if(legacyImage[0] !== 'profile.png' && fs.existsSync(legacyPath)) {
-                fs.unlinkSync(legacyPath)
-            }
-            
         }
 
         return res.status(200)
