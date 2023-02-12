@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import DaumPostcodeEmbed from 'react-daum-postcode'
 
 import Header from '../../component/header'
@@ -8,6 +7,7 @@ import styles from '../../styles/Profile.module.css'
 import API from '../../api-server'
 import { getCookie } from 'cookies-next'
 import { setToken } from '../../module/Token'
+import ProfileInfo from '../../component/profile/profileInfo'
 
 export default function Profile() {
     const router = useRouter()
@@ -24,6 +24,8 @@ export default function Profile() {
     const [detail, setDetail] = useState()
     const [nickname, setNickname] = useState()
     var [file, setFile] = useState('http://localhost:8000/profile/profile.png')
+
+    
 
     useEffect(() => {
         API.profile()
@@ -112,6 +114,25 @@ export default function Profile() {
         setMenuIdx(e.target.value)
     }
 
+    const profileInfoVariable = {
+        profileImage: profileImage,
+        src: src,
+        updateProfile: updateProfile,
+        nickname: nickname,
+        point: profile?.point,
+        zoneCode: zoneCode,
+        address: address,
+        detail: detail
+    }
+
+    const profileInfoFunction = {
+        handleProfileImage: handleProfileImage,
+        changeNickname: changeNickname,
+        addressInput: addressInput,
+        detailChange: detailChange,
+        profileUpdate: profileUpdate
+    }
+
     return (
         <div className={styles.main_container}>
             <Header />
@@ -137,48 +158,9 @@ export default function Profile() {
                 </div>
                 <div className={styles.layout_body}>
                     <div className={styles.body_contents}>
-                        {/* 이 부분을 컴포넌트로 바꿔서 변경해야할듯 */}
-                        <div className={styles.profile_card}>    
-                            <div className={styles.profile_image}>
-                                {
-                                    updateProfile ?  
-                                    <div><label htmlFor='input-image' id='profile_image_active'>
-                                    { profileImage ?
-                                        <img src={profileImage} width={70} height={70} alt='' /> :
-                                        <Image loader={() => src} src={src} width={70} height={70} alt='' />
-                                    }</label>
-                                    <input type='file' id='input-image' accept='image/*' style={{ display: 'none'}} onChange={(e) => handleProfileImage(e)} /></div> :
-                                    <div>
-                                    { profileImage ?
-                                        <img src={profileImage} width={70} height={70} alt='' /> :
-                                        <Image loader={() => src} src={src} width={70} height={70} alt='' />
-                                    }
-                                    </div>
-                                }
-                            </div>
-                            <input type='file' style={{ display: 'none'}} />
-                            <div className={styles.card_contents}>
-                                <p>
-                                    {updateProfile 
-                                    ? <input type='text' placeholder='닉네임' value={nickname} onChange={changeNickname}></input> 
-                                    : nickname + '님' }
-                                </p>
-                                <p>적립포인트: {profile?.point}p</p>
-                                <p>보유쿠폰: 0개</p>
-                            </div>
-                        </div>
-                        <div className={styles.address}>
-                            <div className={styles.address_head}>
-                                주소: <input type='text' placeholder='우편번호' value={zoneCode} disabled></input><button className={updateProfile ? styles.address_button_active : styles.address_button} onClick={addressInput}>우편번호 찾기</button>
-                            </div>
-                            <div className={styles.address_tail}>
-                                <input type='text' placeholder='주소' value={address} disabled></input><br />
-                                <input type='text' placeholder='상세주소' disabled={updateProfile ? false : true} value={detail} onChange={detailChange}></input>
-                            </div>
-                        </div>
-                        <div className={styles.profile_button} onClick={() => profileUpdate()}>
-                            {updateProfile ? '저장' : '프로필 수정하기'}
-                        </div>
+                        { menuIdx === 0 ?
+                            <ProfileInfo variable={profileInfoVariable} function={profileInfoFunction} /> : null
+                        }
                     </div>
                 </div>
             </div>
