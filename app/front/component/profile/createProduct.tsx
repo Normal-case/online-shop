@@ -21,6 +21,7 @@ export default function CreateProduct() {
     const [productCategory, setProductCategory] = useState('category')
     const [productPrice, setProductPrice] = useState()
     const [productDesc, setProductDesc] = useState()
+    const [imgList, setImgList] = useState([])
     
     const onSubmit = () => {
         if(!submitActive) return
@@ -32,7 +33,7 @@ export default function CreateProduct() {
         const value = e.target.value
         setProductName(value)
 
-        if(value && productPrice && productDesc && productCategory !== 'category') {
+        if(value && productPrice && productDesc && productCategory !== 'category' && imgList.length !== 0) {
             setSubmitActive(true)
         } else {
             setSubmitActive(false)
@@ -43,7 +44,7 @@ export default function CreateProduct() {
         const value = e.target.value
         setProductCategory(value)
 
-        if(productName && productPrice && productDesc && value !== 'category') {
+        if(productName && productPrice && productDesc && value !== 'category' && imgList.length !== 0) {
             setSubmitActive(true)
         } else {
             setSubmitActive(false)
@@ -54,7 +55,7 @@ export default function CreateProduct() {
         const value = e.target.value
         setProductPrice(value)
 
-        if(productName && value && productDesc && productCategory !== 'category') {
+        if(productName && value && productDesc && productCategory !== 'category' && imgList.length !== 0) {
             setSubmitActive(true)
         } else {
             setSubmitActive(false)
@@ -65,11 +66,27 @@ export default function CreateProduct() {
         const value = e.target.value
         setProductDesc(value)
 
-        if(productName && productPrice && value && productCategory !== 'category') {
+        if(productName && productPrice && value && productCategory !== 'category' && imgList.length !== 0) {
             setSubmitActive(true)
         } else {
             setSubmitActive(false)
         }
+    }
+
+    const changeProductImage = (e: any) => {
+        let files = e.target.files
+        let tmpList = []
+        
+        if(productName && productPrice && productDesc && productCategory !== 'category' && files.length !== 0) {
+            setSubmitActive(true)
+        } else {
+            setSubmitActive(false)
+        }
+
+        for(let i=0;i<files.length;i++) {
+            tmpList.push(URL.createObjectURL(files[i]))
+        }
+        setImgList(tmpList)
     }
 
     return (
@@ -90,7 +107,15 @@ export default function CreateProduct() {
             <div>
                 <label htmlFor='input-product-image'>
                     <div className={styles.productImage}>
-                        <span>상품 이미지를 등록해주세요.</span>
+                        {
+                            imgList.length !== 0 ?
+                            imgList.map((img, idx) => {
+                                return (
+                                    <img src={img} height={200} alt='' />
+                                )
+                            }) :
+                            <span>상품 이미지를 등록해주세요.</span>
+                        }
                     </div>
                 </label>
                 <input
@@ -98,6 +123,8 @@ export default function CreateProduct() {
                     id='input-product-image'
                     accept='image/*'
                     style={{ display: 'none' }}
+                    onChange={changeProductImage}
+                    multiple
                 />
             </div>
 

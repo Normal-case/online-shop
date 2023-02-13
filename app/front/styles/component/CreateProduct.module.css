@@ -40,11 +40,16 @@
     border: 1px dashed #aaaaaa;
     cursor: pointer;
     margin: 0 auto;
+    overflow: auto;
 }
 
 .productImage span {
     line-height: 180px;
     vertical-align: middle;
+}
+
+.productImage img {
+    padding: .5rem .5rem
 }
 
 .submitDisabled {
