@@ -1,0 +1,67 @@
+.body {
+    width: 100%;
+}
+
+.inputText {
+    padding: .5rem .2rem;
+    margin-bottom: 30px;
+    border: 1px solid #aaaaaa;
+    outline: 0;
+    width: 600px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+}
+
+.inputPrice {
+    padding: .5rem .2rem;
+    margin-bottom: 30px;
+    border: 1px solid #aaaaaa;
+    outline: 0;
+    width: 400px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+}
+
+.options {
+    padding: .5rem .2rem;
+    border: 1px solid #aaaaaa;
+    outline: 0;
+    width: 200px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+}
+
+.productImage {
+    width: 600px;
+    height: 200px;
+    border: 1px dashed #aaaaaa;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.productImage span {
+    line-height: 180px;
+    vertical-align: middle;
+}
+
+.submit {
+    width: 600px;
+    border: 1px solid #6482FF;
+    border-radius: 20px;
+    padding: 1rem 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    background-color: #6482FF;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    color: #fff;
+}
+
+.submit:hover {
+    background-color: #14148C;
+    border: 1px solid #14148C;
+}

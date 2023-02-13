@@ -57,14 +57,6 @@ export default function Profile() {
         setNickname(profile.name)
     }
 
-    const convertURLtoFile = async (url: string) => {
-        const response = await fetch(url)
-        const data = await response.blob()
-        const filename = url.split('/').pop()
-        const metadata = { type: 'image/jpeg' }
-        return new File([data], filename!, metadata)
-    }
-
     const profileUpdate = async () => {
         if(updateProfile) {
             setUpdateProfile(false)
