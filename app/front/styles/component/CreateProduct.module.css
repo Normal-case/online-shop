@@ -47,6 +47,19 @@
     vertical-align: middle;
 }
 
+.submitDisabled {
+    width: 600px;
+    border: 1px solid #b4b4b4;
+    border-radius: 20px;
+    padding: 1rem 1rem;
+    margin-top: 1rem;
+    background-color: #b4b4b4;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    color: #fff;
+}
+
 .submit {
     width: 600px;
     border: 1px solid #6482FF;
