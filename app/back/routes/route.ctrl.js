@@ -55,6 +55,12 @@ const process = {
         }
 
         return res.status(200)
+    },
+
+    product: (req, res) => {
+        // product change
+        console.log(req.body)
+        return res.status(200).json({ success: true })
     }
 }
 

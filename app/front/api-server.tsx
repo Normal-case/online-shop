@@ -56,4 +56,17 @@ export default class API {
             }
         })
     }
+
+    static productCreate(body: any) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        console.log(body)
+        // return axios.post(`${domain}/product`, body, {
+        //     headers: {
+        //         "Content-Type": "multipart/form-data",
+        //         'access': 'Bearer ' + accesstoken,
+        //         'refresh': 'Bearer ' + refreshtoken
+        //     }
+        // })
+    }
 }

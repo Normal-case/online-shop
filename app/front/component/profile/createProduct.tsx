@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import styles from '../../styles/component/CreateProduct.module.css'
+import API from '../../api-server'
 
 export default function CreateProduct() {
 
@@ -26,7 +27,19 @@ export default function CreateProduct() {
     const onSubmit = () => {
         if(!submitActive) return
 
-        console.log(productName)
+        let formData = new FormData()
+        const contents = {
+            productName,
+            productCategory,
+            productPrice,
+            productDesc
+        }
+        //formData.append('imgList', imgList)
+        formData.append('productName', productName)
+        formData.append('productCategory', productCategory)
+        API.productCreate(formData)
+            .then(console.log)
+            .catch(console.log)
     }
 
     const changeProductName = (e: any) => {
