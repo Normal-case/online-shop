@@ -26,7 +26,6 @@ const corsOption = {
 const route = require('./routes')
 
 // middleware
-app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors(corsOption))
 app.use(express.static('files'))
