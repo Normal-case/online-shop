@@ -1,0 +1,35 @@
+.body {
+    text-align: center;
+}
+
+.cart_header {
+    background-color: #B0F7FF;
+}
+
+.cart_header h1 {
+    font-family: 'NanumSquareNeo';
+}
+
+.cart_header ul {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.cart_header ul li {
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+    background-color: #B0F7FF;
+    border: 1px solid #B0F7FF;
+
+    font-family: 'NanumSquareNeo';
+}
+
+.cart_header ul li:hover {
+    background-color: #6482FF;
+    border: 1px solid #6482FF;
+    border-radius: 5px;
+    cursor: pointer;
+
+    color: #fff;
+}

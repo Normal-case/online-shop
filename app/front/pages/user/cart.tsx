@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import Header from '../../component/header'
 import API from '../../api-server'
+import styles from '../../styles/Cart.module.css'
 
 export default function Cart() {
 
@@ -22,8 +23,18 @@ export default function Cart() {
     return (
         <div>
             <Header />
-            <h1>쇼핑카트</h1>
-            <button><Link href='/'>Home</Link></button>
+            <div className={styles.body}>
+                <div className={styles.cart_header}>
+                    <h1>장바구니</h1>
+                    <ul>
+                        <li>최근 본 상품</li>
+                        <li>장바구니</li>
+                        <li>좋아요</li>
+                    </ul>
+                </div>
+                
+            </div>
+            
         </div>
     )
 }
