@@ -35,7 +35,6 @@ export default function CreateProduct() {
             productPrice,
             productDesc
         }
-        console.log(fileList)
         fileList.forEach(image => {
             formData.append('img', image)
         })

@@ -1,5 +1,6 @@
 const User = require("../models/User")
 const UserStorage = require('../models/UserStorage')
+const Product = require('../models/Product')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
 
@@ -59,8 +60,19 @@ const process = {
 
     product: (req, res) => {
         // product change
-        console.log(req.files)
-        console.log(req.body)
+        //console.log(req.files)
+        const body = req.body
+        const product = new Product()
+        product.create(req.files, body)
+
+        if(req.files) {
+            for(var i=0;i<req.files.length;i++) {
+                fs.rename(req.files[i].path, `files/product/${body.productName}_${i}.jpg`, (err) => {if(err) throw err})
+
+                // fs.rename(req.files[i].path, 'files/product/' + body.productName + '_' + i + '.jpg', (err) => {if(err) throw err})
+            }
+        }
+
         return res.status(200).json({ success: true })
     }
 }

@@ -3,6 +3,7 @@ const readline = require('readline')
 require('dotenv').config({ path: __dirname + '/../.env'})
 var connectionString = process.env.MONGODB_URI
 const client = new MongoClient(connectionString)
+const fs = require('fs')
 
 client.connect((err, db) => {
     if(err) throw err
@@ -18,6 +19,7 @@ client.connect((err, db) => {
     console.log('please choose options')
     console.log('1. delete all users and profiles')
     console.log('2. update user authority. Plz input username with spacebar')
+    console.log('3. clear product and product image')
     rl.on('line', async (line) => {
         const inputLine = line.split(' ')
         var option, data
@@ -50,7 +52,12 @@ client.connect((err, db) => {
                 )
                 console.log('success update')
             } else if (option === 3) {
-                // other options
+                await dbo.collection('product').deleteMany({})
+                await dbo.collection('productImage').deleteMany({})
+                fs.readdirSync('./files/product/').forEach(file => {
+                    fs.unlinkSync(`./files/product/${file}`)
+                })
+                console.log('success delete product and product image')
             } else {
                 console.log(`input is wrong`)
             }
