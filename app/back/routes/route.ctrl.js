@@ -60,7 +60,6 @@ const process = {
 
     product: (req, res) => {
         // product change
-        //console.log(req.files)
         const body = req.body
         const product = new Product()
         product.create(req.files, body)
@@ -68,8 +67,6 @@ const process = {
         if(req.files) {
             for(var i=0;i<req.files.length;i++) {
                 fs.rename(req.files[i].path, `files/product/${body.productName}_${i}.jpg`, (err) => {if(err) throw err})
-
-                // fs.rename(req.files[i].path, 'files/product/' + body.productName + '_' + i + '.jpg', (err) => {if(err) throw err})
             }
         }
 

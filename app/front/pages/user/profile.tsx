@@ -151,7 +151,7 @@ export default function Profile() {
                         { menuIdx === 0 ?
                             <ProfileInfo variable={profileInfoVariable} function={profileInfoFunction} /> :
                           menuIdx === 6 ?
-                            <CreateProduct /> : null
+                            <CreateProduct setMenuIdx={setMenuIdx} /> : null
                         }
                     </div>
                 </div>

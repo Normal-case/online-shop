@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import styles from '../../styles/component/CreateProduct.module.css'
 import API from '../../api-server'
 
-export default function CreateProduct() {
+export default function CreateProduct(props: any) {
+    /* setMenuIdx: form 초기화를 위한 메뉴 인덱스 함수 */ 
 
     const selectOptions = [
         { value: 'category', name: '종류' },
@@ -42,7 +43,12 @@ export default function CreateProduct() {
             formData.append(key, contents[key])
         }
         API.productCreate(formData)
-            .then(console.log)
+            .then(res => {
+                if(res.data.success) {
+                    alert('물품이 성공적으로 등록되었습니다.')
+                    props.setMenuIdx(0)
+                }
+            })
             .catch(console.log)
     }
 
