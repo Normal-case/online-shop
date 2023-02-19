@@ -27,7 +27,7 @@ export default function CreateProduct() {
     const onSubmit = () => {
         if(!submitActive) return
 
-        let formData = new FormData()
+        const formData = new FormData()
         const contents = {
             productName,
             productCategory,
@@ -35,8 +35,9 @@ export default function CreateProduct() {
             productDesc
         }
         //formData.append('imgList', imgList)
-        formData.append('productName', productName)
-        formData.append('productCategory', productCategory)
+        for(let key in contents) {
+            formData.append(key, contents[key])
+        }
         API.productCreate(formData)
             .then(console.log)
             .catch(console.log)
