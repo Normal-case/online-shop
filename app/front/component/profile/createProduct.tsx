@@ -23,6 +23,7 @@ export default function CreateProduct() {
     const [productPrice, setProductPrice] = useState()
     const [productDesc, setProductDesc] = useState()
     const [imgList, setImgList] = useState([])
+    const [fileList, setFileList] = useState([])
     
     const onSubmit = () => {
         if(!submitActive) return
@@ -34,7 +35,10 @@ export default function CreateProduct() {
             productPrice,
             productDesc
         }
-        //formData.append('imgList', imgList)
+        console.log(fileList)
+        fileList.forEach(image => {
+            formData.append('img', image)
+        })
         for(let key in contents) {
             formData.append(key, contents[key])
         }
@@ -89,7 +93,8 @@ export default function CreateProduct() {
 
     const changeProductImage = (e: any) => {
         let files = e.target.files
-        let tmpList = []
+        let tmpImageList = []
+        let tmpFileList = []
         
         if(productName && productPrice && productDesc && productCategory !== 'category' && files.length !== 0) {
             setSubmitActive(true)
@@ -98,9 +103,11 @@ export default function CreateProduct() {
         }
 
         for(let i=0;i<files.length;i++) {
-            tmpList.push(URL.createObjectURL(files[i]))
+            tmpImageList.push(URL.createObjectURL(files[i]))
+            tmpFileList.push(files[i])
         }
-        setImgList(tmpList)
+        setImgList(tmpImageList)
+        setFileList(tmpFileList)
     }
 
     return (
@@ -135,6 +142,7 @@ export default function CreateProduct() {
                 <input
                     type='file'
                     id='input-product-image'
+                    name='img'
                     accept='image/*'
                     style={{ display: 'none' }}
                     onChange={changeProductImage}

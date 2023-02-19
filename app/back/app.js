@@ -30,7 +30,7 @@ const route = require('./routes')
 // middleware
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-app.use(formData.array())
+//app.use(formData.array())
 app.use(cors(corsOption))
 app.use(express.static('files'))
 app.use('/', route)
