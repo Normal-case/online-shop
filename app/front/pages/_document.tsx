@@ -13,7 +13,10 @@ class MyDocument extends Document {
     return (
         <Html>
             <Head>
-                <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet" /> {/* Naver 나눔스퀘어네오 */}
+                {/* Naver 나눔스퀘어네오 */}
+                {/* font-family: 'NanumSquareNeoLight', 'NanumSquareNeo'
+                'NanumSquareNeoBold', 'NanumSquareNeoExtraBold', 'NanumSquareNeoHeavy' */}
+                <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet" /> 
                 <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" /> {/* goole Comrotaa font */}
             </Head>
             <body>

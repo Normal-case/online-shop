@@ -1,0 +1,46 @@
+.container {
+    display: grid;
+    grid-template-columns: 300px 300px 300px 300px 300px;
+}
+
+.card {
+    margin: 20px 20px;
+}
+
+.image {
+    width: 260px;
+    height: 370px;
+    background-color: #B89563;
+    border-radius: 10px;
+}
+
+.title {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.price {
+    font-family: 'NanumSquareNeoExtraBold';
+    font-size: 18px;
+    margin-top: 37px;
+}
+
+.footer {
+    margin-top: 20px;
+    border-top: 1px solid #dcdcdc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.count { 
+    font-family: 'NanumSquareNeo';
+    font-size: 16px;
+    color: #aaaaaa;
+
+    padding-top: 15px;
+}
+
+.liked {
+    font-size: 24px;
+}
