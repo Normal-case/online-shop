@@ -16,17 +16,10 @@ export default function Profile() {
     const [menuIdx, setMenuIdx] = useState(0)
 
     const [profile, setProfile] = useState()
-    const [src, setSrc] = useState('')
-    const [profileImage, setProfileImage] = useState()
-    const [updateProfile, setUpdateProfile] = useState(false)
     const [modal, setModal] = useState(false)
     const [zoneCode, setZoneCode] = useState()
     const [address, setAddress] = useState()
     const [detail, setDetail] = useState()
-    const [nickname, setNickname] = useState()
-    var [file, setFile] = useState('http://localhost:8000/profile/profile.png')
-
-    
 
     useEffect(() => {
         API.profile()
@@ -48,37 +41,9 @@ export default function Profile() {
             if(tmpMenu.length === 6) setMenuData([...tmpMenu, '물품등록'])
         }
         setProfile(profile)
-        setSrc(profile.pImage)
-        setFile(profile.pImage)
-        setNickname(profile.name)
         setZoneCode(profile.zoneCode)
         setAddress(profile.address)
         setDetail(profile.detail)
-        setNickname(profile.name)
-    }
-
-    const profileUpdate = async () => {
-        if(updateProfile) {
-            setUpdateProfile(false)
-            let formData = new FormData()
-            const username = getCookie('user')
-            const key = ['zoneCode', 'address', 'detail', 'nickname', 'username']
-            const value = [zoneCode, address, detail, nickname, username]
-            formData.append('img', file)
-            for (var i=0;i<key.length;i++) {
-                formData.append(key[i], value[i])
-            }
-            API.profileUpdate(formData)
-                .then(console.log)
-                .catch(console.log)
-        } else {
-            setUpdateProfile(true)
-        }
-    }
-
-    const addressInput = () => {
-        if(!updateProfile) return
-        setModal(true)
     }
 
     const handleComplete = (data: Object) => {
@@ -87,40 +52,20 @@ export default function Profile() {
         setZoneCode(data.zonecode)
     }
 
-    const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFile(e.target.files[0])
-        setProfileImage(URL.createObjectURL(e.target.files[0]))
-    }
-
-    const detailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDetail(e.target.value)
-    }
-
-    const changeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNickname(e.target.value)
-    }
-
     const menuActive = (e) => {
         setMenuIdx(e.target.value)
     }
 
     const profileInfoVariable = {
-        profileImage: profileImage,
-        src: src,
-        updateProfile: updateProfile,
-        nickname: nickname,
-        point: profile?.point,
+        profile: profile,
         zoneCode: zoneCode,
         address: address,
         detail: detail
     }
 
     const profileInfoFunction = {
-        handleProfileImage: handleProfileImage,
-        changeNickname: changeNickname,
-        addressInput: addressInput,
-        detailChange: detailChange,
-        profileUpdate: profileUpdate
+        setModal,
+        setDetail,
     }
 
     return (
