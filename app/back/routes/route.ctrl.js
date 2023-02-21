@@ -1,6 +1,7 @@
 const User = require("../models/User")
 const UserStorage = require('../models/UserStorage')
 const Product = require('../models/Product')
+const ProductStorage = require('../models/ProductStorage')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
 
@@ -29,6 +30,12 @@ const output = {
         }
         const profile = await UserStorage.profileGet(req.headers.user)
         const response = { success: true, profile: profile, accesstoken: AToken }
+        return res.status(200).json(response)
+    },
+
+    product: async (req, res) => {
+        const product = await ProductStorage.getProduct()
+        const response = { success: true, product: product }
         return res.status(200).json(response)
     }
 }

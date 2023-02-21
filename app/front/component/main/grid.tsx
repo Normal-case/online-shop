@@ -1,161 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../../styles/component/Grid.module.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import API from '../../api-server'
 
 export default function Grid() {
+
+    const [productList, setProductList] = useState([])
+
+    useEffect(() => {
+        API.productGet()
+            .then(res => handleResponse(res.data))
+            .catch(console.log)
+    }, [])
+
+    const handleResponse = (response) => {
+        setProductList(response.product)
+    }
+    
     return (
         <div className={styles.container}>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-            <div className={styles.card}>
-                {/* 사진 */}
-                <div className={styles.image}></div>
-                {/* 제목 */}
-                <div className={styles.title}>제목 들어가는 부분이 만약에 길어진다면?</div>
-                {/* 가격 */}
-                <div className={styles.price}>13000원</div>
-                {/* 구매수 리뷰 좋아요 */}
-                <div className={styles.footer}>
-                    <div className={styles.count}>
-                        구매수 | 리뷰수
-                    </div>
-                    <div className={styles.liked}><HeartOutlined /></div>
-                </div>
-            </div>
-
+            {
+                productList?.map((product, idx) => {
+                    return (
+                        <div className={styles.card}>
+                            <div className={styles.image}></div>
+                            <div className={styles.title}>{product.name}</div>
+                            <div className={styles.price}>{product.price}원</div>
+                            <div className={styles.footer}>
+                                <div className={styles.count}>
+                                    구매수 {product.purchase} | 리뷰수 {product.reviews}
+                                </div>
+                                <div className={styles.liked}><HeartOutlined /></div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }

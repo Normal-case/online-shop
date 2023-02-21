@@ -68,4 +68,8 @@ export default class API {
             }
         })
     }
+
+    static productGet() {
+        return axios.get(`${domain}/product`)
+    }
 }

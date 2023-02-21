@@ -1,4 +1,5 @@
 const { ObjectId } = require('mongodb')
+const dbo = require('../bin/db/connect')
 
 class ProductStorage {
     static createProductInfo(body) {
@@ -15,6 +16,12 @@ class ProductStorage {
             _id: id
         }
         return info
+    }
+
+    static async getProduct() {
+        const dbConnect = dbo.getDB()
+        const productList = await dbConnect.collection('product').find({}).toArray()
+        return productList
     }
 }
 
