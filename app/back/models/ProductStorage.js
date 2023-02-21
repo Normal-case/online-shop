@@ -2,8 +2,7 @@ const { ObjectId } = require('mongodb')
 const dbo = require('../bin/db/connect')
 
 class ProductStorage {
-    static createProductInfo(body) {
-        const id = ObjectId()
+    static createProductInfo(body, productImage, id) {
         const info = {
             name: body.productName,
             category: body.productCategory,
@@ -11,11 +10,12 @@ class ProductStorage {
             description: body.productDesc,
             purchase: 0,
             reviews: 0,
+            image: productImage,
             createAt: new Date(),
             updateAt: new Date(),
             _id: id
         }
-        return info
+        return info 
     }
 
     static async getProduct() {

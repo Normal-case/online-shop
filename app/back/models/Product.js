@@ -7,15 +7,15 @@ class Product {
     create(files, body) {
         const dbConnect = dbo.getDB()
         const id = ObjectId()
-        const info = ProductStorage.createProductInfo(body)
+        let productImage = []
+        for(var i=0;i<files.length;i++) {
+            productImage.push(`${domain}/product/${id}_${i}.jpg`)
+        }
+
+        const info = ProductStorage.createProductInfo(body, productImage, id)
         dbConnect.collection('product').insertOne(info)
 
-        for(var i=0;i<files.length;i++) {
-            dbConnect.collection('productImage').insertOne({
-                url: `${domain}/profile/${body.productName}_${i}.jpg`,
-                productID: id
-            })
-        }
+        return id
     }
 }
 

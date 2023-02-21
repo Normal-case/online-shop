@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from '../../styles/component/Grid.module.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import API from '../../api-server'
+import Image from 'next/image'
 
 export default function Grid() {
 
@@ -14,6 +15,7 @@ export default function Grid() {
     }, [])
 
     const handleResponse = (response) => {
+        console.log(response)
         setProductList(response.product)
     }
     
@@ -21,9 +23,12 @@ export default function Grid() {
         <div className={styles.container}>
             {
                 productList?.map((product, idx) => {
+                    console.log(product.image[0])
                     return (
                         <div className={styles.card}>
-                            <div className={styles.image}></div>
+                            <div className={styles.image}>
+                                <Image loader={() => product?.image[0]} src={product?.image[0]} width={260} height={370} alt='' />
+                            </div>
                             <div className={styles.title}>{product.name}</div>
                             <div className={styles.price}>{product.price}원</div>
                             <div className={styles.footer}>

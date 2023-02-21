@@ -65,15 +65,16 @@ const process = {
         return res.status(200)
     },
 
-    product: (req, res) => {
+    product: async (req, res) => {
         // product change
         const body = req.body
         const product = new Product()
-        product.create(req.files, body)
+        const id = await product.create(req.files, body)
+        console.log(id)
 
         if(req.files) {
             for(var i=0;i<req.files.length;i++) {
-                fs.rename(req.files[i].path, `files/product/${body.productName}_${i}.jpg`, (err) => {if(err) throw err})
+                fs.rename(req.files[i].path, `files/product/${id}_${i}.jpg`, (err) => {if(err) throw err})
             }
         }
 
