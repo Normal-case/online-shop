@@ -73,10 +73,11 @@ const process = {
 
     product: async (req, res) => {
         // product change
+        if(!req.isAdmin) return res.status(400).json({ success: false })
         const body = req.body
+        const username = req.user.name
         const product = new Product()
-        const id = await product.create(req.files, body)
-        console.log(id)
+        const id = await product.create(req.files, body, username)
 
         if(req.files) {
             for(var i=0;i<req.files.length;i++) {

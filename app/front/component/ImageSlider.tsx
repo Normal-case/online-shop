@@ -86,7 +86,7 @@ export default function ImageSlider({ product }) {
         <div style={sliderStyles}>
             <div style={leftArrowStyles} onClick={goToPrevious}><LeftOutlined /></div>
             <div style={rightArrowStyles} onClick={goToNext}><RightOutlined /></div>
-            <Link href={`/product/${product._id}`}><div style={slideStyles}></div></Link>
+            <Link href={`/product/${product?._id}`}><div style={slideStyles}></div></Link>
             <div style={dotsContainerStyles}>
                 {product?.image.map((slide, slideIndex) => (
                     <div 

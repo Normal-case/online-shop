@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 
 import Header from '../../component/header'
 import API from '../../api-server'
+import ImageSlider from '../../component/ImageSlider'
+import styles from '../../styles/component/ProductDetail.module.css'
 
 export default function Product() {
     
@@ -20,19 +22,23 @@ export default function Product() {
     }, [router])
 
     const handleResponse = (data) => {
-        setProduct(data)
+        setProduct(data.product)
     }
 
     return (
         <div>
             <Header />
-            <div>
+            <div className={styles.container}>
                 {/* 사진 부분 */}
-                <div>
-
+                <div className={styles.imageContainer}>
+                    <ImageSlider product={product} />
+                    
                 </div>
                 {/* 내용 부분 */}
-                <div>
+                <div className={styles.contents}>
+                    <div className={styles.name}>{product?.name}</div>
+                    <div className={styles.price}>{product?.price}</div>
+                    <div className={styles.description}>{product?.description}</div>
 
                 </div>
             </div>

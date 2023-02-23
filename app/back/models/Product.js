@@ -4,7 +4,7 @@ const domain = process.env.SERVER_DOMAIN
 const ProductStorage = require('./ProductStorage')
 
 class Product {
-    create(files, body) {
+    create(files, body, username) {
         const dbConnect = dbo.getDB()
         const id = ObjectId()
         let productImage = []
@@ -12,7 +12,7 @@ class Product {
             productImage.push(`${domain}/product/${id}_${i}.jpg`)
         }
 
-        const info = ProductStorage.createProductInfo(body, productImage, id)
+        const info = ProductStorage.createProductInfo(body, productImage, id, username)
         dbConnect.collection('product').insertOne(info)
 
         return id

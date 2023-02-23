@@ -27,10 +27,10 @@ export default function Grid() {
                     return (
                         <div className={styles.card}>
                             <div className={styles.image}>
-                                <ImageSlider slides={product?.image} product={product} />
+                                <ImageSlider product={product} />
                             </div>
-                            <Link href={`/product/${product._id}`}>
-                                <div className={styles.title}>{product.name}</div>
+                            <Link href={`/product/${product?._id}`}>
+                                <div className={styles.title}>{product?.name}</div>
                             </Link>
                             <div className={styles.price}>{product.price}원</div>
                             <div className={styles.footer}>
