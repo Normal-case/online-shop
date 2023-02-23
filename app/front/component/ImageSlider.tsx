@@ -46,7 +46,8 @@ export default function ImageSlider({ slides }) {
         justifyContent: 'center',
         position: 'absolute',
         bottom: '0%',
-        transform: 'translate(100%, -50%)'
+        left: '50%',
+        transform: 'translate(-50%, 0)'
     }
 
     const dotStyles = {

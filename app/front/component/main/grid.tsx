@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styles from '../../styles/component/Grid.module.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import API from '../../api-server'
-import Image from 'next/image'
 import ImageSlider from '../ImageSlider'
 
 export default function Grid() {
