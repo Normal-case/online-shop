@@ -37,6 +37,12 @@ const output = {
         const product = await ProductStorage.getProduct()
         const response = { success: true, product: product }
         return res.status(200).json(response)
+    },
+
+    productDetail: async (req, res) => {
+        const product = await ProductStorage.getProductDetail(req.params.id)
+        const response = { success: true, product: product }
+        return res.status(200).json(response)
     }
 }
 

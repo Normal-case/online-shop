@@ -3,6 +3,7 @@ import styles from '../../styles/component/Grid.module.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import API from '../../api-server'
 import ImageSlider from '../ImageSlider'
+import Link from 'next/link'
 
 export default function Grid() {
 
@@ -26,9 +27,11 @@ export default function Grid() {
                     return (
                         <div className={styles.card}>
                             <div className={styles.image}>
-                                <ImageSlider slides={product?.image} />
+                                <ImageSlider slides={product?.image} product={product} />
                             </div>
-                            <div className={styles.title}>{product.name}</div>
+                            <Link href={`/product/${product._id}`}>
+                                <div className={styles.title}>{product.name}</div>
+                            </Link>
                             <div className={styles.price}>{product.price}원</div>
                             <div className={styles.footer}>
                                 <div className={styles.count}>

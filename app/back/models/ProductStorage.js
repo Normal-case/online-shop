@@ -23,6 +23,14 @@ class ProductStorage {
         const productList = await dbConnect.collection('product').find({}).toArray()
         return productList
     }
+
+
+    static async getProductDetail(id) {
+        const dbConnect = dbo.getDB()
+        var oID = new ObjectId(id)
+        const product = await dbConnect.collection('product').findOne({_id: oID})
+        return product
+    }
 }
 
 module.exports = ProductStorage

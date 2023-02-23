@@ -72,4 +72,8 @@ export default class API {
     static productGet() {
         return axios.get(`${domain}/product`)
     }
+
+    static productDetail(id: string) {
+        return axios.get(`${domain}/product/${id}`)
+    }
 }

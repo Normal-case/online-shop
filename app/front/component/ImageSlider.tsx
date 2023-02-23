@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import Link from 'next/link'
 
-export default function ImageSlider({ slides }) {
+export default function ImageSlider({ product }) {
 
     const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -16,7 +17,7 @@ export default function ImageSlider({ slides }) {
         borderRadius: '10px',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        backgroundImage: `url(${slides[currentIndex]})`
+        backgroundImage: `url(${product?.image[currentIndex]})`
     }
 
     const leftArrowStyles = {
@@ -66,12 +67,12 @@ export default function ImageSlider({ slides }) {
 
     const goToPrevious = () => {
         const isFirstSlide = currentIndex === 0
-        const newIndex = isFirstSlide ? slides.length -1 : currentIndex - 1
+        const newIndex = isFirstSlide ? product?.image.length -1 : currentIndex - 1
         setCurrentIndex(newIndex)
     }
 
     const goToNext = () => {
-        const isLastSlide = currentIndex === slides.length -1
+        const isLastSlide = currentIndex === product?.image.length -1
         const newIndex = isLastSlide ? 0 : currentIndex + 1
         setCurrentIndex(newIndex)
     }
@@ -85,9 +86,9 @@ export default function ImageSlider({ slides }) {
         <div style={sliderStyles}>
             <div style={leftArrowStyles} onClick={goToPrevious}><LeftOutlined /></div>
             <div style={rightArrowStyles} onClick={goToNext}><RightOutlined /></div>
-            <div style={slideStyles}></div>
+            <Link href={`/product/${product._id}`}><div style={slideStyles}></div></Link>
             <div style={dotsContainerStyles}>
-                {slides.map((slide, slideIndex) => (
+                {product?.image.map((slide, slideIndex) => (
                     <div 
                         key={slideIndex} 
                         style={slideIndex === currentIndex ? dotStyles_active : dotStyles} 
