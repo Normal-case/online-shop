@@ -15,7 +15,6 @@ export default function CreateProduct(props: any) {
         { value: 'blouse', name: '블라우스' },
         { value: 'skirt', name: '스커트' },
         { value: 'pants', name: '팬츠' },
-        { value: 'underwear', name: '언더웨어' },
     ]
 
     const [submitActive, setSubmitActive] = useState(false)

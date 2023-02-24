@@ -4,21 +4,156 @@
 }
 
 .imageContainer {
-    width: 500px;
-    height: 700px;
+    width: 700px;
+    height: 900px;
+    margin-right: 150px; 
+}
+
+.contents {
+    width: 700px;
+}
+
+.productInfo {
+    border-bottom: 1px solid #d2d2d2;
 }
 
 .name {
+    margin: 20px 0;
+    margin-bottom: 80px;
     font-family: 'NanumSquareNeo';
-    font-size: 20px;
+    font-size: 24px;
+}
+
+.price {
+    font-family: 'NanumSquareNeoExtraBold';
+    font-size: 24px;
+    margin-bottom: 50px;
 }
 
 .description {
     font-family: 'NanumSquareNeo';
     font-size: 20px;
+    margin-bottom: 30px;
 }
 
-.price {
+.postedInfo {
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.posted {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #8c8c8c;
+
+    margin: 40px 0;
+}
+
+.createAt {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #8c8c8c;
+
+    margin-bottom: 60px;
+}
+
+.selectProduct {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+
+    padding: 20px 15px;
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+    background-color: #d2d2d2;
+}
+
+.selectProductName {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.optionsContents {
+    display: flex;
+    justify-content: space-between;
+}
+
+.optionsBtn {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.amountBtn {
+    border: 1px solid #d2d2d2;
+    border-radius: 50%;
+    margin: 0 15px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.eachPrice {
     font-family: 'NanumSquareNeoExtraBold';
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.totalPrice {
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #d2d2d2;
+    margin: 20px 0;
+    padding: 20px 0;
+}
+
+.priceText {
+    font-family: 'NanumSquareNeoExtraBold';
+    font-size: 18px;
+}
+
+.totalPriceValue {
+    font-family: 'NanumSquareNeoExtraBold';
+    font-size: 24px;
+    color: #0064FF;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.heartBtn {
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+
+    font-size: 24px;
+    color: #FFAF00;
+}
+
+.cartBtn {
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 300px;
+    height: 80px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 24px;
+}
+
+.buyBtn {
+    border: 1px solid #FFA01E;
+    border-radius: 10px;
+    background-color: #FFA01E;
+    width: 300px;
+    height: 80px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 24px;
 }
