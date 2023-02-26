@@ -108,7 +108,15 @@ const process = {
     }
 }
 
+const remove = {
+    liked: (req, res) => {
+        console.log(req.body)
+        return res.status(200).json({ success: true })
+    }
+}
+
 module.exports = {
     output,
-    process
+    process,
+    remove
 }

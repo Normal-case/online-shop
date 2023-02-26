@@ -76,7 +76,10 @@ export default function Product() {
                             username: username,
                             productId: product?._id
                         }
-                        API.
+                        API.likedDelete(data)
+                            .then(console.log)
+                            .catch(console.log)
+                        setHeart(false)
                     } else {
                         const body = {
                             username: username,

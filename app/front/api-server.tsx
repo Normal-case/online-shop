@@ -116,12 +116,10 @@ export default class API {
     static likedDelete(data: Object) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
-        return axios.post(`${domain}/liked/get`, { data: data }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'access': 'Bearer ' + accesstoken,
-                'refresh': 'Bearer ' + refreshtoken
-            }
-        })
+        return axios.delete(`${domain}/liked`, { data: data, headers: {
+            'Content-Type': 'application/json',
+            'access': 'Bearer ' + accesstoken,
+            'refresh': 'Bearer ' + refreshtoken
+        } })
     }
 }

@@ -21,4 +21,6 @@ router.post('/wishList', authenticate, ctrl.process.wishList)
 router.post('/liked', authenticate, ctrl.process.liked)
 router.post('/liked/get', authenticate, ctrl.process.likedGet)
 
+router.delete('/liked', authenticate, ctrl.remove.liked)
+
 module.exports = router
