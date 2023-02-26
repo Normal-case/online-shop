@@ -13,6 +13,12 @@ class Liked {
             dbConnect.collection('liked').insertOne(body)
         }
     }
+
+    async delete() {
+        const dbConnect = dbo.getDB()
+        const body = this.body
+        dbConnect.collection('liked').deleteOne({ username: body.username, productId: body.productId})
+    }
 }
 
 module.exports = Liked

@@ -110,7 +110,8 @@ const process = {
 
 const remove = {
     liked: (req, res) => {
-        console.log(req.body)
+        const liked = new Liked(req.body)
+        liked.delete()
         return res.status(200).json({ success: true })
     }
 }
