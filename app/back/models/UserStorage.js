@@ -94,15 +94,6 @@ class UserStorage {
         )
         return profile
     }
-
-    static async wishListCreate(body) {
-        const dbConnect = dbo.getDB()
-
-        const wish = await dbConnect.collection('wishList').findOne({ username: body.username, productId: body.productId})
-        if(!wish) {
-            dbConnect.collection('wishList').insertOne(body)
-        }
-    }
 }
 
 module.exports = UserStorage

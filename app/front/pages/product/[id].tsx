@@ -14,6 +14,7 @@ export default function Product() {
     const [product, setProduct] = useState()
     const [amount, setAmount] = useState(1)
     const [modal, setModal] = useState(false)
+    const [heart, setHeart] = useState(false)
     const category = {
         'outer': '아웃터',
         'onePiece': '원피스',
@@ -34,9 +35,24 @@ export default function Product() {
         
     }, [router])
 
-    const handleResponse = (data) => {
-        setProduct(data.product)
-        console.log(data.product)
+    const handleResponse = (data: Object) => {
+        const product = data?.product
+        const username = getCookie('user')
+        setProduct(product)
+
+        const body = {
+            username: username,
+            id: product._id
+        }
+
+        API.likedGet(body)
+            .then(res => {
+                const data = res.data
+                if(data.success && data.liked) {
+                    setHeart(true)
+                }
+            })
+            .catch(console.log)  
     }
 
     const minus = () => {
@@ -50,11 +66,37 @@ export default function Product() {
         setAmount(tmpAmount)
     }
 
+    const likedSave = () => {
+        API.tokenVerify()
+            .then(res => {
+                if(res.data.success) {
+                    const username = getCookie('user')
+                    const body = {
+                        username: username,
+                        productId: product?._id,
+                        productName: product?.name,
+                        productPrice: product?.price,
+                        productCategory: product?.category,
+                        imageURL: product?.image[0]
+                    }
+                    API.likedPost(body)
+                        .then(console.log)
+                        .catch(console.log)
+                    setHeart(true)
+                }
+            })
+            .catch(err => {
+                if(confirm('로그인 후 찜하기가 가능합니다. 로그인 하시겠습니까?') === true) {
+                    router.replace('/user/login')
+                }
+            })
+        
+    }
+
     const cartSave = () => {
         API.tokenVerify()
             .then(res => {
                 if(res.data.success) {
-                    
                     const username = getCookie('user')
                     const body = {
                         username: username,
@@ -121,7 +163,7 @@ export default function Product() {
                     </div>
                     {/* 구매하기, 장바구니, 찜 버튼 */}
                     <div className={styles.buttonContainer}>
-                        <button className={styles.heartBtn}><HeartOutlined /></button>
+                        <button className={styles.heartBtn} onClick={likedSave}>{heart ? <HeartFilled /> : <HeartOutlined />}</button>
                         <button className={styles.cartBtn} onClick={cartSave}>장바구니</button>
                         <button className={styles.buyBtn}>구매하기</button>
                     </div>

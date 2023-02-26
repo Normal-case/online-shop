@@ -2,6 +2,9 @@ const User = require("../models/User")
 const UserStorage = require('../models/UserStorage')
 const Product = require('../models/Product')
 const ProductStorage = require('../models/ProductStorage')
+const WishList = require('../models/wishList')
+const Liked = require('../models/Liked')
+const LikedStorage = require('../models/LikedStorage')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
 
@@ -23,7 +26,6 @@ const output = {
     },
 
     profile: async (req, res) => {
-        //const user = new User(req.headers.user)
         var AToken
         if(req.access) {
             AToken = req.access
@@ -89,8 +91,20 @@ const process = {
     },
 
     wishList: (req, res) => {
-        UserStorage.wishListCreate(req.body)
+        const wishlist = new WishList(req.body)
+        wishlist.create()
         return res.status(200).json({ success: true })
+    },
+
+    liked: (req, res) => {
+        const liked = new Liked(req.body)
+        liked.create()
+        return res.status(200).json({ success: true })
+    },
+
+    likedGet: async (req, res) => {
+        const liked = await LikedStorage.getLiked(req.body)
+        return res.status(200).json({ success: true, liked })
     }
 }
 
