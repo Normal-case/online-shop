@@ -7,6 +7,13 @@ class LikedStorage {
 
         return liked
     }
+
+    static async getList(username) {
+        const dbConnect = dbo.getDB()
+        const likedList = await dbConnect.collection('liked').find({ username: username }).toArray()
+
+        return likedList
+    }
 }
 
 module.exports = LikedStorage

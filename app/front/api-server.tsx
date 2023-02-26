@@ -122,4 +122,16 @@ export default class API {
             'refresh': 'Bearer ' + refreshtoken
         } })
     }
+
+    static cartLikedGet() {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.get(`${domain}/wishList`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }

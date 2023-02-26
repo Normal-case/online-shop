@@ -11,6 +11,7 @@ router.get('/user/logout', logout, ctrl.output.logout)
 router.get('/user/profile', authenticate, ctrl.output.profile)
 router.get('/product', ctrl.output.product)
 router.get('/product/:id', ctrl.output.productDetail)
+router.get('/wishList', authenticate, ctrl.output.wishList)
 
 
 router.post('/login', ctrl.process.login)

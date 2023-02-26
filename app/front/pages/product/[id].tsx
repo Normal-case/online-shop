@@ -116,6 +116,7 @@ export default function Product() {
                         productPrice: product?.price,
                         productCategory: product?.category,
                         imageURL: product?.image[0],
+                        amount: amount
                     }
                     API.wishListPost(body)
                         .then(console.log)

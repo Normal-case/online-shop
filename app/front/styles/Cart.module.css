@@ -2,34 +2,156 @@
     text-align: center;
 }
 
-.cart_header {
-    background-color: #B0F7FF;
+.cartHeader {
+    background-color: #73EEB2;
+    padding: 1rem .5rem;
 }
 
-.cart_header h1 {
+.cartHeader h1 {
     font-family: 'NanumSquareNeo';
 }
 
-.cart_header ul {
+.cartHeader ul {
     padding: 0;
     display: flex;
     justify-content: center;
 }
 
-.cart_header ul li {
+.cartHeader ul li {
     margin: 1rem 1rem;
     padding: 1rem 1rem;
-    background-color: #B0F7FF;
-    border: 1px solid #B0F7FF;
 
     font-family: 'NanumSquareNeo';
 }
 
-.cart_header ul li:hover {
-    background-color: #6482FF;
-    border: 1px solid #6482FF;
+.cartHeader ul li:hover {
+    background-color: #4646CD;
+    /* border: 1px solid #4646CD; */
     border-radius: 5px;
     cursor: pointer;
 
     color: #fff;
+}
+
+.active {
+    background-color: #4646CD;
+    /* border: 1px solid #4646CD; */
+    border-radius: 5px;
+
+    color: #fff;
+}
+
+.productCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    height: 230px;
+    border: 3px solid #dcdcdc;
+    border-radius: 10px;
+
+    margin: 30px auto;
+}
+
+.cardFront {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 600px;
+}
+
+.checkbox {
+    font-size: 28px;
+    cursor: pointer;
+    color: #bebebe;
+}
+
+.checkBoxActive {
+    font-size: 28px;
+    cursor: pointer;
+    color: #FFA01E;
+}
+
+.checkboxImg {
+    border-radius: 10px;
+}
+
+.productName {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+
+    width: 320px;
+}
+
+.cardBack {
+    display: flex;
+    justify-content: space-between;
+    width: 270px;
+}
+
+.optionsBtn {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    position: relative;
+    top: 6px;
+}
+
+.amountBtn {
+    border: 1px solid #d2d2d2;
+    border-radius: 50%;
+    margin: 0 15px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.eachPrice {
+    font-family: 'NanumSquareNeoExtraBold';
+    font-size: 18px;
+    position: relative;
+    top: 6px;
+}
+
+.closeBtn button {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    text-align: center;
+    background-color: transparent;
+    font-size: 24px;
+    font-weight: 700;
+    color: #999;
+
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 700px;
+    margin: 0 auto;
+}
+
+.selectOrder {
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 300px;
+    height: 80px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 24px;
+}
+
+.wholeOrder {
+    border: 1px solid #FFA01E;
+    border-radius: 10px;
+    background-color: #FFA01E;
+    width: 300px;
+    height: 80px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 24px; 
 }

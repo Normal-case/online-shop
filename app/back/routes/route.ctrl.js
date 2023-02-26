@@ -2,7 +2,8 @@ const User = require("../models/User")
 const UserStorage = require('../models/UserStorage')
 const Product = require('../models/Product')
 const ProductStorage = require('../models/ProductStorage')
-const WishList = require('../models/wishList')
+const WishList = require('../models/WishList')
+const WishListStorage = require('../models/WishListStorage')
 const Liked = require('../models/Liked')
 const LikedStorage = require('../models/LikedStorage')
 const Token = require('../bin/jwt/token')
@@ -44,6 +45,12 @@ const output = {
     productDetail: async (req, res) => {
         const product = await ProductStorage.getProductDetail(req.params.id)
         const response = { success: true, product: product }
+        return res.status(200).json(response)
+    },
+
+    wishList: async (req, res) => {
+        const { wishList, likedList } = await WishListStorage.getList(req.user.username)
+        const response = { success: true, wishList, likedList }
         return res.status(200).json(response)
     }
 }
