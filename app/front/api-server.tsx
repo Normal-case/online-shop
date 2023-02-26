@@ -76,4 +76,16 @@ export default class API {
     static productDetail(id: string) {
         return axios.get(`${domain}/product/${id}`)
     }
+
+    static wishListPost(body: Object) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.post(`${domain}/wishList`, body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }

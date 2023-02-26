@@ -86,6 +86,11 @@ const process = {
         }
 
         return res.status(200).json({ success: true })
+    },
+
+    wishList: (req, res) => {
+        UserStorage.wishListCreate(req.body)
+        return res.status(200).json({ success: true })
     }
 }
 

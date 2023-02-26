@@ -6,12 +6,14 @@ import API from '../../api-server'
 import ImageSlider from '../../component/ImageSlider'
 import styles from '../../styles/component/ProductDetail.module.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { getCookie } from 'cookies-next'
 
 export default function Product() {
     
     const router = useRouter()
     const [product, setProduct] = useState()
     const [amount, setAmount] = useState(1)
+    const [modal, setModal] = useState(false)
     const category = {
         'outer': '아웃터',
         'onePiece': '원피스',
@@ -34,6 +36,7 @@ export default function Product() {
 
     const handleResponse = (data) => {
         setProduct(data.product)
+        console.log(data.product)
     }
 
     const minus = () => {
@@ -45,6 +48,34 @@ export default function Product() {
     const plus = () => {
         var tmpAmount = amount + 1
         setAmount(tmpAmount)
+    }
+
+    const cartSave = () => {
+        API.tokenVerify()
+            .then(res => {
+                if(res.data.success) {
+                    
+                    const username = getCookie('user')
+                    const body = {
+                        username: username,
+                        productId: product?._id,
+                        productName: product?.name,
+                        productPrice: product?.price,
+                        productCategory: product?.category,
+                        imageURL: product?.image[0],
+                    }
+                    API.wishListPost(body)
+                        .then(console.log)
+                        .catch(console.log)
+                    
+                    setModal(true)
+                }
+            })
+            .catch(err => {
+                if(confirm('장바구니에 담으려면 로그인하셔야 합니다. 로그인 하시겠습니까?') === true) {
+                    router.replace('/user/login')
+                }
+            })
     }
 
     return (
@@ -91,11 +122,32 @@ export default function Product() {
                     {/* 구매하기, 장바구니, 찜 버튼 */}
                     <div className={styles.buttonContainer}>
                         <button className={styles.heartBtn}><HeartOutlined /></button>
-                        <button className={styles.cartBtn}>장바구니</button>
+                        <button className={styles.cartBtn} onClick={cartSave}>장바구니</button>
                         <button className={styles.buyBtn}>구매하기</button>
                     </div>
                 </div>
             </div>
+
+            {/* 리뷰 부분 */}
+
+            {/* 장바구니 등록 모달 */}
+            {
+                modal ?
+                <div className={styles.modal}>
+                    <div className={styles.openModal}>
+                        <div className={styles.modalHeader}>
+                            장바구니 <button onClick={() => setModal(false)}>&times;</button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            <div>장바구니에 담았습니다. 장바구니로 이동하시겠습니까?</div>
+                            <div className={styles.cartBtnContainer}>
+                                <button className={styles.keepShop} onClick={() => setModal(false)}>쇼핑 더 하기</button>
+                                <button className={styles.moveCart} onClick={() => router.replace('/user/cart')}>장바구니로 이동</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> : null
+            }
         </div>
     )
 }

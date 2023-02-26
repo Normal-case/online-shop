@@ -16,5 +16,6 @@ router.post('/login', ctrl.process.login)
 router.post('/register', ctrl.process.register)
 router.post('/profile', authenticate, uploadProfile.single('img'), ctrl.process.profile)
 router.post('/product', authenticate, uploadProduct.array('img', 10), ctrl.process.product)
+router.post('/wishList', authenticate, ctrl.process.wishList)
 
 module.exports = router

@@ -103,8 +103,8 @@ export default function Profile() {
             {
                 modal ? 
                 <div className={styles.modal}>
-                    <div className={styles.open_modal}>
-                        <div className={styles.modal_header}>
+                    <div className={styles.openModal}>
+                        <div className={styles.modalHeader}>
                             주소를 입력해주세요. <button onClick={() => setModal(false)}>&times;</button>
                         </div>
                         <DaumPostcodeEmbed onComplete={handleComplete} />
