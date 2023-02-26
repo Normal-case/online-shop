@@ -71,18 +71,26 @@ export default function Product() {
             .then(res => {
                 if(res.data.success) {
                     const username = getCookie('user')
-                    const body = {
-                        username: username,
-                        productId: product?._id,
-                        productName: product?.name,
-                        productPrice: product?.price,
-                        productCategory: product?.category,
-                        imageURL: product?.image[0]
+                    if(heart) {
+                        const data = {
+                            username: username,
+                            productId: product?._id
+                        }
+                        API.
+                    } else {
+                        const body = {
+                            username: username,
+                            productId: product?._id,
+                            productName: product?.name,
+                            productPrice: product?.price,
+                            productCategory: product?.category,
+                            imageURL: product?.image[0]
+                        }
+                        API.likedPost(body)
+                            .then(console.log)
+                            .catch(console.log)
+                        setHeart(true)
                     }
-                    API.likedPost(body)
-                        .then(console.log)
-                        .catch(console.log)
-                    setHeart(true)
                 }
             })
             .catch(err => {
