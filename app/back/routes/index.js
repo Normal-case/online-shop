@@ -21,6 +21,7 @@ router.post('/product', authenticate, uploadProduct.array('img', 10), ctrl.proce
 router.post('/wishList', authenticate, ctrl.process.wishList)
 router.post('/liked', authenticate, ctrl.process.liked)
 router.post('/liked/get', authenticate, ctrl.process.likedGet)
+router.post('/order', authenticate, ctrl.process.order)
 
 router.delete('/liked', authenticate, ctrl.remove.liked)
 router.delete('/wishList', authenticate, ctrl.remove.wishList)

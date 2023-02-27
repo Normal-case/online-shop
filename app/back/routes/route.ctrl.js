@@ -112,6 +112,11 @@ const process = {
     likedGet: async (req, res) => {
         const liked = await LikedStorage.getLiked(req.body)
         return res.status(200).json({ success: true, liked })
+    },
+
+    order: (req, res) => {
+        console.log(req.body)
+        return res.status(200).json({ success: true })
     }
 }
 

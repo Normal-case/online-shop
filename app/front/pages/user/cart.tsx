@@ -102,6 +102,37 @@ export default function Cart() {
     }
 
     const selectOrder = () => {
+        if(menuIdx === 0) {
+            let newArr = [...wishListAmount]
+            for(var i=0;i<newArr.length;i++){
+                if(!newArr[i].checkbox) {
+                    newArr.splice(i, 1)
+                    i--
+                }
+            }
+            const order = newArr
+            const body = {
+                data: order
+            }
+            API.order(body)
+                .then(console.log)
+                .catch(console.log)
+        } else if(menuIdx === 1) {
+            let newArr = [...likedListAmount]
+            for(var i=0;i<newArr.length;i++){
+                if(!newArr[i].checkbox) {
+                    newArr.splice(i, 1)
+                    i--
+                }
+            }
+            const order = newArr
+            const body = {
+                data: order
+            }
+            API.order(body)
+                .then(console.log)
+                .catch(console.log)
+        }
 
     }
 
@@ -115,10 +146,15 @@ export default function Cart() {
                 .then(console.log)
                 .catch(console.log)
         } else if(menuIdx === 1) {
-
+            const body = {
+                data: likedListAmount
+            }
+            API.order(body)
+                .then(console.log)
+                .catch(console.log)
         }
     }
-    console.log(wishListAmount)
+    
     return (
         <div>
             <Header />
