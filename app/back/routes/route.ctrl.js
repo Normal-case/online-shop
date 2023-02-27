@@ -6,6 +6,7 @@ const WishList = require('../models/WishList')
 const WishListStorage = require('../models/WishListStorage')
 const Liked = require('../models/Liked')
 const LikedStorage = require('../models/LikedStorage')
+const Order = require('../models/Order')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
 
@@ -115,7 +116,8 @@ const process = {
     },
 
     order: (req, res) => {
-        console.log(req.body)
+        const order = new Order(req.body)
+        order.create(req.user)
         return res.status(200).json({ success: true })
     }
 }

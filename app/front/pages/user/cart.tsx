@@ -35,7 +35,7 @@ export default function Cart() {
         var tmpWishList = []
         for(var i=0;i<wishList.length;i++) {
             var newValue = {
-                productId: wishList[i]._id,
+                productId: wishList[i].productId,
                 amount: wishList[i].amount,
                 checkbox: false
             }
@@ -45,7 +45,7 @@ export default function Cart() {
         var tmpLikedList = []
         for(var i=0;i<likedList.length;i++) {
             var newElement = {
-                productId: likedList[i]._id,
+                productId: likedList[i].productId,
                 amount: 1,
                 checkbox: false
             }
@@ -80,7 +80,7 @@ export default function Cart() {
         var tmpWishList = []
         for(var i=0;i<data.wishList.length;i++) {
             var newValue = {
-                productId: data.wishList[i]._id,
+                productId: data.wishList[i].productId,
                 amount: data.wishList[i].amount,
                 checkbox: false
             }
@@ -90,7 +90,7 @@ export default function Cart() {
         var tmpLikedList = []
         for(var i=0;i<data.likedList.length;i++) {
             var newElement = {
-                productId: data.likedList[i]._id,
+                productId: data.likedList[i].productId,
                 amount: 1,
                 checkbox: false
             }

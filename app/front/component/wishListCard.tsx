@@ -22,13 +22,13 @@ export default function WishListCard(props) {
         const element = props.element
         if(element.amount) {
             setAmount(element.amount)
-            props.handleWishListAmount(element.amount, element._id, boxCheck, props.index)
+            props.handleWishListAmount(element.amount, element.productId, boxCheck, props.index)
         }
     }, [])
 
     const checkBox = () => {
         setBoxCheck(!boxCheck)
-        props.handleWishListAmount(amount, props.element._id, !boxCheck, props.index)
+        props.handleWishListAmount(amount, props.element.productId, !boxCheck, props.index)
         const price = amount * props.element.productPrice
         if(!boxCheck) {
             props.setSelectTotalAmount(props.selectTotalAmount + amount)
@@ -41,7 +41,7 @@ export default function WishListCard(props) {
 
     const plus = () => {
         setAmount(amount + 1)
-        props.handleWishListAmount(amount + 1, props.element._id, boxCheck, props.index)
+        props.handleWishListAmount(amount + 1, props.element.productId, boxCheck, props.index)
         if(boxCheck) {
             props.setSelectTotalAmount(props.selectTotalAmount + 1)
             props.setTotalPrice(props.totalPrice + props.element.productPrice)
@@ -53,7 +53,7 @@ export default function WishListCard(props) {
         const isAmountOne = amount === 1 ? true : false
         if(!isAmountOne) {
             setAmount(amount - 1)
-            props.handleWishListAmount(amount - 1, props.element._id, boxCheck, props.index)
+            props.handleWishListAmount(amount - 1, props.element.productId, boxCheck, props.index)
             if(boxCheck) {
                 props.setSelectTotalAmount(props.selectTotalAmount - 1)
                 props.setTotalPrice(props.totalPrice - props.element.productPrice)

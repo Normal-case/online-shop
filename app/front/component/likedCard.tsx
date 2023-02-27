@@ -20,7 +20,7 @@ export default function LikedCard(props) {
 
     const checkBox = () => {
         setBoxCheck(!boxCheck)
-        props.handleLikedListAmount(amount, props.element._id, !boxCheck, props.index)
+        props.handleLikedListAmount(amount, props.element.productId, !boxCheck, props.index)
         const price = amount * props.element.productPrice
         if(!boxCheck) {
             props.setSelectTotalAmount(props.selectTotalAmount + amount)
@@ -33,7 +33,7 @@ export default function LikedCard(props) {
 
     const plus = () => {
         setAmount(amount + 1)
-        props.handleLikedListAmount(amount + 1, props.element._id, boxCheck, props.index)
+        props.handleLikedListAmount(amount + 1, props.element.productId, boxCheck, props.index)
         if(boxCheck) {
             props.setSelectTotalAmount(props.selectTotalAmount + 1)
             props.setTotalPrice(props.totalPrice + props.element.productPrice)
@@ -44,7 +44,7 @@ export default function LikedCard(props) {
         const isAmountOne = amount === 1 ? true : false
         if(!isAmountOne) {
             setAmount(amount - 1)
-            props.handleLikedListAmount(amount - 1, props.element._id, boxCheck, props.index)
+            props.handleLikedListAmount(amount - 1, props.element.productId, boxCheck, props.index)
             if(boxCheck) {
                 props.setSelectTotalAmount(props.selectTotalAmount - 1)
                 props.setTotalPrice(props.totalPrice - props.element.productPrice)
