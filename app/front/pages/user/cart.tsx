@@ -16,6 +16,8 @@ export default function Cart() {
     const [likedList, setLikedList] = useState([])
     const [selectTotalAmount, setSelectTotalAmount] = useState(0)
     const [totalPrice, setTotalPrice] = useState(0)
+    const [wishListAmount, setWishListAmount] = useState([])
+    const [likedListAmount, setLikedListAmount] = useState([])
 
     useEffect(() => {
         API.cartLikedGet()
@@ -30,15 +32,93 @@ export default function Cart() {
     useEffect(() => {
         setSelectTotalAmount(0)
         setTotalPrice(0)
+        var tmpWishList = []
+        for(var i=0;i<wishList.length;i++) {
+            var newValue = {
+                productId: wishList[i]._id,
+                amount: wishList[i].amount,
+                checkbox: false
+            }
+            tmpWishList.push(newValue)
+        }
+
+        var tmpLikedList = []
+        for(var i=0;i<likedList.length;i++) {
+            var newElement = {
+                productId: likedList[i]._id,
+                amount: 1,
+                checkbox: false
+            }
+            tmpLikedList.push(newElement)
+        }
+        
+        setWishListAmount(tmpWishList)
+        setLikedListAmount(tmpLikedList)
     }, [menuIdx])
+
+    const handleWishListAmount = (amount: Number, id: string, checkBox: boolean, index: Number) => {
+        let newArr = [...wishListAmount]
+        newArr[index].amount = amount
+        newArr[index].productId = id
+        newArr[index].checkbox = checkBox
+        setWishListAmount(newArr)
+    }
+
+    const handleLikedListAmount = (amount: Number, id: string, checkBox: boolean, index: Number) => {
+        let newArr = [...likedListAmount]
+        newArr[index].amount = amount
+        newArr[index].productId = id
+        newArr[index].checkbox = checkBox
+        setLikedListAmount(newArr)
+    }
 
     const handleResponse = (res) => {
         console.log(res.data)
         const data = res.data
         setWisthList(data.wishList)
         setLikedList(data.likedList)
+        var tmpWishList = []
+        for(var i=0;i<data.wishList.length;i++) {
+            var newValue = {
+                productId: data.wishList[i]._id,
+                amount: data.wishList[i].amount,
+                checkbox: false
+            }
+            tmpWishList.push(newValue)
+        }
+
+        var tmpLikedList = []
+        for(var i=0;i<data.likedList.length;i++) {
+            var newElement = {
+                productId: data.likedList[i]._id,
+                amount: 1,
+                checkbox: false
+            }
+            tmpLikedList.push(newElement)
+        }
+        
+        setWishListAmount(tmpWishList)
+        setLikedListAmount(tmpLikedList)
     }
 
+    const selectOrder = () => {
+
+    }
+
+    const wholeOrder = () => {
+        if(menuIdx === 0) {
+            // 물품id랑 user는 있으니깐 수량이 중요할듯?
+            const body = {
+                data: wishListAmount
+            }
+            API.order(body)
+                .then(console.log)
+                .catch(console.log)
+        } else if(menuIdx === 1) {
+
+        }
+    }
+    console.log(wishListAmount)
     return (
         <div>
             <Header />
@@ -67,11 +147,13 @@ export default function Cart() {
                         wishList.map((wish, idx) => {
                             return (
                                 <WishListCard 
+                                    index={idx}
                                     element={wish} 
                                     selectTotalAmount={selectTotalAmount}
                                     setSelectTotalAmount={setSelectTotalAmount}
                                     totalPrice={totalPrice}
                                     setTotalPrice={setTotalPrice}
+                                    handleWishListAmount={handleWishListAmount}
                                 />
                             )
                         })
@@ -83,11 +165,13 @@ export default function Cart() {
                         likedList.map((liked, idx) => {
                             return (
                                 <LikedCard
+                                    index={idx}
                                     element={liked}
                                     selectTotalAmount={selectTotalAmount}
                                     setSelectTotalAmount={setSelectTotalAmount}
                                     totalPrice={totalPrice}
                                     setTotalPrice={setTotalPrice}
+                                    handleLikedListAmount={handleLikedListAmount}
                                 />
                             )
                         })
@@ -114,8 +198,8 @@ export default function Cart() {
                 
                 {/* 구매 버튼 */}
                 <div className={styles.buttonContainer}>
-                    <button className={styles.selectOrder}>선택상품 주문하기</button>
-                    <button className={styles.wholeOrder}>전체상품 주문하기</button>
+                    <button className={styles.selectOrder} onClick={selectOrder}>선택상품 주문하기</button>
+                    <button className={styles.wholeOrder} onClick={wholeOrder}>전체상품 주문하기</button>
                 </div>
             </div>
             

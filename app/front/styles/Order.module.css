@@ -1,0 +1,14 @@
+.body {
+    text-align: center;
+}
+
+.orderHeader {
+    background-color: #73EEB2;
+    height: 208px;
+}
+
+.orderHeader h1 {
+    line-height: 208px;
+    vertical-align: middle;
+    font-family: 'NanumSquareNeo';
+}

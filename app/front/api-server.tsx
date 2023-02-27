@@ -144,4 +144,16 @@ export default class API {
             }
         })
     }
+
+    static order(body: Object) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.post(`${domain}/order`, body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }
