@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
 import styles from '../styles/Cart.module.css'
+import API from '../api-server'
 import { CheckCircleOutlined, CheckCircleFilled } from '@ant-design/icons'
 
 export default function WishListCard({ element }) {
     const [amount, setAmount] = useState(1)
     const [boxCheck, setBoxCheck] = useState(false)
+    const [hide, setHide] = useState(false)
     const category = {
         'outer': '아웃터',
         'onePiece': '원피스',
@@ -35,7 +37,24 @@ export default function WishListCard({ element }) {
         if(!isAmountOne) setAmount(amount - 1)
     }
 
+    const remove = () => {
+        const data = {
+            username: element.username,
+            productId: element.productId
+        }
+
+        API.wishListDelete(data)
+            .then(res => {
+                if(res.data.success) {
+                    setHide(true)
+                }
+            })
+            .catch(console.log)
+    }
+
     return (
+        <>
+        { hide ? null :
         <div className={styles.productCard}>
             {/* 체크박스 이미지 상품명 */}
             <div className={styles.cardFront}>
@@ -64,9 +83,11 @@ export default function WishListCard({ element }) {
                     {element.productPrice}원
                 </div>
                 <div className={styles.closeBtn}>
-                    <button>&times;</button>
+                    <button onClick={remove}>&times;</button>
                 </div>
             </div>
         </div>
+        }
+        </>
     )
 }

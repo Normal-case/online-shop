@@ -120,6 +120,12 @@ const remove = {
         const liked = new Liked(req.body)
         liked.delete()
         return res.status(200).json({ success: true })
+    },
+
+    wishList: (req, res) => {
+        const wishList = new WishList(req.body)
+        wishList.delete()
+        return res.status(200).json({ success: true })
     }
 }
 

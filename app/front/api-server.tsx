@@ -123,6 +123,16 @@ export default class API {
         } })
     }
 
+    static wishListDelete(data: Object) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.delete(`${domain}/wishList`, { data: data, headers: {
+            'Content-Type': 'application/json',
+            'access': 'Bearer ' + accesstoken,
+            'refresh': 'Bearer ' + refreshtoken
+        } })
+    }
+
     static cartLikedGet() {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')

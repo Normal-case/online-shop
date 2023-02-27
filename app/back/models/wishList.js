@@ -13,6 +13,12 @@ class WishList {
             dbConnect.collection('wishList').insertOne(body)
         }
     }
+
+    delete() {
+        const dbConnect = dbo.getDB()
+        const body = this.body
+        dbConnect.collection('wishList').deleteOne({ username: body.username, productId: body.productId})
+    }
 }
 
 module.exports = WishList
