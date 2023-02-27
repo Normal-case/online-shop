@@ -4,7 +4,7 @@ import styles from '../styles/Cart.module.css'
 import API from '../api-server'
 import { CheckCircleOutlined, CheckCircleFilled } from '@ant-design/icons'
 
-export default function WishListCard({ element }) {
+export default function WishListCard(props) {
     const [amount, setAmount] = useState(1)
     const [boxCheck, setBoxCheck] = useState(false)
     const [hide, setHide] = useState(false)
@@ -19,28 +19,47 @@ export default function WishListCard({ element }) {
     }
 
     useEffect(() => {
-        if(element.amount) {
-            setAmount(element.amount)
+        if(props.element.amount) {
+            setAmount(props.element.amount)
         }
     }, [])
 
     const checkBox = () => {
         setBoxCheck(!boxCheck)
+        const price = amount * props.element.productPrice
+        if(!boxCheck) {
+            props.setSelectTotalAmount(props.selectTotalAmount + amount)
+            props.setTotalPrice(props.totalPrice + price)
+        } else {
+            props.setSelectTotalAmount(props.selectTotalAmount - amount)
+            props.setTotalPrice(props.totalPrice - price)
+        }
     }
 
     const plus = () => {
         setAmount(amount + 1)
+        if(boxCheck) {
+            props.setSelectTotalAmount(props.selectTotalAmount + 1)
+            props.setTotalPrice(props.totalPrice + props.element.productPrice)
+        }
+        
     }
 
     const minus = () => {
         const isAmountOne = amount === 1 ? true : false
-        if(!isAmountOne) setAmount(amount - 1)
+        if(!isAmountOne) {
+            setAmount(amount - 1)
+            if(boxCheck) {
+                props.setSelectTotalAmount(props.selectTotalAmount - 1)
+                props.setTotalPrice(props.totalPrice - props.element.productPrice)
+            }
+        }
     }
 
     const remove = () => {
         const data = {
-            username: element.username,
-            productId: element.productId
+            username: props.element.username,
+            productId: props.element.productId
         }
 
         API.wishListDelete(data)
@@ -63,13 +82,13 @@ export default function WishListCard({ element }) {
                 </div>
                 <div>
                     <img
-                        src={element.imageURL}
+                        src={props.element.imageURL}
                         width={150} height={200} alt=''
                         className={styles.checkboxImg}
                     />
                 </div>
                 <div className={styles.productName}>
-                    [{category[element.productCategory]}] {element.productName}
+                    [{category[props.element.productCategory]}] {props.element.productName}
                 </div>
             </div>
             {/* 수량 가격 닫기버튼 */}
@@ -80,7 +99,7 @@ export default function WishListCard({ element }) {
                     <button className={styles.amountBtn} onClick={plus}>+</button>
                 </div>
                 <div className={styles.eachPrice}>
-                    {element.productPrice}원
+                    {props.element.productPrice}원
                 </div>
                 <div className={styles.closeBtn}>
                     <button onClick={remove}>&times;</button>

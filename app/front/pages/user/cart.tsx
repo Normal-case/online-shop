@@ -6,7 +6,6 @@ import API from '../../api-server'
 import styles from '../../styles/Cart.module.css'
 import WishListCard from '../../component/wishListCard'
 import LikedCard from '../../component/likedCard'
-import { CheckCircleOutlined, CheckCircleFilled } from '@ant-design/icons'
 
 export default function Cart() {
 
@@ -15,6 +14,8 @@ export default function Cart() {
     const [menuIdx, setMenuIdx] = useState(0)
     const [wishList, setWisthList] = useState([])
     const [likedList, setLikedList] = useState([])
+    const [selectTotalAmount, setSelectTotalAmount] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
 
     useEffect(() => {
         API.cartLikedGet()
@@ -25,6 +26,11 @@ export default function Cart() {
                 }
             })
     }, [])
+
+    useEffect(() => {
+        setSelectTotalAmount(0)
+        setTotalPrice(0)
+    }, [menuIdx])
 
     const handleResponse = (res) => {
         console.log(res.data)
@@ -57,22 +63,56 @@ export default function Cart() {
                 
                 <div>
                     {
-                        menuIdx === 0 ?
+                        menuIdx === 0 && wishList.length > 0 ?
                         wishList.map((wish, idx) => {
                             return (
-                                <WishListCard element={wish} />
+                                <WishListCard 
+                                    element={wish} 
+                                    selectTotalAmount={selectTotalAmount}
+                                    setSelectTotalAmount={setSelectTotalAmount}
+                                    totalPrice={totalPrice}
+                                    setTotalPrice={setTotalPrice}
+                                />
                             )
                         })
-                        : menuIdx === 1 ?
+                        : menuIdx === 0 && wishList.length <= 0 ?
+                        <div className={styles.empty}>
+                            <span>등록된 상품이 없습니다.</span>
+                        </div>
+                        : menuIdx === 1 && likedList.length > 0 ?
                         likedList.map((liked, idx) => {
                             return (
-                                <LikedCard element={liked} />
+                                <LikedCard
+                                    element={liked}
+                                    selectTotalAmount={selectTotalAmount}
+                                    setSelectTotalAmount={setSelectTotalAmount}
+                                    totalPrice={totalPrice}
+                                    setTotalPrice={setTotalPrice}
+                                />
                             )
                         })
-                        : null
+                        : menuIdx === 1 && likedList.length <= 0 ?
+                        <div className={styles.empty}>
+                            <span>등록된 상품이 없습니다.</span>
+                        </div>
+                        : 
+                        <div className={styles.empty}>
+                            <span>등록된 상품이 없습니다.</span>
+                        </div>
                     }
                 </div>
 
+                {/* 총 금액 계산 */}
+                <div className={styles.totalPriceContainer}>
+                    <div className={styles.selectAmount}>
+                        선택한 상품: {selectTotalAmount}개
+                    </div>
+                    <div className={styles.totalPrice}>
+                        총금액: {totalPrice}원
+                    </div>
+                </div>
+                
+                {/* 구매 버튼 */}
                 <div className={styles.buttonContainer}>
                     <button className={styles.selectOrder}>선택상품 주문하기</button>
                     <button className={styles.wholeOrder}>전체상품 주문하기</button>

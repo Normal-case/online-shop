@@ -126,6 +126,22 @@
 
 }
 
+.empty {
+    width: 1000px;
+    height: 230px;
+    border: 3px solid #dcdcdc;
+    border-radius: 10px;
+    margin: 30px auto;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.empty span {
+    line-height: 220px;
+    vertical-align: middle;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: space-around;
@@ -154,5 +170,22 @@
     cursor: pointer;
 
     font-family: 'NanumSquareNeo';
+    font-size: 24px; 
+}
+
+.totalPriceContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    margin: 50px auto;
+}
+
+.selectAmount {
+    font-family: 'NanumSquareNeo';
+    font-size: 24px; 
+}
+
+.totalPrice {
+    font-family: 'NanumSquareNeoExtraBold';
     font-size: 24px; 
 }
