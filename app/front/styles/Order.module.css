@@ -37,8 +37,149 @@
 
 .orderProductTable th {
     padding: 10px;
+    font-family: 'NanumSquareNeo';
 }
 
 .orderProductTable td {
     padding: 10px;
+}
+
+.imageTd {
+    width: 120px;
+}
+
+.neo {
+    font-family: 'NanumSquareNeo';
+}
+
+.bold {
+    font-family: 'NanumSquareNeoExtraBold';
+}
+
+.deliveryInfo {
+    width: 100%;
+    margin: 30px 0;
+    border-top: 1px solid #dcdcdc;
+    border-collapse: collapse;
+}
+
+.deliveryInfo tr {
+    border-bottom: 1px solid #dcdcdc;
+    font-family: 'NanumSquareNeo';
+}
+
+.deliveryInfo td {
+    padding: 15px;
+    text-align: left;
+    border-left: 1px solid #dcdcdc;
+}
+
+.deliveryInfo td:first-child {
+    border-left: none;
+}
+.index {
+    width: 150px;
+}
+
+.normal {
+    outline: none;
+    border: 1px solid #aaaaaa;
+    width: 300px;
+    height: 35px;
+    margin-right: 5px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #464646;
+}
+
+.phone {
+    outline: none;
+    border: 1px solid #aaaaaa;
+    width: 100px;
+    height: 35px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #464646;
+}
+
+.zoneCode {
+    outline: none;
+    border: 1px solid #aaaaaa;
+    width: 200px;
+    height: 35px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #464646;
+}
+
+.findZoneCode {
+    border: 1px solid #aaaaaa;
+    width: 130px;
+    height: 35px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.memo {
+    outline: none;
+    border: 1px solid #aaaaaa;
+    width: 700px;
+    height: 35px;
+    margin-right: 5px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #464646;
+}
+
+.price {
+    text-align: right;
+    margin: 50px 0;
+}
+
+.totalDes {
+    font-family: 'NanumSquareNeo';
+    font-size: 24px;
+    margin-right: 40px;
+}
+
+.totalValue {
+    font-family: 'NanumSquareNeoExtraBold';
+    font-size: 24px;
+}
+
+.btnContainer {
+    width: 550px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+.payment {
+    border: 1px solid #464646;
+    background-color: #464646;
+    width: 250px;
+    height: 50px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #fff;
+}
+
+.cancel {
+    border: 1px solid #aaaaaa;
+    width: 250px;
+    height: 50px;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
 }

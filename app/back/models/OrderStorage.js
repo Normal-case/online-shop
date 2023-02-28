@@ -46,11 +46,13 @@ class OrderStorage {
             const payload = {
                 orderId: pId,
                 productName: product.name,
+                productCategory: product.category,
                 amount: data[i].amount,
                 price: product.price,
                 totalPrice: product.price * data[i].amount,
                 productId: product._id,
                 expiredAt: new Date(current.getTime() + orderExpiredTime),
+                image: product.image[0],
                 _id: dId
             }
             dbConnect.collection('orderDetail').insertOne(payload)
