@@ -9,8 +9,9 @@ class Order {
     async create(user) {
         const dbConnect = dbo.getDB()
         const body = this.body
-        const order = await OrderStorage.getContents(body, user)
-        dbConnect.collection('order').insertOne(order)
+        const contents = await OrderStorage.getContents(body, user)
+        dbConnect.collection('order').insertOne(contents.order)
+        return contents.orderId
     }
 }
 

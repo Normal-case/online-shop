@@ -1,9 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import Header from '../../component/header'
 import styles from '../../styles/Order.module.css'
+import API from '../../api-server'
 
 export default function Order() {
+
+    const router = useRouter()
+
+    useEffect(() => {
+        if(router.isReady) {
+            const { id } = router.query
+            API.getOrder(id)
+                .then(console.log)
+                .catch(console.log)
+        }
+    }, [router])
+
     return (
         <div>
             <Header />

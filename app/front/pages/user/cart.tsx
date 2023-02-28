@@ -115,7 +115,11 @@ export default function Cart() {
                 data: order
             }
             API.order(body)
-                .then(console.log)
+                .then(res => {
+                    if(res.data.success) {
+                        router.replace(`/order/${res.data.orderId}`)
+                    }
+                })
                 .catch(console.log)
         } else if(menuIdx === 1) {
             let newArr = [...likedListAmount]
@@ -130,7 +134,11 @@ export default function Cart() {
                 data: order
             }
             API.order(body)
-                .then(console.log)
+                .then(res => {
+                    if(res.data.success) {
+                        router.replace(`/order/${res.data.orderId}`)
+                    }
+                })
                 .catch(console.log)
         }
 
@@ -143,14 +151,22 @@ export default function Cart() {
                 data: wishListAmount
             }
             API.order(body)
-                .then(console.log)
+                .then(res => {
+                    if(res.data.success) {
+                        router.replace(`/order/${res.data.orderId}`)
+                    }
+                })
                 .catch(console.log)
         } else if(menuIdx === 1) {
             const body = {
                 data: likedListAmount
             }
             API.order(body)
-                .then(console.log)
+                .then(res => {
+                    if(res.data.success) {
+                        router.replace(`/order/${res.data.orderId}`)
+                    }
+                })
                 .catch(console.log)
         }
     }

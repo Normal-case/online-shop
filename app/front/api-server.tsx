@@ -156,4 +156,16 @@ export default class API {
             }
         })
     }
+
+    static getOrder(id: string) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.get(`${domain}/order/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }

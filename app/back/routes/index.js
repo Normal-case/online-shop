@@ -12,7 +12,7 @@ router.get('/user/profile', authenticate, ctrl.output.profile)
 router.get('/product', ctrl.output.product)
 router.get('/product/:id', ctrl.output.productDetail)
 router.get('/wishList', authenticate, ctrl.output.wishList)
-
+router.get('/order/:id', ctrl.output.order)
 
 router.post('/login', ctrl.process.login)
 router.post('/register', ctrl.process.register)
@@ -22,6 +22,7 @@ router.post('/wishList', authenticate, ctrl.process.wishList)
 router.post('/liked', authenticate, ctrl.process.liked)
 router.post('/liked/get', authenticate, ctrl.process.likedGet)
 router.post('/order', authenticate, ctrl.process.order)
+
 
 router.delete('/liked', authenticate, ctrl.remove.liked)
 router.delete('/wishList', authenticate, ctrl.remove.wishList)

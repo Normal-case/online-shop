@@ -7,6 +7,7 @@ const WishListStorage = require('../models/WishListStorage')
 const Liked = require('../models/Liked')
 const LikedStorage = require('../models/LikedStorage')
 const Order = require('../models/Order')
+const OrderStorage = require('../models/OrderStorage')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
 
@@ -52,6 +53,12 @@ const output = {
     wishList: async (req, res) => {
         const { wishList, likedList } = await WishListStorage.getList(req.user.username)
         const response = { success: true, wishList, likedList }
+        return res.status(200).json(response)
+    },
+
+    order: async (req, res) => {
+        const data = await OrderStorage.getOrder(req.params.id)
+        const response = { success: true, data }
         return res.status(200).json(response)
     }
 }
@@ -115,10 +122,10 @@ const process = {
         return res.status(200).json({ success: true, liked })
     },
 
-    order: (req, res) => {
+    order: async (req, res) => {
         const order = new Order(req.body)
-        order.create(req.user)
-        return res.status(200).json({ success: true })
+        const orderId = await order.create(req.user)
+        return res.status(200).json({ success: true, orderId: orderId })
     }
 }
 
