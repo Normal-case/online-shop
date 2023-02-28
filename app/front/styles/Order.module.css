@@ -84,7 +84,7 @@
 .normal {
     outline: none;
     border: 1px solid #aaaaaa;
-    width: 300px;
+    width: 400px;
     height: 35px;
     margin-right: 5px;
 
@@ -130,7 +130,7 @@
 .memo {
     outline: none;
     border: 1px solid #aaaaaa;
-    width: 700px;
+    width: 1000px;
     height: 35px;
     margin-right: 5px;
 
@@ -182,4 +182,52 @@
 
     font-family: 'NanumSquareNeo';
     font-size: 18px;
+}
+
+.openModal {
+    width: 700px;
+    z-index: 99;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid #aaaaaa;
+}
+
+.modal {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modalHeader {
+    position: relative;
+    padding: 1rem 1rem;
+    background-color: #f1f1f1;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.modalHeader button {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    font-size: 21px;
+    font-weight: 700;
+    text-align: center;
+    color: #999;
+    background-color: transparent;
 }

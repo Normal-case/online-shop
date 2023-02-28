@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import DaumPostcodeEmbed from 'react-daum-postcode'
 
 import Header from '../../component/header'
 import styles from '../../styles/Order.module.css'
@@ -11,6 +12,20 @@ export default function Order() {
     const [order, setOrder] = useState()
     const [productList, setProductList] = useState([])
     const [totalPayingPrice, setTotalPayingPrice] = useState(0)
+    
+    // address
+    const [modal, setModal] = useState(false)
+    const [zoneCode, setZoneCode] = useState()
+    const [address, setAddress] = useState()
+    const [detail, setDetail] = useState()
+
+    // Info
+    const [nickname, setNickname] = useState()
+    const [phoneF, setPhoneF] = useState('010')
+    const [phoneS, setPhoneS] = useState()
+    const [phoneT, setPhoneT] = useState()
+    const [meno, setMemo] = useState()
+
     const category = {
         'outer': '아웃터',
         'onePiece': '원피스',
@@ -38,7 +53,11 @@ export default function Order() {
 
     const handleResponse = (data) => {
         setOrder(data.order)
+        setZoneCode(data.order.zoneCode)
+        setAddress(data.order.address)
+        setDetail(data.order.detail)
         setProductList(data.detail)
+        setNickname(data.order.nickname)
         var tmpPrice = 0
         for(var i=0;i<data.detail.length;i++) {
             tmpPrice = tmpPrice + data.detail[i].totalPrice
@@ -46,8 +65,38 @@ export default function Order() {
         setTotalPayingPrice(tmpPrice)
     }
 
-    const phone = (e) => {
-        console.log(e.target.value)
+    const addressInput = () => {
+        setModal(true)
+    }
+
+    const handleComplete = (data: Object) => {
+        setModal(false)
+        setAddress(data.address)
+        setZoneCode(data.zonecode)
+    }
+
+    const nicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNickname(e.target.value)
+    }
+
+    const phoneFChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPhoneF(e.target.value)
+    }
+
+    const phoneSChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPhoneS(e.target.value)
+    }
+
+    const phoneTChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPhoneT(e.target.value)
+    }
+
+    const detailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDetail(e.target.value)
+    }
+
+    const menoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setMemo(e.target.value)
     }
 
     return (
@@ -101,30 +150,30 @@ export default function Order() {
                         <tbody>
                             <tr>
                                 <td className={styles.index}>이름</td>
-                                <td><input type='text' className={styles.normal} value={order?.nickname} /></td>
+                                <td><input type='text' className={styles.normal} value={nickname} onChange={nicknameChange} /></td>
                             </tr>
                             <tr>
                                 <td>휴대폰번호</td>
                                 <td>
-                                    <input type='number' className={styles.phone} value='010' /> - <input type='number' className={styles.phone} /> - <input type='number' className={styles.phone} />
+                                    <input type='number' className={styles.phone} value={phoneF} onChange={phoneFChange} /> - <input type='number' className={styles.phone} onChange={phoneSChange} /> - <input type='number' className={styles.phone} onChange={phoneTChange} />
                                 </td>
                             </tr>
                             <tr>
                                 <td>주소</td>
                                 <td>
                                     <div>
-                                        <input type='number' className={styles.zoneCode} value={order?.zoneCode} disabled />
-                                        <button className={styles.findZoneCode}>우편번호 찾기</button>
+                                        <input type='number' className={styles.zoneCode} value={zoneCode} disabled />
+                                        <button className={styles.findZoneCode} onClick={addressInput}>우편번호 찾기</button>
                                     </div>
                                     <div>
-                                        <input type='text' className={styles.normal} value={order?.address} disabled />
-                                        <input type='text' className={styles.normal} value={order?.detail} />
+                                        <input type='text' className={styles.normal} value={address} disabled />
+                                        <input type='text' className={styles.normal} value={detail} onChange={detailChange} />
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>배송메모</td>
-                                <td><input type='text' className={styles.memo} /></td>
+                                <td><input type='text' className={styles.memo} onChange={menoChange} /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -138,6 +187,17 @@ export default function Order() {
                     </div>
                 </div>
             </div>
+            {
+                modal ?
+                <div className={styles.modal}>
+                    <div className={styles.openModal}>
+                        <div className={styles.modalHeader}>
+                            주소를 입력해주세요. <button onClick={() => setModal(false)}>&times;</button>
+                        </div>
+                        <DaumPostcodeEmbed onComplete={handleComplete} />
+                    </div>
+                </div> : null
+            }
         </div>
     )
 }
