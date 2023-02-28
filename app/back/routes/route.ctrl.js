@@ -58,7 +58,10 @@ const output = {
 
     order: async (req, res) => {
         const data = await OrderStorage.getOrder(req.params.id)
-        const response = { success: true, data }
+        var response
+        if(data.load) response = { success: true, data }
+        else response = {success: false}
+
         return res.status(200).json(response)
     }
 }

@@ -12,3 +12,33 @@
     vertical-align: middle;
     font-family: 'NanumSquareNeo';
 }
+
+.orderMain {
+    width: 1200px;
+    margin: 30px auto;
+}
+
+.title {
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    text-align: left;
+}
+
+.orderProductTable {
+    width: 100%;
+    margin: 30px 0;
+    border-top: 1px solid #dcdcdc;
+    border-collapse: collapse;
+}
+
+.orderProductTable tr {
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.orderProductTable th {
+    padding: 10px;
+}
+
+.orderProductTable td {
+    padding: 10px;
+}

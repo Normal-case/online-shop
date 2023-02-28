@@ -63,11 +63,20 @@ class OrderStorage {
         const dbConnect = dbo.getDB()
         const oId = ObjectId(id)
         const order = await dbConnect.collection('order').findOne({_id: oId})
-        const orderDetail = await dbConnect.collection('orderDetail').find({ orderId: order._id }).toArray()
-        const data = {
-            order,
-            detail: orderDetail
+        var data = {}
+        if(order) {
+            const orderDetail = await dbConnect.collection('orderDetail').find({ orderId: order._id }).toArray()
+            data = {
+                load: true,
+                order,
+                detail: orderDetail
+            }
+        } else {
+            data = {
+                load: false
+            }
         }
+        
         return data
     }
 }
