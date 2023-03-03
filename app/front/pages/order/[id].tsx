@@ -99,6 +99,10 @@ export default function Order() {
         setMemo(e.target.value)
     }
 
+    const cancelOrder = () => {
+        router.replace('/user/cart')
+    }
+
     return (
         <div>
             <Header />
@@ -183,7 +187,7 @@ export default function Order() {
                     </div>
                     <div className={styles.btnContainer}>
                         <button className={styles.payment}>결제하기</button>
-                        <button className={styles.cancel}>취소</button>
+                        <button className={styles.cancel} onClick={cancelOrder}>취소</button>
                     </div>
                 </div>
             </div>
