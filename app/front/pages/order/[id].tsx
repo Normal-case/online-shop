@@ -24,7 +24,8 @@ export default function Order() {
     const [phoneF, setPhoneF] = useState('010')
     const [phoneS, setPhoneS] = useState()
     const [phoneT, setPhoneT] = useState()
-    const [meno, setMemo] = useState()
+    const [email, setEmail] = useState()
+    const [memo, setMemo] = useState()
 
     const category = {
         'outer': '아웃터',
@@ -91,6 +92,10 @@ export default function Order() {
         setPhoneT(e.target.value)
     }
 
+    const emailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value)
+    }
+
     const detailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDetail(e.target.value)
     }
@@ -101,6 +106,51 @@ export default function Order() {
 
     const cancelOrder = () => {
         router.replace('/user/cart')
+    }
+
+    const checkForm = () => {
+        if(nickname && phoneF && phoneS && phoneT && zoneCode && address && detail) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const doOrder = () => {
+        API.getOrder(router.query.id)
+            .then(res => {
+                if(!res.data.success) {
+                    alert('주문 세션이 만료되었습니다.')
+                    router.replace('/user/cart')
+                }
+            })
+            .catch(console.log)
+
+        if(!checkForm()) {
+            alert('필수 항목을 입력해주세요.')
+            return
+        }
+
+        if(email) {
+            const regex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            if(!regex.test(email)) {
+                alert('올바른 0이메일 형식을 입력해주세요.')
+                return
+            }
+        }
+        const body = {
+            id: router.query.id,
+            nickname,
+            phone: phoneF + phoneS + phoneT,
+            email,
+            zoneCode,
+            address,
+            detail,
+            memo
+        }
+        API.ordering(body)
+            .then(console.log)
+            .catch(console.log)
     }
 
     return (
@@ -149,21 +199,60 @@ export default function Order() {
                     <div className={styles.title}>
                         배송지 정보
                     </div>
+                    <div className={styles.desc}>
+                        * 항목은 필수로 입력해주시기 바랍니다.
+                    </div>
 
                     <table className={styles.deliveryInfo}>
                         <tbody>
                             <tr>
-                                <td className={styles.index}>이름</td>
+                                <td className={styles.index}>이름 *</td>
                                 <td><input type='text' className={styles.normal} value={nickname} onChange={nicknameChange} /></td>
                             </tr>
                             <tr>
-                                <td>휴대폰번호</td>
+                                <td>휴대폰번호 *</td>
                                 <td>
-                                    <input type='number' className={styles.phone} value={phoneF} onChange={phoneFChange} /> - <input type='number' className={styles.phone} onChange={phoneSChange} /> - <input type='number' className={styles.phone} onChange={phoneTChange} />
+                                    <input 
+                                        type='number' 
+                                        className={styles.phone} 
+                                        value={phoneF} 
+                                        onChange={phoneFChange}
+                                        maxLength={4}
+                                        onInput={(e) => {
+                                            if(e.target.value.length > e.target.maxLength)
+                                                e.target.value = e.target.value.slice(0, e.target.maxLength)
+                                        }}
+                                    /> - 
+                                    <input 
+                                        type='number' 
+                                        className={styles.phone} 
+                                        onChange={phoneSChange} 
+                                        maxLength={4}
+                                        onInput={(e) => {
+                                            if(e.target.value.length > e.target.maxLength)
+                                                e.target.value = e.target.value.slice(0, e.target.maxLength)
+                                        }}
+                                    /> - 
+                                    <input 
+                                        type='number' 
+                                        className={styles.phone} 
+                                        onChange={phoneTChange}
+                                        maxLength={4}
+                                        onInput={(e) => {
+                                            if(e.target.value.length > e.target.maxLength)
+                                                e.target.value = e.target.value.slice(0, e.target.maxLength)
+                                        }}
+                                    />
                                 </td>
                             </tr>
                             <tr>
-                                <td>주소</td>
+                                <td>이메일</td>
+                                <td>
+                                    <input type='email' className={styles.normal} onChange={emailChange} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>주소 *</td>
                                 <td>
                                     <div>
                                         <input type='number' className={styles.zoneCode} value={zoneCode} disabled />
@@ -186,7 +275,7 @@ export default function Order() {
                         <span className={styles.totalDes}>총 결제금액:</span> <span className={styles.totalValue}>{totalPayingPrice}원</span>
                     </div>
                     <div className={styles.btnContainer}>
-                        <button className={styles.payment}>결제하기</button>
+                        <button className={styles.payment} onClick={doOrder}>결제하기</button>
                         <button className={styles.cancel} onClick={cancelOrder}>취소</button>
                     </div>
                 </div>

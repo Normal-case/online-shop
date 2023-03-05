@@ -23,6 +23,7 @@ router.post('/liked', authenticate, ctrl.process.liked)
 router.post('/liked/get', authenticate, ctrl.process.likedGet)
 router.post('/order', authenticate, ctrl.process.order)
 
+router.put('/order', authenticate, ctrl.update.order)
 
 router.delete('/liked', authenticate, ctrl.remove.liked)
 router.delete('/wishList', authenticate, ctrl.remove.wishList)

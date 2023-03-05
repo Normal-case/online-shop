@@ -52,7 +52,7 @@ export default function Header() {
                     <li><div onClick={loginOrOut}>{loginFlag}</div></li>
                     <li><SearchOutlined /></li>
                     <li><Link href="/user/cart"><ShoppingCartOutlined /></Link></li>
-                    <li><Link href="/user/login"><UserOutlined /></Link></li>
+                    <li><Link href="/user/profile"><UserOutlined /></Link></li>
                 </ul>
                 
             </div>

@@ -132,6 +132,14 @@ const process = {
     }
 }
 
+const update = {
+    order: (req, res) => {
+        const order = new Order(req.body)
+        const success = order.update()
+        return res.status(200).json({ success: success })
+    }
+}
+
 const remove = {
     liked: (req, res) => {
         const liked = new Liked(req.body)
@@ -149,5 +157,6 @@ const remove = {
 module.exports = {
     output,
     process,
-    remove
+    remove,
+    update
 }

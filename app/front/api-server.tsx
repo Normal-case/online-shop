@@ -168,4 +168,16 @@ export default class API {
             }
         })
     }
+
+    static ordering(body: Object) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.put(`${domain}/order`, body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }

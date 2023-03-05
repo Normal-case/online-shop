@@ -1,6 +1,7 @@
 const dbo = require('../bin/db/connect')
 const { ObjectId } = require('mongodb')
 const orderExpiredTime = 1000 * 60 * 60 // 1 hour
+const paiedOrderExpiredTime = 1000 * 60 * 60 * 24 * 30 * 12 * 100 // 100 years
 
 class OrderStorage {
     static async getContents(body, user) {
@@ -80,6 +81,43 @@ class OrderStorage {
         }
         
         return data
+    }
+
+    static async getOrderOnly(id) {
+        const dbConnect = dbo.getDB()
+        const oId = ObjectId(id)
+        const order = await dbConnect.collection('order').findOne({_id: oId})
+        return order
+    }
+    
+    static async orderUpdate(data, body) {
+        const dbConnect = dbo.getDB()
+        const oId = ObjectId(data._id)
+        const current = new Date()
+        dbConnect.collection('order').updateOne(
+            { _id: oId },
+            { $set: {
+                nickname: body.nickname,
+                email: body.email,
+                memo: body.memo,
+                status: 'paied',
+                zoneCode: body.zoneCode,
+                address: body.address,
+                detail: body.detail,
+                phone: body.phone,
+                expiredAt: new Date(current.getTime() + paiedOrderExpiredTime)
+            }},
+            { upsert: true }
+        )
+
+        for(var i=0;i<data.orderDId.length;i++) {
+            dbConnect.collection('orderDetail').updateOne(
+                { _id: data.orderDId[i] },
+                { $set: {
+                    expiredAt: new Date(current.getTime() + paiedOrderExpiredTime)
+                }}
+            )
+        }
     }
 }
 
