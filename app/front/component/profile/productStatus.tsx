@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import styles from '../../styles/component/ProductStatus.module.css'
 import API from '../../api-server'
+import Link from 'next/link'
 
 export default function ProductStatus() {
 
@@ -24,7 +25,7 @@ export default function ProductStatus() {
                         <div className={styles.card}>
                             <div className={styles.cardHeader}>
                                 <div className={styles.productDetail}>
-                                    {order.createAt.split('T')[0]} | <span>주문상세보기</span>
+                                    {order.createAt.split('T')[0]} | <Link href={`/order/done/${order._id}`}><span>주문상세보기</span></Link>
                                 </div>
                                 <div className={styles.productPrice}>
                                     총 주문금액: <span>{order.totalPrice}</span>원
