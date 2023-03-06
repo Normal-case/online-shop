@@ -180,4 +180,16 @@ export default class API {
             }
         })
     }
+
+    static getOrderList(status: string) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.get(`${domain}/order/list/${status}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }

@@ -63,6 +63,12 @@ const output = {
         else response = {success: false}
 
         return res.status(200).json(response)
+    },
+
+    orderList: async (req, res) => {
+        const order = await OrderStorage.getOrderList(req.user.username, req.params.status)
+        const response = { success: true, order }
+        return res.status(200).json(response)
     }
 }
 

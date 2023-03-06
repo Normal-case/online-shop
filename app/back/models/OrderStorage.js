@@ -119,6 +119,31 @@ class OrderStorage {
             )
         }
     }
+
+    static async getOrderList(username, status) {
+        const dbConnect = dbo.getDB()
+        const orderList = await dbConnect.collection('order').find({
+            username: username,
+            status: status
+        }).toArray()
+        //console.log(orderList)
+        var orderArr = []
+        for(var i=0;i<orderList.length;i++) {
+            var price = 0
+            var imageArr = []
+            for(var j=0;j<orderList[i].orderDId.length;j++) {
+                const detail = await dbConnect.collection('orderDetail').findOne({ _id: orderList[i].orderDId[j]})
+                price = price + detail.totalPrice
+                imageArr.push(detail.image)
+            }
+            orderList[i].totalPrice = price
+            orderList[i].imageList = imageArr
+            orderList[i].createAt = new Date(orderList[i].createAt.getTime() + 1000 * 60 * 60 * 9)
+            orderArr.push(orderList[i])
+        }
+        // console.log(orderArr)
+        return orderArr
+    }
 }
 
 module.exports = OrderStorage

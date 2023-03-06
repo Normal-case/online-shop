@@ -8,6 +8,7 @@ import API from '../../api-server'
 import { setToken } from '../../module/Token'
 import ProfileInfo from '../../component/profile/profileInfo'
 import CreateProduct from '../../component/profile/createProduct'
+import ProductStatus from '../../component/profile/productStatus'
 
 export default function Profile() {
     const router = useRouter()
@@ -94,6 +95,8 @@ export default function Profile() {
                     <div className={styles.body_contents}>
                         { menuIdx === 0 ?
                             <ProfileInfo variable={profileInfoVariable} function={profileInfoFunction} /> :
+                          menuIdx === 1 ?
+                            <ProductStatus /> :
                           menuIdx === 6 ?
                             <CreateProduct setMenuIdx={setMenuIdx} /> : null
                         }

@@ -149,7 +149,15 @@ export default function Order() {
             memo
         }
         API.ordering(body)
-            .then(console.log)
+            .then(res => {
+                if(res.data.success) {
+                    alert('주문이 완료되었습니다.')
+                    router.replace('/user/profile')
+                } else {
+                    alert('세션이 만료되었습니다.')
+                    router.replace('/user/cart')
+                }
+            })
             .catch(console.log)
     }
 

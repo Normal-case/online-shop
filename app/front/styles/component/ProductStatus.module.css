@@ -1,0 +1,52 @@
+.card {
+    width: 800px;
+    height: 200px;
+    border: 3px solid #dcdcdc;
+    border-radius: 10px;
+
+    margin: 30px auto;
+    padding: 1rem 1rem;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 1rem;
+}
+
+.productDetail {
+    font-family: 'NanumSquareNeo';
+    font-size: 14px;
+}
+
+.productDetail span {
+    color: #1478FF;
+    cursor: pointer;
+}
+
+.productPrice {
+    font-family: 'NanumSquareNeo';
+    font-size: 14px;
+}
+
+.productPrice span {
+    font-family: 'NanumSquareNeoExtraBold';
+    font-size: 18px;
+}
+
+.title {
+    font-family: 'NanumSquareNeo';
+    font-size: 16px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.imageContainer {
+    text-align: left;
+}
+
+.image {
+    border-radius: 5px;
+    margin: 5px 5px;
+}

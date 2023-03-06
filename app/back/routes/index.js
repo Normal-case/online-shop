@@ -13,6 +13,7 @@ router.get('/product', ctrl.output.product)
 router.get('/product/:id', ctrl.output.productDetail)
 router.get('/wishList', authenticate, ctrl.output.wishList)
 router.get('/order/:id', ctrl.output.order)
+router.get('/order/list/:status', authenticate, ctrl.output.orderList)
 
 router.post('/login', ctrl.process.login)
 router.post('/register', ctrl.process.register)
