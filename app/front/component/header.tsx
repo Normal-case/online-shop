@@ -2,21 +2,26 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router'
-import { InstagramFilled, TwitterOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
+import { InstagramFilled, TwitterOutlined, SettingOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
 
 import API from '../api-server'
 
 export default function Header() {
     const router = useRouter()
     const [loginFlag, setLoginFlag] = useState('로그인')
+    const [isAdmin, setIsAdmin] = useState(false)
 
     useEffect(() => {
         API.tokenVerify()
             .then(res => {
                 if(res.data.success) {
                     setLoginFlag('로그아웃')
+                    if(res.data.admin) setIsAdmin(true)
+                    else setIsAdmin(false)
                 } else {
                     setLoginFlag('로그인')
+                    if(res.data.admin) setIsAdmin(true)
+                    else setIsAdmin(false)
                 }
             })
             .catch(err => {
@@ -50,7 +55,7 @@ export default function Header() {
 
                 <ul className={styles.functionIcon}>
                     <li><div onClick={loginOrOut}>{loginFlag}</div></li>
-                    <li><SearchOutlined /></li>
+                    { isAdmin ? <Link href='/admin'><li><SettingOutlined /></li></Link> : null }
                     <li><Link href="/user/cart"><ShoppingCartOutlined /></Link></li>
                     <li><Link href="/user/profile"><UserOutlined /></Link></li>
                 </ul>

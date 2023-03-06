@@ -13,7 +13,7 @@ const fs = require('fs')
 
 const output = {
     auth: async (req, res) => {
-        const response = { success: true }
+        const response = { success: true, admin: req.isAdmin }
         return res.status(200).json(response)
     },
 
@@ -62,6 +62,12 @@ const output = {
         if(data.load) response = { success: true, data }
         else response = {success: false}
 
+        return res.status(200).json(response)
+    },
+
+    orderAllList: async (req, res) => {
+        const allList = await OrderStorage.getOrderAllList()
+        const response = { success: true, allList }
         return res.status(200).json(response)
     },
 

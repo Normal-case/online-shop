@@ -126,7 +126,7 @@ class OrderStorage {
             username: username,
             status: status
         }).toArray()
-        //console.log(orderList)
+        
         var orderArr = []
         for(var i=0;i<orderList.length;i++) {
             var price = 0
@@ -141,8 +141,42 @@ class OrderStorage {
             orderList[i].createAt = new Date(orderList[i].createAt.getTime() + 1000 * 60 * 60 * 9)
             orderArr.push(orderList[i])
         }
-        // console.log(orderArr)
+        
         return orderArr
+    }
+
+    static async orderStatus(status) {
+        const dbConnect = dbo.getDB()
+        const orderArr = await dbConnect.collection('order').find({
+            status: status
+        }).toArray()
+        var orderList = []
+        for(var i=0;i<orderArr.length;i++) {
+            var price = 0
+            var imageArr = []
+            for(var j=0;j<orderArr[i].orderDId.length;j++) {
+                const detail = await dbConnect.collection('orderDetail').findOne({
+                    _id: orderArr[i].orderDId[j]
+                })
+                price = price + detail.totalPrice
+                imageArr.push(detail.image)
+            }
+            orderArr[i].totalPrice = price
+            orderArr[i].imageList = imageArr
+            orderArr[i].createAt = new Date(orderArr[i].createAt.getTime() + 1000 * 60 * 60 * 9)
+            orderList.push(orderArr[i])
+        }
+
+        return orderList
+    }
+
+    static async getOrderAllList() {
+        const paiedArr = await this.orderStatus('paied')
+        const preparingArr = await this.orderStatus('preparing')
+        const departArr = await this.orderStatus('depart')
+        const shippingArr = await this.orderStatus('shipping')
+        const deliveredArr = await this.orderStatus('delivered')
+        return { paiedArr, preparingArr, departArr, shippingArr, deliveredArr }
     }
 }
 

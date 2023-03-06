@@ -181,6 +181,18 @@ export default class API {
         })
     }
 
+    static getOrderAllList() {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.get(`${domain}/orderAll`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
+
     static getOrderList(status: string) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
