@@ -66,13 +66,13 @@ const output = {
     },
 
     orderAllList: async (req, res) => {
-        const allList = await OrderStorage.getOrderAllList()
-        const response = { success: true, allList }
+        const orderArr = await OrderStorage.getOrderAllList(req.params.status)
+        const response = { success: true, order: orderArr }
         return res.status(200).json(response)
     },
 
     orderList: async (req, res) => {
-        const order = await OrderStorage.getOrderList(req.user.username, req.params.status)
+        const order = await OrderStorage.getOrderList(req.user.username)
         const response = { success: true, order }
         return res.status(200).json(response)
     }
@@ -152,6 +152,7 @@ const update = {
     },
 
     orderStatus: (req, res) => {
+        if(!req.isAdmin) return res.status(400).json({ success: false })
         const order = new Order(req.body)
         order.status()
         return res.status(200).json({ success: true })

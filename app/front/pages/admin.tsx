@@ -36,7 +36,7 @@ export default function Admin() {
     }, [])
 
     useEffect(() => {
-        API.getOrderList('paied')
+        API.getOrderAllList('paied')
             .then(res => {
                 if(res.data.success) {
                     setOrderList(res.data.order)
@@ -46,7 +46,7 @@ export default function Admin() {
     }, [])
 
     useEffect(() => {
-        API.getOrderList(statusIdx[menuIdx])
+        API.getOrderAllList(statusIdx[menuIdx])
             .then(res => {
                 if(res.data.success) setOrderList(res.data.order)
             })

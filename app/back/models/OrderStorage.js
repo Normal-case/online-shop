@@ -120,9 +120,14 @@ class OrderStorage {
         }
     }
 
-    static async getOrderList(username, status) {
-        const orderArr = await this.orderStatus(status, username)        
-        return orderArr
+    static async getOrderList(username) {
+        const paiedArr = await this.orderStatus('paied', username)
+        const preparingArr = await this.orderStatus('preparing', username)
+        const departArr = await this.orderStatus('depart', username)
+        const shippingArr = await this.orderStatus('shipping', username)
+        const deliveredArr = await this.orderStatus('delivered', username)
+
+        return { paiedArr, preparingArr, departArr, shippingArr, deliveredArr }
     }
 
     static async orderStatus(status, username = undefined) {
@@ -159,13 +164,9 @@ class OrderStorage {
         return orderList
     }
 
-    static async getOrderAllList() {
-        const paiedArr = await this.orderStatus('paied')
-        const preparingArr = await this.orderStatus('preparing')
-        const departArr = await this.orderStatus('depart')
-        const shippingArr = await this.orderStatus('shipping')
-        const deliveredArr = await this.orderStatus('delivered')
-        return { paiedArr, preparingArr, departArr, shippingArr, deliveredArr }
+    static async getOrderAllList(status) {
+        const orderArr = await this.orderStatus(status)
+        return orderArr
     }
 }
 

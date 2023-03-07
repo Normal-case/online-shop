@@ -20,6 +20,14 @@ export default function Profile() {
     const [zoneCode, setZoneCode] = useState()
     const [address, setAddress] = useState()
     const [detail, setDetail] = useState()
+    const [orderArr, setOrderArr] = useState([])
+    const statusIdx = {
+        1: 'paied',
+        2: 'preparing',
+        3: 'depart',
+        4: 'shipping',
+        5: 'delivered'
+    }
 
     useEffect(() => {
         API.profile()
@@ -29,6 +37,14 @@ export default function Profile() {
                     router.replace('/user/login')
                 }
             })
+    }, [])
+
+    useEffect(() => {
+        API.getOrderUser()
+            .then(res => {
+                if(res.data.success) setOrderArr(res.data.order)
+            })
+            .catch(console.log)
     }, [])
 
     const handleResponse = (res: any) => {
@@ -96,7 +112,30 @@ export default function Profile() {
                         { menuIdx === 0 ?
                             <ProfileInfo variable={profileInfoVariable} function={profileInfoFunction} /> :
                           menuIdx === 1 ?
-                            <ProductStatus /> :
+                            <ProductStatus 
+                                orderArr={orderArr.paiedArr} 
+                                status={statusIdx[menuIdx]}
+                            /> :
+                          menuIdx === 2 ?
+                            <ProductStatus 
+                                orderArr={orderArr.preparingArr} 
+                                status={statusIdx[menuIdx]}
+                            /> :
+                          menuIdx === 3 ?
+                            <ProductStatus 
+                                orderArr={orderArr.departArr} 
+                                status={statusIdx[menuIdx]}
+                            /> :
+                          menuIdx === 4 ?
+                            <ProductStatus 
+                                orderArr={orderArr.shippingArr} 
+                                status={statusIdx[menuIdx]}
+                            /> :
+                          menuIdx === 5 ?
+                            <ProductStatus 
+                                orderArr={orderArr.deliveredArr} 
+                                status={statusIdx[menuIdx]}
+                            /> :
                           menuIdx === 6 ?
                             <CreateProduct setMenuIdx={setMenuIdx} /> : null
                         }

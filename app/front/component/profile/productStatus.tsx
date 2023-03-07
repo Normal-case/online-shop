@@ -3,29 +3,23 @@ import styles from '../../styles/component/ProductStatus.module.css'
 import API from '../../api-server'
 import Link from 'next/link'
 
-export default function ProductStatus() {
-
-    const [orderArr, setOrderArr] = useState([])
-
-    useEffect(() => {
-        API.getOrderList('paied')
-            .then(res => {
-                if(res.data.success) {
-                    console.log(res.data.order)
-                    setOrderArr(res.data.order)
-                }
-            })
-            .catch(console.log)
-    }, [])
+export default function ProductStatus({ orderArr, status }) {
+    const orderStatus = {
+        'paied': '결제완료',
+        'preparing': '상품준비중',
+        'depart': '출고시작',
+        'shipping': '배송중',
+        'delivered': '배송완료'
+    }
     return (
         <div>
-            {
-                orderArr.map((order, idx) => {
+            { orderArr?.length !== 0 ?
+                orderArr?.map((order, idx) => {
                     return (
                         <div className={styles.card}>
                             <div className={styles.cardHeader}>
                                 <div className={styles.productDetail}>
-                                    {order.createAt.split('T')[0]} | 
+                                    {order.createAt.split('T')[0]} | &nbsp;
                                     <Link href={`/order/done/${order._id}`}>
                                         <span>주문상세보기</span>
                                     </Link>
@@ -35,7 +29,7 @@ export default function ProductStatus() {
                                 </div>
                             </div>
                             <div className={styles.title}>
-                                거래완료
+                                {orderStatus[status]}
                             </div>
                             <div className={styles.imageContainer}>
                                 {
@@ -54,7 +48,10 @@ export default function ProductStatus() {
                             </div>
                         </div>                        
                     )
-                })
+                }) :
+                <div className={styles.empty}>
+                    <span>해당 상품이 없습니다.</span>
+                </div>
             }
         </div>
     )

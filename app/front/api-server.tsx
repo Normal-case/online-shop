@@ -181,10 +181,10 @@ export default class API {
         })
     }
 
-    static getOrderAllList() {
+    static getOrderAllList(status: string) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
-        return axios.get(`${domain}/orderAll`, {
+        return axios.get(`${domain}/admin/order/list/${status}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'access': 'Bearer ' + accesstoken,
@@ -193,10 +193,10 @@ export default class API {
         })
     }
 
-    static getOrderList(status: string) {
+    static getOrderUser() {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
-        return axios.get(`${domain}/order/list/${status}`, {
+        return axios.get(`${domain}/user/order`, {
             headers: {
                 'Content-Type': 'application/json',
                 'access': 'Bearer ' + accesstoken,
@@ -208,7 +208,7 @@ export default class API {
     static updateOrder(body: Object) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
-        return axios.put(`${domain}/order/status`, body, {
+        return axios.put(`${domain}/admin/order/status`, body, {
             headers: {
                 'Content-Type': 'application/json',
                 'access': 'Bearer ' +  accesstoken,
