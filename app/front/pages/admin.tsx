@@ -3,12 +3,14 @@ import { useRouter } from 'next/router'
 import Header from "../component/header";
 import API from "../api-server";
 import styles from '../styles/Profile.module.css'
+import ProductStatus from "../component/admin/product";
 
 export default function Admin() {
 
     const router = useRouter()
     const menuData = ['결제완료', '상품준비중', '출고시작', '배송중', '배송완료']
     const [menuIdx, setMenuIdx] = useState(0)
+    const [allList, setAllList] = useState()
     const orderStatus = {
         'paied': '결제완료',
         'preparing': '상품준비중',
@@ -28,7 +30,11 @@ export default function Admin() {
 
     useEffect(() => {
         API.getOrderAllList()
-            .then(console.log)
+            .then(res => {
+                if(res.data.success) {
+                    setAllList(res.data.allList)
+                }
+            })
             .catch(console.log)
     }, [])
 
@@ -61,7 +67,11 @@ export default function Admin() {
                 </div>
 
                 <div className={styles.layout_body}>
-
+                    <div className={styles.body_contents}>
+                        { menuIdx === 0 ?
+                            <ProductStatus orderArr={allList?.paiedArr} /> : null
+                        }
+                    </div>
                 </div>
             </div>
         </div>

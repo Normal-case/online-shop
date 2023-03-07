@@ -25,7 +25,10 @@ export default function ProductStatus() {
                         <div className={styles.card}>
                             <div className={styles.cardHeader}>
                                 <div className={styles.productDetail}>
-                                    {order.createAt.split('T')[0]} | <Link href={`/order/done/${order._id}`}><span>주문상세보기</span></Link>
+                                    {order.createAt.split('T')[0]} | 
+                                    <Link href={`/order/done/${order._id}`}>
+                                        <span>주문상세보기</span>
+                                    </Link>
                                 </div>
                                 <div className={styles.productPrice}>
                                     총 주문금액: <span>{order.totalPrice}</span>원
