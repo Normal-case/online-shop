@@ -149,6 +149,12 @@ const update = {
         const order = new Order(req.body)
         const success = order.update()
         return res.status(200).json({ success: success })
+    },
+
+    orderStatus: (req, res) => {
+        const order = new Order(req.body)
+        order.status()
+        return res.status(200).json({ success: true })
     }
 }
 

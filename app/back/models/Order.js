@@ -24,6 +24,21 @@ class Order {
         OrderStorage.orderUpdate(data, body)
         return true
     }
+
+    async status() {
+        const idArr = this.body.updateId
+        const status = this.body.status
+
+        const dbConnect = dbo.getDB()
+        for(var i=0;i<idArr.length;i++) {
+            const oId = ObjectID(idArr[i])
+            dbConnect.collection('order').updateOne(
+                { _id: oId },
+                { $set: { status: status }},
+                { upsert: true }
+            )
+        }
+    }
 }
 
 module.exports = Order
