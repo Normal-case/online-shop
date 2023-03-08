@@ -183,7 +183,106 @@ export default function Product() {
             </div>
 
             {/* 리뷰 부분 */}
+            <div className={styles.reviewContainer}>
+                <div className={styles.reviewHeader}>
+                    <div className={styles.title}>
+                        구매후기
+                    </div>
+                    <div className={styles.reviewCreate}>
+                        리뷰작성
+                    </div>
+                </div>
+                <div className={styles.ratingAvg}>
+                    <div className={styles.neo}>
+                        구매 평점
+                    </div>
+                    <div className={styles.ratingValue}>
+                        <div className={styles.neo}>
+                            4.9 / 5
+                        </div>
+                        <div className={styles.heart}>
+                            <HeartFilled />
+                            <HeartFilled />
+                            <HeartFilled />
+                            <HeartFilled />
+                            <HeartOutlined />
+                        </div>
+                    </div>
+                </div>
 
+                {/* 리뷰 목록 */}
+                <table className={styles.reviewTable}>
+                    <tbody>
+                        <tr>
+                            <td className={styles.left}>
+                                <div className={styles.profile}>
+                                    <div className={styles.profileImg}></div>
+                                    <div className={styles.username}>
+                                        한유진
+                                    </div>
+                                </div>
+                            </td>
+                            <td className={styles.right}>
+                                <div className={styles.heart}>
+                                    <HeartFilled />
+                                    <HeartFilled />
+                                    <HeartFilled />
+                                    <HeartFilled />
+                                    <HeartOutlined />
+                                </div>
+                                <p>
+                                    가격대비 퀄리티 너무 좋아서 놀랐어요
+                                    이 가격에 이런 트위드 자켓을 살 수 있다니ㅠㅠ
+
+                                    모델 코디처럼 데님이랑 데일리로 입어도 좋을 것 같고
+                                    스커트랑 입고 하객룩이나 데이트룩으로 입기 좋을 것 같아요~
+                                </p>
+                                <div className={styles.productImgContainer}>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className={styles.left}>
+                                <div className={styles.profile}>
+                                    <div className={styles.profileImg}></div>
+                                    <div className={styles.username}>
+                                        한유진
+                                    </div>
+                                </div>
+                            </td>
+                            <td className={styles.right}>
+                                <div className={styles.heart}>
+                                    <HeartFilled />
+                                    <HeartFilled />
+                                    <HeartFilled />
+                                    <HeartFilled />
+                                    <HeartOutlined />
+                                </div>
+                                <p>
+                                    가격대비 퀄리티 너무 좋아서 놀랐어요
+                                    이 가격에 이런 트위드 자켓을 살 수 있다니ㅠㅠ
+
+                                    모델 코디처럼 데님이랑 데일리로 입어도 좋을 것 같고
+                                    스커트랑 입고 하객룩이나 데이트룩으로 입기 좋을 것 같아요~
+                                </p>
+                                <div className={styles.productImgContainer}>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                    <div className={styles.productImg}></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
             {/* 장바구니 등록 모달 */}
             {
                 modal ?

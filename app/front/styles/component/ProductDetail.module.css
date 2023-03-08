@@ -240,3 +240,116 @@
     font-family: 'NanumSquareNeo';
     font-size: 18px;
 }
+
+/* 리뷰 */
+.reviewContainer {
+    text-align: center;
+    margin: 100px auto;
+    width: 1200px;
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: 'NanumSquareNeo';
+    font-size: 28px;
+}
+
+.reviewCreate {
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    color: #00B9FF;
+    cursor: pointer;
+}
+
+.ratingAvg {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-top: 20px;
+}
+
+.ratingValue {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+}
+
+.neo {
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    line-height: 33px;
+}
+
+.heart {
+    font-size: 24px;
+    color: #FF6A89;
+}
+
+.heart span {
+    margin: 0 1px;
+}
+
+/* 리뷰 */
+
+.reviewTable {
+    border-top: 1px solid #dcdcdc;
+    border-collapse: collapse;
+    margin-top: 100px;
+}
+
+.reviewTable tr {
+    border-top: 1px solid #dcdcdc;
+}
+
+.reviewTable td {
+    padding: 50px 20px;
+}
+
+.left {
+    width: 300px;
+    vertical-align: top;
+}
+
+.right {
+    text-align: left;
+}
+
+.profile {
+    display: flex;
+}
+
+.profileImg {
+    width: 100px;
+    height: 100px;
+    margin-right: 30px;
+
+    border-radius: 50%;
+    background-color: #dcdcdc;
+}
+
+.username {
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    line-height: 100px;
+}
+
+.right p {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.productImgContainer {
+    display: flex;
+}
+
+.productImg {
+    width: 130px;
+    height: 150px;
+    background-color: #dcdcdc;
+    border-radius: 10px;
+    margin-right: 10px;
+}

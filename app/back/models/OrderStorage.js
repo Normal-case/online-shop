@@ -111,6 +111,8 @@ class OrderStorage {
         )
 
         for(var i=0;i<data.orderDId.length;i++) {
+
+            // 제품 구매수 증가
             const detail = await dbConnect.collection('orderDetail').findOne({
                 _id: data.orderDId[i]
             })
@@ -120,6 +122,14 @@ class OrderStorage {
                     purchase: detail.amount
                 } }
             )
+            
+            // 상품 구매 유저 목록 삽입
+            dbConnect.collection('productUser').insertOne({
+                productId: detail.productId,
+                username: data.username
+            })
+
+            // orderDetail 만료기간 연장
             dbConnect.collection('orderDetail').updateOne(
                 { _id: data.orderDId[i] },
                 { $set: {
