@@ -111,6 +111,15 @@ class OrderStorage {
         )
 
         for(var i=0;i<data.orderDId.length;i++) {
+            const detail = await dbConnect.collection('orderDetail').findOne({
+                _id: data.orderDId[i]
+            })
+            dbConnect.collection('product').updateOne(
+                { _id: detail.productId },
+                { $inc: {
+                    purchase: detail.amount
+                } }
+            )
             dbConnect.collection('orderDetail').updateOne(
                 { _id: data.orderDId[i] },
                 { $set: {

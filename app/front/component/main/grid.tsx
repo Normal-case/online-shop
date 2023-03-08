@@ -16,7 +16,6 @@ export default function Grid() {
     }, [])
 
     const handleResponse = (response) => {
-        console.log(response)
         setProductList(response.product)
     }
     
