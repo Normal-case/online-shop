@@ -8,8 +8,10 @@ const Liked = require('../models/Liked')
 const LikedStorage = require('../models/LikedStorage')
 const Order = require('../models/Order')
 const OrderStorage = require('../models/OrderStorage')
+const Review = require('../models/Review')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
+const ReviewStorage = require("../models/ReviewStorage")
 
 const output = {
     auth: async (req, res) => {
@@ -75,6 +77,11 @@ const output = {
         const order = await OrderStorage.getOrderList(req.user.username)
         const response = { success: true, order }
         return res.status(200).json(response)
+    },
+
+    review: async (req, res) => {
+        const review = await ReviewStorage.getReview(req.params.id)
+        return res.status(200).json({ success: true, review })
     }
 }
 
@@ -141,6 +148,33 @@ const process = {
         const order = new Order(req.body)
         const orderId = await order.create(req.user)
         return res.status(200).json({ success: true, orderId: orderId })
+    },
+
+    review: async (req, res) => {
+        const review = new Review(req.body)
+        const result = await review.create(req.files, req.user.username)
+        console.log(result)
+        if(result.success) {
+            if(req.files) {
+                for(let i=0;i<req.files.length;i++) {
+                    fs.rename(req.files[i].path, `files/review/${result.id}_${i}.jpg`, (err) => {if(err) throw err})
+                }
+            }
+
+            return res.status(200).json({ success: true })
+        } else {
+            if(req.files) {
+                for(let i=0;i<req.files.length;i++) {
+                    fs.unlink(req.files[i].path, err => {if(err) throw err})
+                }
+            }
+
+            if(result.type === 'exist') {
+                return res.status(400).json({ success: false, type: 'exist' })
+            } else {
+                return res.status(400).json({ success: false, type: 'buy' })
+            }
+        }
     }
 }
 

@@ -216,4 +216,28 @@ export default class API {
             }
         }) 
     }
+
+    static createReview(body) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.post(`${domain}/review`, body, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
+
+    static getReview(id: string) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.get(`${domain}/review/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }

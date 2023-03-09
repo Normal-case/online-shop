@@ -9,6 +9,7 @@ class ProductStorage {
             price: Number(body.productPrice),
             description: body.productDesc,
             purchase: 0,
+            ratingSum: 0,
             reviews: 0,
             image: productImage,
             posted: username,

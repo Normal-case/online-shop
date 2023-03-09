@@ -21,6 +21,8 @@ client.connect((err, db) => {
     console.log('2. update user authority. Plz input username with spacebar')
     console.log('3. clear product and product image')
     console.log('4. clear order and order detail')
+    console.log('5. clear review and productUser')
+    console.log('6. clear wishList and liked')
     rl.on('line', async (line) => {
         const inputLine = line.split(' ')
         var option, data
@@ -63,6 +65,14 @@ client.connect((err, db) => {
                 await dbo.collection('order').deleteMany({})
                 await dbo.collection('orderDetail').deleteMany({})
                 console.log('success delete order and orderDetail')
+            } else if (option === 5) {
+                await dbo.collection('review').deleteMany({})
+                await dbo.collection('productUser').deleteMany({})
+                console.log('success delete review and productUser')
+            } else if (option === 6) {
+                await dbo.collection('wishList').deleteMany({})
+                await dbo.collection('liked').deleteMany({})
+                console.log('success delete wishList and liked')
             }
         } else {
             console.log(`input is wrong`)

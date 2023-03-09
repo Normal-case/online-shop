@@ -15,6 +15,18 @@ export default function Product() {
     const [amount, setAmount] = useState(1)
     const [modal, setModal] = useState(false)
     const [heart, setHeart] = useState(false)
+
+    // 리뷰 평점
+    const [reviewTotalRate, setReviewTotalRate] = useState(5)
+    const [reviewDisplayRate, setReviewDisplayRate] = useState(5)
+    const [reviewRating, setReviewRating] = useState(5)
+
+    const [reviewModal, setReviewModal] = useState(false)
+    const [reviewContents, setReviewContents] = useState('')
+    const [imageList, setImageList] = useState([])
+    const [fileList, setFileList] = useState([])
+
+    const [reviewList, setReviewList] = useState([])
     const category = {
         'outer': '아웃터',
         'onePiece': '원피스',
@@ -32,10 +44,23 @@ export default function Product() {
                 .then(res => handleResponse(res.data))
                 .catch(console.log)
         }
-        
+    }, [router])
+
+    useEffect(() => {
+        if(router.isReady) {
+            const { id } = router.query
+            API.getReview(id)
+                .then(res => {
+                    if(res.data.success) {
+                        reviewResponse(res.data)
+                    }
+                })
+                .catch(console.log)
+        }
     }, [router])
 
     const handleResponse = (data: Object) => {
+        console.log(data.product)
         const product = data?.product
         const username = getCookie('user')
         setProduct(product)
@@ -53,6 +78,10 @@ export default function Product() {
                 }
             })
             .catch(console.log)  
+    }
+
+    const reviewResponse = (data:Object) => {
+        setReviewList(data.review)
     }
 
     const minus = () => {
@@ -132,6 +161,111 @@ export default function Product() {
             })
     }
 
+    const openModal = () => {
+        setReviewModal(true)
+    }
+
+    const rateChange = (idx: number) => {
+        setReviewRating(idx+1)
+    }
+
+    const reviewRateRendering = (rate: number, click: boolean) => {
+        var result = []
+        for(var i=0;i<5;i++) {
+            var heart
+            const idx = i
+            if(i < rate) {
+                if(click) {
+                    heart = <li 
+                                key={i} 
+                                className={styles.heartEle}
+                                onClick={() => rateChange(idx)}
+                            >
+                                <HeartFilled />
+                            </li>
+                } else {
+                    heart = <li 
+                                key={i} 
+                                className={styles.heartEleUnClick}
+                            >
+                                <HeartFilled />
+                            </li>
+                }
+
+            } else {
+                if(click) {
+                    heart = <li 
+                                key={i} 
+                                className={styles.heartEle}
+                                onClick={() => rateChange(idx)}
+                            >
+                                <HeartOutlined />
+                            </li>                    
+                } else {
+                    heart = <li 
+                                key={i} 
+                                className={styles.heartEleUnClick}
+                            >
+                                <HeartOutlined />
+                            </li>
+                }
+            }
+            result.push(heart)
+        }
+
+        return result
+    }
+
+    const changeDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setReviewContents(e.target.value)
+    }
+
+    const changeProductImage = (e: any) => {
+        let files = e.target.files
+        let tmpImageList = []
+        let tmpFileList = []
+        for(let i=0;i<files.length;i++) {
+            tmpImageList.push(URL.createObjectURL(files[i]))
+            tmpFileList.push(files[i])
+        }
+        setImageList(tmpImageList)
+        setFileList(tmpFileList)
+    }
+
+    const onSubmitReview = () => {
+        if(reviewContents.replace(/(\s*)/g, "").length < 10) {
+            alert('리뷰를 10글자 이상 작성해주세요.')
+            return
+        }
+        const body = {
+            productId: product?._id,
+            rating: reviewRating,
+            contents: reviewContents
+        }
+        const formData = new FormData()
+        fileList.forEach(image => {
+            formData.append('img', image)
+        })
+        for(let key in body) {
+            formData.append(key, body[key])
+        }
+        API.createReview(formData)
+            .then(res => {
+                if(res.data.success) {
+                    alert('리뷰가 성공적으로 작성되었습니다.')
+                    router.reload()
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                if(err.response.data.type === 'exist') {
+                    alert('이미 작성한 댓글이 있습니다.')
+                } else if(err.response.data.type === 'buy') {
+                    alert('이 상품을 구매하지 않아 리뷰를 작성할 수 없습니다.')
+                }
+            })
+    }
+
     return (
         <div>
             <Header />
@@ -188,7 +322,7 @@ export default function Product() {
                     <div className={styles.title}>
                         구매후기
                     </div>
-                    <div className={styles.reviewCreate}>
+                    <div className={styles.reviewCreate} onClick={openModal}>
                         리뷰작성
                     </div>
                 </div>
@@ -198,87 +332,67 @@ export default function Product() {
                     </div>
                     <div className={styles.ratingValue}>
                         <div className={styles.neo}>
-                            4.9 / 5
+                            {Math.round(product?.ratingSum / product?.reviews * 10) / 10} / 5
                         </div>
-                        <div className={styles.heart}>
-                            <HeartFilled />
-                            <HeartFilled />
-                            <HeartFilled />
-                            <HeartFilled />
-                            <HeartOutlined />
-                        </div>
+                        <ul className={styles.heartTotal}>
+                            {reviewRateRendering(Math.round(product?.ratingSum / product?.reviews), false)}
+                        </ul>
                     </div>
                 </div>
 
                 {/* 리뷰 목록 */}
                 <table className={styles.reviewTable}>
                     <tbody>
-                        <tr>
-                            <td className={styles.left}>
-                                <div className={styles.profile}>
-                                    <div className={styles.profileImg}></div>
-                                    <div className={styles.username}>
-                                        한유진
-                                    </div>
-                                </div>
-                            </td>
-                            <td className={styles.right}>
-                                <div className={styles.heart}>
-                                    <HeartFilled />
-                                    <HeartFilled />
-                                    <HeartFilled />
-                                    <HeartFilled />
-                                    <HeartOutlined />
-                                </div>
-                                <p>
-                                    가격대비 퀄리티 너무 좋아서 놀랐어요
-                                    이 가격에 이런 트위드 자켓을 살 수 있다니ㅠㅠ
-
-                                    모델 코디처럼 데님이랑 데일리로 입어도 좋을 것 같고
-                                    스커트랑 입고 하객룩이나 데이트룩으로 입기 좋을 것 같아요~
-                                </p>
-                                <div className={styles.productImgContainer}>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className={styles.left}>
-                                <div className={styles.profile}>
-                                    <div className={styles.profileImg}></div>
-                                    <div className={styles.username}>
-                                        한유진
-                                    </div>
-                                </div>
-                            </td>
-                            <td className={styles.right}>
-                                <div className={styles.heart}>
-                                    <HeartFilled />
-                                    <HeartFilled />
-                                    <HeartFilled />
-                                    <HeartFilled />
-                                    <HeartOutlined />
-                                </div>
-                                <p>
-                                    가격대비 퀄리티 너무 좋아서 놀랐어요
-                                    이 가격에 이런 트위드 자켓을 살 수 있다니ㅠㅠ
-
-                                    모델 코디처럼 데님이랑 데일리로 입어도 좋을 것 같고
-                                    스커트랑 입고 하객룩이나 데이트룩으로 입기 좋을 것 같아요~
-                                </p>
-                                <div className={styles.productImgContainer}>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                    <div className={styles.productImg}></div>
-                                </div>
-                            </td>
-                        </tr>
+                        {
+                            reviewList?.map((review, idx) => {
+                                return (
+                                    <tr>
+                                        <td className={styles.left}>
+                                            <div className={styles.profile}>
+                                                <div>
+                                                    <img 
+                                                        src={review.pImage}
+                                                        width={80}
+                                                        height={80}
+                                                        className={styles.profileImg}
+                                                    />
+                                                </div>
+                                                <div className={styles.username}>
+                                                    {review.nickname}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className={styles.right}>
+                                            <ul className={styles.heartDisplay}>
+                                                {
+                                                    reviewRateRendering(review.rating, false)
+                                                }
+                                            </ul>
+                                            <span>
+                                                {review.contents}
+                                            </span>
+                                            <div className={styles.productImgContainer}>
+                                                {
+                                                    review.image.map((img) => {
+                                                        return (
+                                                            <img
+                                                                src={img}
+                                                                width={130}
+                                                                height={150}
+                                                                className={
+                                                                    styles.productImg
+                                                                }
+                                                            />
+                                                        )            
+                                                    })
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                        
                     </tbody>
                 </table>
 
@@ -297,6 +411,61 @@ export default function Product() {
                                 <button className={styles.keepShop} onClick={() => setModal(false)}>쇼핑 더 하기</button>
                                 <button className={styles.moveCart} onClick={() => router.replace('/user/cart')}>장바구니로 이동</button>
                             </div>
+                        </div>
+                    </div>
+                </div> : null
+            }
+            {/* 리뷰작성 모달 */}
+            {
+                reviewModal ?
+                <div className={styles.modal}>
+                    <div className={styles.openModalReview}>
+                        <div className={styles.modalHeader}>
+                            리뷰를 등록해주세요. 
+                            <button onClick={() => setReviewModal(false)}>
+                                &times;
+                            </button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            상품 평점을 남겨주세요.
+                            <ul className={styles.heartModal}>
+                                {reviewRateRendering(reviewRating, true)}
+                            </ul>
+                            <textarea 
+                                className={styles.reviewText}
+                                placeholder='소중한 리뷰 작성부탁드립니다. 최소 10글자 이상 입력해주세요.'
+                                onChange={changeDesc}
+                            />
+                            <label htmlFor='input-product-review-image'>
+                                <div className={styles.productImage}>
+                                    {
+                                        imageList.length !== 0 ?
+                                        imageList.map((img, idx) => {
+                                            return (
+                                                <img src={img} height={120} alt='' />
+                                            )
+                                        }) :
+                                        <span>
+                                            리뷰 이미지는 4장까지 등록가능합니다.
+                                        </span>
+                                    }
+                                </div>
+                            </label>
+                            <input 
+                                type='file'
+                                id='input-product-review-image'
+                                name='img'
+                                accept='image/*'
+                                style={{ display: 'none' }}
+                                onChange={changeProductImage}
+                                multiple
+                            />
+                            <button 
+                                className={styles.submitReview}
+                                onClick={onSubmitReview}
+                            >
+                                리뷰 쓰기
+                            </button>
                         </div>
                     </div>
                 </div> : null

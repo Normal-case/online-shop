@@ -207,6 +207,7 @@
 .modalBody {
     padding: 2rem 2rem;
     background-color: #f1f1f1;
+    text-align: center;
 
     font-family: 'NanumSquareNeo';
     font-size: 18px;
@@ -295,10 +296,22 @@
 
 /* 리뷰 */
 
+.openModalReview {
+    width: 700px;
+    z-index: 21;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid #aaaaaa;
+}
+
 .reviewTable {
     border-top: 1px solid #dcdcdc;
     border-collapse: collapse;
     margin-top: 100px;
+    width: 1200px;
 }
 
 .reviewTable tr {
@@ -318,38 +331,122 @@
     text-align: left;
 }
 
+.right span {
+    white-space: pre;
+    white-space: pre-line;
+    white-space: pre-wrap;
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+}
+
+.heartDisplay {
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    font-size: 24px;
+    color: #FF6A89;
+    display: flex;
+}
+
 .profile {
     display: flex;
 }
 
 .profileImg {
-    width: 100px;
-    height: 100px;
     margin-right: 30px;
-
     border-radius: 50%;
-    background-color: #dcdcdc;
 }
 
 .username {
     font-family: 'NanumSquareNeo';
     font-size: 20px;
-    line-height: 100px;
-}
-
-.right p {
-    font-family: 'NanumSquareNeo';
-    font-size: 18px;
+    line-height: 83px;
 }
 
 .productImgContainer {
     display: flex;
+    margin-top: 20px;
 }
 
 .productImg {
-    width: 130px;
-    height: 150px;
-    background-color: #dcdcdc;
     border-radius: 10px;
     margin-right: 10px;
+}
+
+.heartTotal {
+    font-size: 24px;
+    color: #FF6A89;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.heartModal {
+    font-size: 24px;
+    color: #FF6A89;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    height: 30px;
+}
+
+.heartEle {
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+.heartEle:hover {
+    font-size: 32px;
+}
+
+.heartEleUnClick {
+    margin-right: 2px;
+}
+
+.reviewText {
+    padding: .5rem .2rem;
+    border: 1px solid #aaaaaa;
+    outline: 0;
+    width: 550px;
+    height: 150px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    resize: none;
+}
+
+.productImage {
+    width: 550px;
+    height: 125px;
+    border: 1px dashed #aaaaaa;
+    cursor: pointer;
+    overflow: auto;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.productImage span {
+    line-height: 90px;
+}
+
+.productImage img {
+    padding: .5rem .5rem;
+}
+
+.submitReview {
+    width: 550px;
+    border: 1px solid #6482FF;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+}
+
+.submitReview:hover {
+    background-color: #6482FF;
+    border: 1px solid #6482FF;
+    color: #fff;
 }
