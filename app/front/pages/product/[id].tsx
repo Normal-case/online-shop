@@ -17,8 +17,7 @@ export default function Product() {
     const [heart, setHeart] = useState(false)
 
     // 리뷰 평점
-    const [reviewTotalRate, setReviewTotalRate] = useState(5)
-    const [reviewDisplayRate, setReviewDisplayRate] = useState(5)
+    const [totalRating, setTotalRating] = useState(5)
     const [reviewRating, setReviewRating] = useState(5)
 
     const [reviewModal, setReviewModal] = useState(false)
@@ -64,6 +63,14 @@ export default function Product() {
         const product = data?.product
         const username = getCookie('user')
         setProduct(product)
+
+        let rate
+        if(product.reviews === 0) {
+            rate = 0
+        } else {
+            rate = Math.round(product.ratingSum / product.reviews * 10) / 10
+        }
+        setTotalRating(rate)
 
         const body = {
             username: username,
@@ -158,6 +165,30 @@ export default function Product() {
                 if(confirm('장바구니에 담으려면 로그인하셔야 합니다. 로그인 하시겠습니까?') === true) {
                     router.replace('/user/login')
                 }
+            })
+    }
+
+    const buyProduct = () => {
+        API.tokenVerify()
+            .then(res => {
+                if(res.data.success) {
+                    const body = {
+                        data: [{
+                            productId: product?._id,
+                            amount: amount
+                        }]
+                    }
+                    API.order(body)
+                        .then(res => {
+                            if(res.data.success) {
+                                router.replace(`/order/${res.data.orderId}`)
+                            }
+                        })
+                        .catch(console.log)
+                }
+            })
+            .catch(err => {
+                if(confirm('구매하시려면 로그인하셔야 합니다. 로그인 하시겠습니까?') === true) router.replace('/user/login')
             })
     }
 
@@ -311,7 +342,7 @@ export default function Product() {
                     <div className={styles.buttonContainer}>
                         <button className={styles.heartBtn} onClick={likedSave}>{heart ? <HeartFilled /> : <HeartOutlined />}</button>
                         <button className={styles.cartBtn} onClick={cartSave}>장바구니</button>
-                        <button className={styles.buyBtn}>구매하기</button>
+                        <button className={styles.buyBtn} onClick={buyProduct}>구매하기</button>
                     </div>
                 </div>
             </div>
@@ -332,10 +363,13 @@ export default function Product() {
                     </div>
                     <div className={styles.ratingValue}>
                         <div className={styles.neo}>
-                            {Math.round(product?.ratingSum / product?.reviews * 10) / 10} / 5
+                            리뷰수: {product?.reviews}개
+                        </div>
+                        <div className={styles.neo}>
+                            {totalRating} / 5
                         </div>
                         <ul className={styles.heartTotal}>
-                            {reviewRateRendering(Math.round(product?.ratingSum / product?.reviews), false)}
+                            {reviewRateRendering(totalRating, false)}
                         </ul>
                     </div>
                 </div>

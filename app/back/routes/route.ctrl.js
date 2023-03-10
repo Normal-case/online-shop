@@ -153,7 +153,7 @@ const process = {
     review: async (req, res) => {
         const review = new Review(req.body)
         const result = await review.create(req.files, req.user.username)
-        console.log(result)
+        
         if(result.success) {
             if(req.files) {
                 for(let i=0;i<req.files.length;i++) {

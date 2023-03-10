@@ -269,14 +269,14 @@
 .ratingAvg {
     display: flex;
     justify-content: space-between;
-    width: 500px;
+    width: 600px;
     margin-top: 20px;
 }
 
 .ratingValue {
     display: flex;
     justify-content: space-between;
-    width: 220px;
+    width: 350px;
 }
 
 .neo {
