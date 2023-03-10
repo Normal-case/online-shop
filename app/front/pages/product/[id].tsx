@@ -7,10 +7,12 @@ import ImageSlider from '../../component/ImageSlider'
 import styles from '../../styles/component/ProductDetail.module.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import { getCookie } from 'cookies-next'
+import ReviewModal from '../../component/modal/reviewModal'
 
 export default function Product() {
     
     const router = useRouter()
+    const user = getCookie('user')
     const [product, setProduct] = useState()
     const [amount, setAmount] = useState(1)
     const [modal, setModal] = useState(false)
@@ -26,6 +28,7 @@ export default function Product() {
     const [fileList, setFileList] = useState([])
 
     const [reviewList, setReviewList] = useState([])
+    const [reviewForUpdate, setReviewForUdpate] = useState({})
     const category = {
         'outer': '아웃터',
         'onePiece': '원피스',
@@ -193,6 +196,9 @@ export default function Product() {
     }
 
     const openModal = () => {
+        setReviewForUdpate({})
+        setImageList([])
+        setReviewRating(5)
         setReviewModal(true)
     }
 
@@ -297,6 +303,26 @@ export default function Product() {
             })
     }
 
+    const reviewUpdate = (review: Object) => {
+        setReviewForUdpate(review)
+        setImageList(review.image)
+        setReviewRating(review.rating)
+        setReviewModal(true)
+    }
+
+    const variable = {
+        reviewRating,
+        imageList
+    }
+
+    const func = {
+        setReviewModal,
+        reviewRateRendering,
+        changeDesc,
+        changeProductImage,
+        onSubmitReview
+    }
+
     return (
         <div>
             <Header />
@@ -395,6 +421,18 @@ export default function Product() {
                                                     {review.nickname}
                                                 </div>
                                             </div>
+                                            {
+                                                user === review.username ?
+                                                <div className={styles.ownReview}>
+                                                    <span 
+                                                        onClick={                               () => reviewUpdate(review)
+                                                        }
+                                                    >
+                                                        수정하기
+                                                    </span>
+                                                    <span>삭제하기</span>
+                                                </div> : null
+                                            }
                                         </td>
                                         <td className={styles.right}>
                                             <ul className={styles.heartDisplay}>
@@ -452,57 +490,11 @@ export default function Product() {
             {/* 리뷰작성 모달 */}
             {
                 reviewModal ?
-                <div className={styles.modal}>
-                    <div className={styles.openModalReview}>
-                        <div className={styles.modalHeader}>
-                            리뷰를 등록해주세요. 
-                            <button onClick={() => setReviewModal(false)}>
-                                &times;
-                            </button>
-                        </div>
-                        <div className={styles.modalBody}>
-                            상품 평점을 남겨주세요.
-                            <ul className={styles.heartModal}>
-                                {reviewRateRendering(reviewRating, true)}
-                            </ul>
-                            <textarea 
-                                className={styles.reviewText}
-                                placeholder='소중한 리뷰 작성부탁드립니다. 최소 10글자 이상 입력해주세요.'
-                                onChange={changeDesc}
-                            />
-                            <label htmlFor='input-product-review-image'>
-                                <div className={styles.productImage}>
-                                    {
-                                        imageList.length !== 0 ?
-                                        imageList.map((img, idx) => {
-                                            return (
-                                                <img src={img} height={120} alt='' />
-                                            )
-                                        }) :
-                                        <span>
-                                            리뷰 이미지는 4장까지 등록가능합니다.
-                                        </span>
-                                    }
-                                </div>
-                            </label>
-                            <input 
-                                type='file'
-                                id='input-product-review-image'
-                                name='img'
-                                accept='image/*'
-                                style={{ display: 'none' }}
-                                onChange={changeProductImage}
-                                multiple
-                            />
-                            <button 
-                                className={styles.submitReview}
-                                onClick={onSubmitReview}
-                            >
-                                리뷰 쓰기
-                            </button>
-                        </div>
-                    </div>
-                </div> : null
+                <ReviewModal 
+                    variable={variable} 
+                    func={func} 
+                    review={reviewForUpdate}
+                /> : null
             }
         </div>
     )

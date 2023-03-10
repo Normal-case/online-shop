@@ -363,6 +363,23 @@
     line-height: 83px;
 }
 
+.ownReview {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.ownReview span {
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    margin-left: 16px;
+    color: #00B9FF;
+    cursor: pointer;
+}
+
+.ownReview span:hover {
+    text-decoration: underline;
+}
+
 .productImgContainer {
     display: flex;
     margin-top: 20px;
