@@ -34,5 +34,6 @@ router.put('/review', authenticate, uploadReview.array('img', 4), ctrl.update.re
 
 router.delete('/liked', authenticate, ctrl.remove.liked)
 router.delete('/wishList', authenticate, ctrl.remove.wishList)
+router.delete('/review', authenticate, ctrl.remove.review)
 
 module.exports = router

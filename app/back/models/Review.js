@@ -84,6 +84,25 @@ class Review {
 
         return { success: true }
     }
+
+    delete(username) {
+        const dbConnect = dbo.getDB()
+        const body = this.body
+        const rId = ObjectId(body.reviewId)
+        dbConnect.collection('review').deleteOne({
+            username: username,
+            _id: rId
+        })
+        const pId = ObjectId(body.productId)
+        dbConnect.collection('product').updateOne(
+            { _id: pId },
+            { $inc: {
+                ratingSum: Number(body.rating) * -1,
+                reviews: -1
+            }},
+            { upsert: true }
+        )
+    }
 }
 
 module.exports = Review

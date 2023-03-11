@@ -346,6 +346,23 @@ export default function Product() {
         setReviewModal(true)
     }
 
+    const reviewDelete = (review: Object) => {
+        console.log(review)
+        const body = {
+            reviewId: review._id,
+            productId: review.productId,
+            rating: review.rating
+        }
+        API.deleteReview(body)
+            .then(res => {
+                if(res.data.success) {
+                    alert('리뷰가 성공적으로 삭제되었습니다.')
+                    router.reload()
+                }
+            })
+            .catch(console.log)
+    }
+
     const variable = {
         reviewRating,
         imageList,
@@ -468,7 +485,13 @@ export default function Product() {
                                                     >
                                                         수정하기
                                                     </span>
-                                                    <span>삭제하기</span>
+                                                    <span
+                                                        onClick={
+                                                            () => reviewDelete(review)
+                                                        }
+                                                    >
+                                                        삭제하기
+                                                    </span>
                                                 </div> : null
                                             }
                                         </td>

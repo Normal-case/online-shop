@@ -227,6 +227,12 @@ const remove = {
         const wishList = new WishList(req.body)
         wishList.delete()
         return res.status(200).json({ success: true })
+    },
+
+    review: (req, res) => {
+        const review = new Review(req.body)
+        review.delete(req.user.username)
+        return res.status(200).json({ success: true })
     }
 }
 

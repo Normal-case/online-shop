@@ -252,4 +252,14 @@ export default class API {
             }
         })
     }
+
+    static deleteReview(body) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.delete(`${domain}/review`, { data: body, headers: {
+            'Content-Type': 'application/json',
+            'access': 'Bearer ' + accesstoken,
+            'refresh': 'Bearer ' + refreshtoken
+        } })
+    }
 }
