@@ -53,7 +53,20 @@
     font-size: 18px;
     color: #8c8c8c;
 
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+}
+
+.productManageFunc {
+    font-family: 'NanumSquareNeo';
+    font-size: 18px;
+    color: #00B9FF;
+    cursor: pointer;
+
+    margin-bottom: 40px;
+}
+
+.productManageFunc span {
+    margin-right: 30px;
 }
 
 .selectProduct {
@@ -170,6 +183,17 @@
 
 .openModal {
     width: 500px;
+    z-index: 21;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid #aaaaaa;
+}
+
+.openProductModal {
+    width: 800px;
     z-index: 21;
     position: absolute;
     top: 50%;

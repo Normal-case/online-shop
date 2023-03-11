@@ -70,16 +70,19 @@ class Review {
                 contents: body.contents,
                 image: reviewImage
             }},
-            { upsert: true }
-        )
+            { upsert: true },
+            (err, res) => {
+                if(err) throw err
 
-        // 상품 수정
-        const pId = ObjectId(body.productId)
-        dbConnect.collection('product').updateOne(
-            { _id: pId },
-            { $inc: {
-                ratingSum: Number(body.rating) - Number(body.prevRating)
-            }}
+                // 상품 수정
+                const pId = ObjectId(body.productId)
+                dbConnect.collection('product').updateOne(
+                    { _id: pId },
+                    { $inc: {
+                        ratingSum: Number(body.rating) - Number(body.prevRating)
+                    }}
+                )
+            }
         )
 
         return { success: true }
@@ -92,16 +95,17 @@ class Review {
         dbConnect.collection('review').deleteOne({
             username: username,
             _id: rId
+        }, (err, res) => {
+            if(err) throw err
+            const pId = ObjectId(body.productId)
+            dbConnect.collection('product').updateOne(
+                { _id: pId },
+                { $inc: {
+                    ratingSum: Number(body.rating) * -1,
+                    reviews: -1
+                }}
+            )
         })
-        const pId = ObjectId(body.productId)
-        dbConnect.collection('product').updateOne(
-            { _id: pId },
-            { $inc: {
-                ratingSum: Number(body.rating) * -1,
-                reviews: -1
-            }},
-            { upsert: true }
-        )
     }
 }
 

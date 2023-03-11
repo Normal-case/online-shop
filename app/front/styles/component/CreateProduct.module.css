@@ -11,6 +11,18 @@
 
     font-family: 'NanumSquareNeo';
     font-size: 20px;
+}
+
+.inputTextarea {
+    padding: .5rem .2rem;
+    margin-bottom: 30px;
+    border: 1px solid #aaaaaa;
+    outline: 0;
+    width: 600px;
+    height: 200px;
+
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
     resize: none;
 }
 

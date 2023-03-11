@@ -21,7 +21,7 @@ router.get('/review/:id', ctrl.output.review)
 router.post('/login', ctrl.process.login)
 router.post('/register', ctrl.process.register)
 router.post('/profile', authenticate, uploadProfile.single('img'), ctrl.process.profile) 
-router.post('/product', authenticate, uploadProduct.array('img', 10), ctrl.process.product) // admin
+router.post('/product', authenticate, uploadProduct.array('img', 5), ctrl.process.product) // admin
 router.post('/wishList', authenticate, ctrl.process.wishList)
 router.post('/liked', authenticate, ctrl.process.liked)
 router.post('/liked/get', authenticate, ctrl.process.likedGet)
@@ -31,6 +31,7 @@ router.post('/review', authenticate, uploadReview.array('img', 4), ctrl.process.
 router.put('/order', authenticate, ctrl.update.order)
 router.put('/admin/order/status', authenticate, ctrl.update.orderStatus) // admin
 router.put('/review', authenticate, uploadReview.array('img', 4), ctrl.update.review)
+router.put('/product', authenticate, uploadProduct.array('img', 5), ctrl.update.product)
 
 router.delete('/liked', authenticate, ctrl.remove.liked)
 router.delete('/wishList', authenticate, ctrl.remove.wishList)

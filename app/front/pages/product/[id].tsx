@@ -8,6 +8,7 @@ import styles from '../../styles/component/ProductDetail.module.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import { getCookie } from 'cookies-next'
 import ReviewModal from '../../component/modal/reviewModal'
+import CreateProduct from '../../component/profile/createProduct'
 
 export default function Product() {
     
@@ -17,6 +18,9 @@ export default function Product() {
     const [amount, setAmount] = useState(1)
     const [modal, setModal] = useState(false)
     const [heart, setHeart] = useState(false)
+
+    // 상품 모달
+    const [productModal, setProductModal] = useState(false)
 
     // 리뷰 평점
     const [totalRating, setTotalRating] = useState(5)
@@ -399,6 +403,12 @@ export default function Product() {
                     <div className={styles.postedInfo}>
                         <div className={styles.posted}>작성자 : {product?.posted}</div>
                         <div className={styles.createAt}>동록일자 : {product?.createAt.split('T')[0]}</div>
+                        <div className={styles.productManageFunc}>
+                            <span onClick={() => setProductModal(true)}>
+                                상품수정
+                            </span>
+                            <span>상품삭제</span>
+                        </div>
                     </div>
                     {/* 구매 수량 및 금액 */}
                     <div className={styles.selectProduct}>
@@ -544,6 +554,61 @@ export default function Product() {
                                 <button className={styles.keepShop} onClick={() => setModal(false)}>쇼핑 더 하기</button>
                                 <button className={styles.moveCart} onClick={() => router.replace('/user/cart')}>장바구니로 이동</button>
                             </div>
+                        </div>
+                    </div>
+                </div> : null
+            }
+            {/* 상품수정 모달 */}
+            {
+                productModal ?
+                <div className={styles.modal}>
+                    <div className={styles.openProductModal}>
+                        <div className={styles.modalHeader}>
+                            상품 수정 
+                            <button onClick={() => setProductModal(false)}>
+                                &times;
+                            </button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            <CreateProduct type='update' product={product} />
+                            {/* <input 
+                                type='text' 
+                                className={cStyles.inputText}
+                                placeholder='상품명'
+                            /> <br />
+                            <select className={cStyles.options}>
+                                {
+                                    selectOptions.map((option) => (
+                                        <option value={option.value}>
+                                            {option.name}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                            <input 
+                                className={cStyles.inputPrice}
+                                type='number'
+                                placeholder='가격'
+                            /> <br />
+                            <textarea
+                                className={cStyles.inputTextarea}
+                                placeholder='상품설명'
+                            />
+                            <div>
+                                <label htmlFor='input-product-image'>
+                                    <div className={cStyles.productImage}>
+                                        <span>상품 이미지를 등록해주세요.</span>
+                                    </div>
+                                </label>
+                                <input
+                                    type='file'
+                                    id='input-product-image'
+                                    name='img'
+                                    accept='image/*'
+                                    style={{ display: 'none' }}
+                                    multiple
+                                />
+                            </div> */}
                         </div>
                     </div>
                 </div> : null

@@ -137,7 +137,7 @@ export default function Profile() {
                                 status={statusIdx[menuIdx]}
                             /> :
                           menuIdx === 6 ?
-                            <CreateProduct setMenuIdx={setMenuIdx} /> : null
+                            <CreateProduct setMenuIdx={setMenuIdx} type='create' /> : null
                         }
                     </div>
                 </div>

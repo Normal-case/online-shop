@@ -1,3 +1,4 @@
+const dbo = require('../bin/db/connect')
 const User = require("../models/User")
 const UserStorage = require('../models/UserStorage')
 const Product = require('../models/Product')
@@ -12,6 +13,7 @@ const Review = require('../models/Review')
 const Token = require('../bin/jwt/token')
 const fs = require('fs')
 const ReviewStorage = require("../models/ReviewStorage")
+const { ObjectId } = require('mongodb')
 
 const output = {
     auth: async (req, res) => {
@@ -113,10 +115,8 @@ const process = {
     product: async (req, res) => {
         // product change
         if(!req.isAdmin) return res.status(400).json({ success: false })
-        const body = req.body
-        const username = req.user.name
-        const product = new Product()
-        const id = await product.create(req.files, body, username)
+        const product = new Product(req.body)
+        const id = await product.create(req.files, req.user)
 
         if(req.files) {
             for(var i=0;i<req.files.length;i++) {
@@ -189,6 +189,31 @@ const update = {
         if(!req.isAdmin) return res.status(400).json({ success: false })
         const order = new Order(req.body)
         order.status()
+        return res.status(200).json({ success: true })
+    },
+
+    product: async (req, res) => {
+        if(!req.isAdmin) return res.status(400).json({ success: false })
+
+        // 작성자가 아닐 경우
+        const dbConnect = dbo.getDB()
+        const tmpProduct = await dbConnect.collection('product').findOne({
+            _id: ObjectId(req.body.id)
+        })
+        if(tmpProduct.postedUsername !== req.user.username) {
+            return res.status(400).json({ success: false })
+        }
+        
+        const product = new Product(req.body)
+        product.update(req.files)
+
+        if(req.files) {
+            for(let i=0;i<req.files.length;i++) {
+                fs.rename(
+                    req.files[i].path, `files/product/${req.body.id}_${i}.jpg`, (err) => {if(err) throw err}
+                )
+            }
+        }
         return res.status(200).json({ success: true })
     },
 

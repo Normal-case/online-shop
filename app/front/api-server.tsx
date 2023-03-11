@@ -69,6 +69,18 @@ export default class API {
         })
     }
 
+    static productUpdate(body) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.put(`${domain}/product`, body, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
+
     static productGet() {
         return axios.get(`${domain}/product`)
     }
