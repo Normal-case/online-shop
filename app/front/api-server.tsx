@@ -240,4 +240,16 @@ export default class API {
             }
         })
     }
+
+    static updateReview(body) {
+        const accesstoken = getCookie('accesstoken')
+        const refreshtoken = getCookie('refreshtoken')
+        return axios.put(`${domain}/review`, body, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'access': 'Bearer ' + accesstoken,
+                'refresh': 'Bearer ' + refreshtoken
+            }
+        })
+    }
 }

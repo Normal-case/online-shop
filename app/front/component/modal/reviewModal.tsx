@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styles from '../../styles/component/ProductDetail.module.css'
 
@@ -7,6 +7,7 @@ export default function ReviewModal({ variable, func, review }) {
     variable
     - reviewRating
     - imageList
+    - reviewContents
 
     func
     - setReviewModal
@@ -15,7 +16,7 @@ export default function ReviewModal({ variable, func, review }) {
     - changeProductImage
     - onSubmitReview
     */
-    console.log(review)
+    
     return (
         <div className={styles.modal}>
             <div className={styles.openModalReview}>
@@ -38,7 +39,7 @@ export default function ReviewModal({ variable, func, review }) {
                         className={styles.reviewText}
                         placeholder='소중한 리뷰 작성부탁드립니다. 최소 10글자 이상 입력해주세요.'
                         onChange={func.changeDesc}
-                        value={review.contents}
+                        value={variable.reviewContents}
                     />
                     <label htmlFor='input-product-review-image'>
                         <div className={styles.productImage}>
@@ -66,9 +67,17 @@ export default function ReviewModal({ variable, func, review }) {
                     />
                     <button 
                         className={styles.submitReview} 
-                        onClick={func.onSubmitReview}
+                        onClick={
+                            review.contents ?
+                            func.onSubmitReviewUpdate :
+                            func.onSubmitReview
+                        }
                     >
-                        리뷰 쓰기
+                        {
+                            review.contents ? 
+                            <span>리뷰 수정</span> : 
+                            <span>리뷰 쓰기</span>
+                        }
                     </button>
                 </div>
             </div>

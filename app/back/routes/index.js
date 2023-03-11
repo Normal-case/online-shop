@@ -30,6 +30,7 @@ router.post('/review', authenticate, uploadReview.array('img', 4), ctrl.process.
 
 router.put('/order', authenticate, ctrl.update.order)
 router.put('/admin/order/status', authenticate, ctrl.update.orderStatus) // admin
+router.put('/review', authenticate, uploadReview.array('img', 4), ctrl.update.review)
 
 router.delete('/liked', authenticate, ctrl.remove.liked)
 router.delete('/wishList', authenticate, ctrl.remove.wishList)

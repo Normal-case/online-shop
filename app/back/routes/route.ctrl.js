@@ -190,6 +190,11 @@ const update = {
         const order = new Order(req.body)
         order.status()
         return res.status(200).json({ success: true })
+    },
+
+    review: (req, res) => {
+        console.log(req.body)
+        return res.status(200).json({ success: true })
     }
 }
 

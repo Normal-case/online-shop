@@ -254,7 +254,8 @@ export default function Product() {
     }
 
     const changeDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setReviewContents(e.target.value)
+        console.log(e.target.value)
+        setReviewContents(e.target.value) 
     }
 
     const changeProductImage = (e: any) => {
@@ -267,6 +268,29 @@ export default function Product() {
         }
         setImageList(tmpImageList)
         setFileList(tmpFileList)
+    }
+
+    const onSubmitReviewUpdate = () => {
+        if(reviewContents.replace(/(\s*)/g, "").length < 10) {
+            alert('리뷰를 10글자 이상 작성해주세요.')
+            return
+        }
+
+        const body = {
+            productId: product?._id,
+            rating: reviewRating,
+            contents: reviewContents
+        }
+        const formData = new FormData()
+        fileList.forEach(image => {
+            formData.append('img', image)
+        })
+        for(let key in body) {
+            formData.append(key, body[key])
+        }
+        API.updateReview(formData)
+            .then(console.log)
+            .catch(console.log)
     }
 
     const onSubmitReview = () => {
@@ -305,6 +329,7 @@ export default function Product() {
 
     const reviewUpdate = (review: Object) => {
         setReviewForUdpate(review)
+        setReviewContents(review.contents)
         setImageList(review.image)
         setReviewRating(review.rating)
         setReviewModal(true)
@@ -312,7 +337,8 @@ export default function Product() {
 
     const variable = {
         reviewRating,
-        imageList
+        imageList,
+        reviewContents
     }
 
     const func = {
@@ -320,7 +346,8 @@ export default function Product() {
         reviewRateRendering,
         changeDesc,
         changeProductImage,
-        onSubmitReview
+        onSubmitReview,
+        onSubmitReviewUpdate
     }
 
     return (
@@ -494,6 +521,7 @@ export default function Product() {
                     variable={variable} 
                     func={func} 
                     review={reviewForUpdate}
+                    contents={reviewContents}
                 /> : null
             }
         </div>
