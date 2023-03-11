@@ -254,7 +254,6 @@ export default function Product() {
     }
 
     const changeDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
         setReviewContents(e.target.value) 
     }
 
@@ -270,7 +269,7 @@ export default function Product() {
         setFileList(tmpFileList)
     }
 
-    const onSubmitReviewUpdate = () => {
+    const onSubmitReviewUpdate = (id: string, prevRating: number) => {
         if(reviewContents.replace(/(\s*)/g, "").length < 10) {
             alert('리뷰를 10글자 이상 작성해주세요.')
             return
@@ -279,7 +278,9 @@ export default function Product() {
         const body = {
             productId: product?._id,
             rating: reviewRating,
-            contents: reviewContents
+            prevRating: prevRating,
+            contents: reviewContents,
+            reviewId: id
         }
         const formData = new FormData()
         fileList.forEach(image => {
@@ -289,8 +290,18 @@ export default function Product() {
             formData.append(key, body[key])
         }
         API.updateReview(formData)
-            .then(console.log)
-            .catch(console.log)
+            .then(res => {
+                if(res.data.success) {
+                    alert('리뷰가 성공적으로 수정되었습니다.')
+                    router.reload()
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                if(err.response.data.type === 'exist') {
+                    alert('리뷰가 존재하지 않아 수정할 수 없습니다.')
+                }
+            })
     }
 
     const onSubmitReview = () => {

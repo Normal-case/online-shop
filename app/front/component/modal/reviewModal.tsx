@@ -69,7 +69,9 @@ export default function ReviewModal({ variable, func, review }) {
                         className={styles.submitReview} 
                         onClick={
                             review.contents ?
-                            func.onSubmitReviewUpdate :
+                            () => func.onSubmitReviewUpdate(
+                                review._id, review.rating
+                            ) :
                             func.onSubmitReview
                         }
                     >

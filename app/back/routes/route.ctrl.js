@@ -192,9 +192,27 @@ const update = {
         return res.status(200).json({ success: true })
     },
 
-    review: (req, res) => {
-        console.log(req.body)
-        return res.status(200).json({ success: true })
+    review: async (req, res) => {
+        const review = new Review(req.body)
+        const result = await review.update(req.files, req.user.username)
+
+        if(result.success) {
+            if(req.files) {
+                for(let i=0;i<req.files.length;i++) {
+                    fs.rename(req.files[i].path, `files/review/${req.body.reviewId}_${i}.jpg`, (err) => {if(err) throw err})
+                }
+            }
+
+            return res.status(200).json({ success: true })
+        } else {
+            if(req.files) {
+                for(let i=0;i<req.files.length;i++) {
+                    fs.unlink(req.files[i].path, err => {if(err) throw err})
+                }
+            }
+
+            return res.status(400).json({ success: false, type: 'exist' })
+        }
     }
 }
 

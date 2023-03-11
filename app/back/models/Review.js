@@ -46,6 +46,44 @@ class Review {
         
         return { success: true, id: id }
     }
+
+    async update(files, username) {
+        const body = this.body
+        const dbConnect = dbo.getDB()
+        const review = await dbConnect.collection('review').findOne({
+            username: username,
+            productId: body.productId
+        })
+        if(!review) return { success: false, type: 'exist'}
+
+        let reviewImage = []
+        for(let i=0;i<files.length;i++) {
+            reviewImage.push(`${domain}/review/${body.reviewId}_${i}.jpg`)
+        }
+        const rId = ObjectId(body.reviewId)
+
+        // 리뷰 수정
+        dbConnect.collection('review').updateOne(
+            { _id: rId },
+            { $set: {
+                rating: Number(body.rating),
+                contents: body.contents,
+                image: reviewImage
+            }},
+            { upsert: true }
+        )
+
+        // 상품 수정
+        const pId = ObjectId(body.productId)
+        dbConnect.collection('product').updateOne(
+            { _id: pId },
+            { $inc: {
+                ratingSum: Number(body.rating) - Number(body.prevRating)
+            }}
+        )
+
+        return { success: true }
+    }
 }
 
 module.exports = Review
