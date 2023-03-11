@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Header from "../component/header";
+import Footer from '../component/footer'
 import API from "../api-server";
 import styles from '../styles/Profile.module.css'
 import ProductStatus from "../component/admin/product";
@@ -92,6 +93,7 @@ export default function Admin() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

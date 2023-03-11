@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import Header from '../../component/header'
+import Footer from '../../component/footer'
 import API from '../../api-server'
 import styles from '../../styles/Cart.module.css'
 import WishListCard from '../../component/wishListCard'
@@ -254,7 +255,7 @@ export default function Cart() {
                     <button className={styles.wholeOrder} onClick={wholeOrder}>전체상품 주문하기</button>
                 </div>
             </div>
-            
+            <Footer />
         </div>
     )
 }

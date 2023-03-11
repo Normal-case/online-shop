@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 
 import Header from '../component/header'
 import Grid from '../component/main/grid'
+import Footer from '../component/footer'
 
 export default function Home() {
 
@@ -18,7 +19,7 @@ export default function Home() {
       <div className={styles.body}>
         <Grid />
       </div>
-      
+      <Footer />
     </div>
   )
 }

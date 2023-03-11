@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import DaumPostcodeEmbed from 'react-daum-postcode'
 
 import Header from '../../component/header'
+import Footer from '../../component/footer'
 import styles from '../../styles/Order.module.css'
 import API from '../../api-server'
 
@@ -299,6 +300,7 @@ export default function Order() {
                     </div>
                 </div> : null
             }
+            <Footer />
         </div>
     )
 }

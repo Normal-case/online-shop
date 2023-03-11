@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import DaumPostcodeEmbed from 'react-daum-postcode'
 
 import Header from '../../component/header'
+import Footer from '../../component/footer'
 import styles from '../../styles/Profile.module.css'
 import API from '../../api-server'
 import { setToken } from '../../module/Token'
@@ -142,6 +143,7 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
+            <Footer />
             {
                 modal ? 
                 <div className={styles.modal}>

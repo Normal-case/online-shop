@@ -26,7 +26,7 @@ router.post('/wishList', authenticate, ctrl.process.wishList)
 router.post('/liked', authenticate, ctrl.process.liked)
 router.post('/liked/get', authenticate, ctrl.process.likedGet)
 router.post('/order', authenticate, ctrl.process.order)
-router.post('/review', authenticate, uploadReview.array('img', 4), ctrl.process.review)
+router.post('/review', authenticate, uploadReview.array('img', 4), ctrl.process.review) // admin
 
 router.put('/order', authenticate, ctrl.update.order)
 router.put('/admin/order/status', authenticate, ctrl.update.orderStatus) // admin

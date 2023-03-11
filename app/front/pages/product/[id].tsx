@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import Header from '../../component/header'
+import Footer from '../../component/footer'
 import API from '../../api-server'
 import ImageSlider from '../../component/ImageSlider'
 import styles from '../../styles/component/ProductDetail.module.css'
@@ -407,7 +408,6 @@ export default function Product() {
                             <span onClick={() => setProductModal(true)}>
                                 상품수정
                             </span>
-                            <span>상품삭제</span>
                         </div>
                     </div>
                     {/* 구매 수량 및 금액 */}
@@ -429,7 +429,7 @@ export default function Product() {
                         <div className={styles.priceText}>총금액</div>
                         <div className={styles.totalPriceValue}>{product?.price * amount}원</div>
                     </div>
-                    {/* 구매하기, 장바구니, 찜 버튼 */}
+                    {/* 구매하기, 장바구니 */}
                     <div className={styles.buttonContainer}>
                         <button className={styles.heartBtn} onClick={likedSave}>{heart ? <HeartFilled /> : <HeartOutlined />}</button>
                         <button className={styles.cartBtn} onClick={cartSave}>장바구니</button>
@@ -571,44 +571,6 @@ export default function Product() {
                         </div>
                         <div className={styles.modalBody}>
                             <CreateProduct type='update' product={product} />
-                            {/* <input 
-                                type='text' 
-                                className={cStyles.inputText}
-                                placeholder='상품명'
-                            /> <br />
-                            <select className={cStyles.options}>
-                                {
-                                    selectOptions.map((option) => (
-                                        <option value={option.value}>
-                                            {option.name}
-                                        </option>
-                                    ))
-                                }
-                            </select>
-                            <input 
-                                className={cStyles.inputPrice}
-                                type='number'
-                                placeholder='가격'
-                            /> <br />
-                            <textarea
-                                className={cStyles.inputTextarea}
-                                placeholder='상품설명'
-                            />
-                            <div>
-                                <label htmlFor='input-product-image'>
-                                    <div className={cStyles.productImage}>
-                                        <span>상품 이미지를 등록해주세요.</span>
-                                    </div>
-                                </label>
-                                <input
-                                    type='file'
-                                    id='input-product-image'
-                                    name='img'
-                                    accept='image/*'
-                                    style={{ display: 'none' }}
-                                    multiple
-                                />
-                            </div> */}
                         </div>
                     </div>
                 </div> : null
@@ -623,6 +585,7 @@ export default function Product() {
                     contents={reviewContents}
                 /> : null
             }
+            <Footer />
         </div>
     )
 }

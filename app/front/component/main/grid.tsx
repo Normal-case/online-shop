@@ -36,7 +36,6 @@ export default function Grid() {
                                 <div className={styles.count}>
                                     구매수 {product.purchase} | 리뷰수 {product.reviews}
                                 </div>
-                                <div className={styles.liked}><HeartOutlined /></div>
                             </div>
                         </div>
                     )

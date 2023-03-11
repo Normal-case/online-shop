@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../../component/header'
+import Footer from '../../../component/footer'
 import styles from '../../../styles/Order.module.css'
 import API from '../../../api-server'
 
@@ -162,6 +163,7 @@ export default function OrderDetail() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }
