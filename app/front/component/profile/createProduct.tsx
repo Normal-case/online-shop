@@ -53,6 +53,11 @@ export default function CreateProduct(props: any) {
                 formData.append('img', image)
             })
             formData.append('id', props.product._id)
+        } else if(fileList.length !== 0 && props.type === 'update') {
+            fileList.forEach(image => {
+                formData.append('img', image)
+            })
+            formData.append('id', props.product._id)
         } else {
             fileList.forEach(image => {
                 formData.append('img', image)
@@ -80,7 +85,11 @@ export default function CreateProduct(props: any) {
                         router.reload()
                     }
                 })
-                .catch(console.log)
+                .catch(err => {
+                    if(err.response.data.type === 'authority') {
+                        alert('상품을 등록한 본인만 수정할 수 있습니다.')
+                    }
+                })
         }
         
     }

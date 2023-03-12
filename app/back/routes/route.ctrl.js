@@ -200,8 +200,9 @@ const update = {
         const tmpProduct = await dbConnect.collection('product').findOne({
             _id: ObjectId(req.body.id)
         })
+
         if(tmpProduct.postedUsername !== req.user.username) {
-            return res.status(400).json({ success: false })
+            return res.status(400).json({ success: false, type: 'authority' })
         }
         
         const product = new Product(req.body)
