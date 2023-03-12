@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../../styles/component/Grid.module.css'
-import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import API from '../../api-server'
 import ImageSlider from '../ImageSlider'
 import Link from 'next/link'
 
-export default function Grid() {
+export default function Grid({ filter }) {
 
     const [productList, setProductList] = useState([])
 
     useEffect(() => {
-        API.productGet()
+        API.productGet(filter)
             .then(res => handleResponse(res.data))
             .catch(console.log)
-    }, [])
+    }, [filter])
 
     const handleResponse = (response) => {
         setProductList(response.product)

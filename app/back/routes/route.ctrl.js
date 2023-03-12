@@ -43,7 +43,7 @@ const output = {
     },
 
     product: async (req, res) => {
-        const product = await ProductStorage.getProduct()
+        const product = await ProductStorage.getProduct(req.headers.filter)
         const response = { success: true, product: product }
         return res.status(200).json(response)
     },

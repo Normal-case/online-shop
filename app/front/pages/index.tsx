@@ -16,6 +16,9 @@ export default function Home() {
         <Image src='/img/banner.webp' layout='fill' alt='' objectFit='contain' />
       </div>
       {/* 전체 상품들 그리드 형태로 제공 */}
+      <div className={styles.subtitle}>
+        평점이 높은 상품 top 10
+      </div>
       <div className={styles.body}>
         <Grid />
       </div>

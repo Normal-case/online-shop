@@ -62,14 +62,10 @@ export default function Header() {
                 
             </div>
             <ul className={styles.navBar}>
-                <li>아우터</li>
-                <li>원피스</li>
-                <li>니트</li>
-                <li>티셔츠</li>
-                <li>블라우스</li>
-                <li>스커트</li>
-                <li>팬츠</li>
-                <li>언더웨어</li>
+                <Link href={`/list/hot`}><li>인기상품</li></Link>
+                <Link href={`/list/top`}><li>상의</li></Link>
+                <Link href={`/list/bottom`}><li>하의</li></Link>
+                <Link href={`/list/onePiece`}><li>원피스</li></Link>
             </ul>
         </div>
     )

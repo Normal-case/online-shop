@@ -81,8 +81,12 @@ export default class API {
         })
     }
 
-    static productGet() {
-        return axios.get(`${domain}/product`)
+    static productGet(filter: string) {
+        return axios.get(`${domain}/product`, {
+            headers: {
+                'filter': filter
+            }
+        })
     }
 
     static productDetail(id: string) {

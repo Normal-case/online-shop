@@ -21,9 +21,36 @@ class ProductStorage {
         return info 
     }
 
-    static async getProduct() {
+    static async getProduct(filter) {
         const dbConnect = dbo.getDB()
-        const productList = await dbConnect.collection('product').find({}).toArray()
+        var productList 
+        if(filter === 'top') {
+            productList = await dbConnect.collection('product').find({
+                $or: [
+                    { category: 'outer' },
+                    { category: 'knit' },
+                    { category: 'tShrit' },
+                    { category: 'blouse' }
+                ]
+            }).toArray()
+        } else if(filter === 'bottom') {
+            productList = await dbConnect.collection('product').find({
+                $or: [
+                    { category: 'skirt' },
+                    { category: 'pants' }
+                ]
+            }).toArray()
+        } else if(filter === 'onePiece') {
+            productList = await dbConnect.collection('product').find({
+                category: 'onePiece'
+            }).toArray()
+        } else if(filter === 'hot') {
+            productList = await dbConnect.collection('product').find({})
+                .sort({purchase: -1}).toArray()
+        } else {
+            productList = await dbConnect.collection('product').find({})
+                .sort({ratingSum: -1}).limit(10).toArray()
+        }
         return productList
     }
 

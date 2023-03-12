@@ -1,0 +1,13 @@
+.body {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.title {
+    font-family: 'NanumSquareNeo';
+    font-size: 20px;
+    width: 1500px;
+    margin: 50px auto;
+    padding-left: 20px;
+}
