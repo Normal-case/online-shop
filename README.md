@@ -5,9 +5,11 @@
 1인 개발을 통해서 현존하는 인터넷 쇼핑몰의 기능을 최대한 구현하는 것을 목적으로 웹 페이지 개발 코딩 실력 향상을 위해 진행하게 되었다.
 
 # 2. 기술 스택
+<div style={display: 'flex'}>
 <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white">
 <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
 <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=white">
+</div>
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=Express&logoColor=white">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=Express&logoColor=white">
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">
