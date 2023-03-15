@@ -115,6 +115,12 @@ export default function Cart() {
             const body = {
                 data: order
             }
+            
+            if(order.length === 0) {
+                alert('상품을 선택해주세요.')
+                return
+            }
+            
             API.order(body)
                 .then(res => {
                     if(res.data.success) {
@@ -134,6 +140,11 @@ export default function Cart() {
             const body = {
                 data: order
             }
+            if(order.length === 0) {
+                alert('상품을 선택해주세요.')
+                return
+            }
+            
             API.order(body)
                 .then(res => {
                     if(res.data.success) {
