@@ -28,5 +28,5 @@
 
 
 # 3.기능명세서
-<img width="500" src="https://user-images.githubusercontent.com/66524625/225435761-cd27e90a-2b87-40b0-ae93-65c42ca70ea3.png">
-<img width="500" src="https://user-images.githubusercontent.com/66524625/225435765-92e09d46-a1b7-4ad6-aa27-04b8b0e4928c.png">
+<img width="700" src="https://user-images.githubusercontent.com/66524625/225435761-cd27e90a-2b87-40b0-ae93-65c42ca70ea3.png">
+<img width="700" src="https://user-images.githubusercontent.com/66524625/225435765-92e09d46-a1b7-4ad6-aa27-04b8b0e4928c.png">
