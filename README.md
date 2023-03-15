@@ -28,3 +28,4 @@
 
 
 # 3.기능 
+<img src="https://user-images.githubusercontent.com/66524625/225435761-cd27e90a-2b87-40b0-ae93-65c42ca70ea3.png">
