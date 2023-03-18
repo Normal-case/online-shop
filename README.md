@@ -47,4 +47,6 @@
 
 ### :sunny: 관리자 기능
 - 관리자 권한의 유저는 상품을 새로 등록 및 수정가능
-- 주문된 상품의 배송상태를 업데이트 
+- 주문된 상품의 배송상태를 업데이트
+
+자세한 기능은 해당 [링크](https://docs.google.com/presentation/d/1YVXrlAsAW4Gnq5_Ei3MVjYumWakKSC7tnccBu6Twus0/edit?usp=sharing)를 클릭해주세요. 
