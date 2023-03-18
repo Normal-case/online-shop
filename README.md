@@ -27,11 +27,6 @@
 
 
 
-# 3.기능명세서
-<img width="700" src="https://user-images.githubusercontent.com/66524625/225435761-cd27e90a-2b87-40b0-ae93-65c42ca70ea3.png">
-<img width="700" src="https://user-images.githubusercontent.com/66524625/225435765-92e09d46-a1b7-4ad6-aa27-04b8b0e4928c.png">
-<img width="700" src="https://user-images.githubusercontent.com/66524625/225435769-ba5ab32c-73a5-42c7-8e69-8e7ac11f0c2d.png">
-<img width="700" src="https://user-images.githubusercontent.com/66524625/225435772-21e603b8-7920-4c41-b588-082a5850ac4d.png">
-<img width="700" src="https://user-images.githubusercontent.com/66524625/225435774-07923d0b-b9e9-4b97-9016-bd21a681aa6c.png">
-<img width="700" src="https://user-images.githubusercontent.com/66524625/225435779-798c30fc-0090-4c4d-bd0d-4675023bfa5f.png">
-<img width="400" src="https://user-images.githubusercontent.com/66524625/225435784-6577d510-c39b-4088-abab-7fa5ea567862.png">
+# 3.주요기능
+
+:art:
