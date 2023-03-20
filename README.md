@@ -53,5 +53,6 @@
 화면설계서를 확인하고 싶다면 해당 [링크](https://docs.google.com/presentation/d/1lqBBX0RLJ0iQNehNoJ3FCF2Lbl057L4YfKKwcS4XekY/edit?usp=sharing)를 클릭해주세요.
 
 # 4. 다음 업데이트
-- [ ] aws 서버 배포
-- [x] url  
+- [ ] 로컬 이미지 저장소를 aws s3 버킷으로 변경
+- [ ] aws ec2 서버, 클라이언트 배포
+- [ ] 배포 웹 사이트 url 적용
