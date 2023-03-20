@@ -51,3 +51,7 @@
 
 자세한 기능은 해당 [링크](https://docs.google.com/presentation/d/1YVXrlAsAW4Gnq5_Ei3MVjYumWakKSC7tnccBu6Twus0/edit?usp=sharing)를 클릭해주세요. <br />
 화면설계서를 확인하고 싶다면 해당 [링크](https://docs.google.com/presentation/d/1lqBBX0RLJ0iQNehNoJ3FCF2Lbl057L4YfKKwcS4XekY/edit?usp=sharing)를 클릭해주세요.
+
+# 4. 다음 업데이트
+- [ ] aws 서버 배포
+- [x] url  
