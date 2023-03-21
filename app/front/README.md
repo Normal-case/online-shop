@@ -15,4 +15,4 @@ CSR만 제공하는 React와 달리 상황에 따라 NextJs는 SSR, SSG를 사�
 # 화면 설계서
 <img width="700" src="https://user-images.githubusercontent.com/66524625/226581045-d5bd51c3-467f-49b1-9a65-f4aef1c6ac65.png" alt='' />
 
-화면 설계서를 확인하려면 해당 [링크](https://docs.google.com/presentation/d/1lqBBX0RLJ0iQNehNoJ3FCF2Lbl057L4YfKKwcS4XekY/edit?usp=sharing)를 클릭하세요.
+화면 설계서를 전체를 확인하려면 해당 [링크](https://docs.google.com/presentation/d/1lqBBX0RLJ0iQNehNoJ3FCF2Lbl057L4YfKKwcS4XekY/edit?usp=sharing)를 클릭하세요.
