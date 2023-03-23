@@ -42,16 +42,17 @@ export default function CreateProduct(props: any) {
         }
 
         if(fileList.length === 0 && props.type === 'update') {
-            let tmpFileList = []
-            for(let i=0;i<imgList.length;i++) {
-                const response = await fetch(imgList[i])
-                const blob = await response.blob()
-                const imgFile = new File([blob], 'image.jpg', { type: blob.type })
-                tmpFileList.push(imgFile)
-            }
-            tmpFileList.forEach(image => {
-                formData.append('img', image)
-            })
+            // let tmpFileList = []
+            // for(let i=0;i<imgList.length;i++) {
+            //     console.log(imgList)
+            //     const response = await fetch(imgList[i])
+            //     const blob = await response.blob()
+            //     const imgFile = new File([blob], 'image.jpg', { type: blob.type })
+            //     tmpFileList.push(imgFile)
+            // }
+            // tmpFileList.forEach(image => {
+            //     formData.append('img', image)
+            // })
             formData.append('id', props.product._id)
         } else if(fileList.length !== 0 && props.type === 'update') {
             fileList.forEach(image => {

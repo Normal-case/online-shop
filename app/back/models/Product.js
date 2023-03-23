@@ -14,7 +14,7 @@ class Product {
         const body = this.body
         let productImage = []
         for(var i=0;i<files.length;i++) {
-            productImage.push(`${domain}/product/${id}_${i}.jpg`)
+            productImage.push(files[i].location)
         }
 
         const info = ProductStorage.createProductInfo(body, productImage, id, user)
@@ -28,24 +28,37 @@ class Product {
         const body = this.body
         let productImage = []
 
-        if(files) {
+        if(files.length > 0) {
             for(let i=0;i<files.length;i++) {
-                productImage.push(`${domain}/product/${body.id}_${i}.jpg`)
+                productImage.push(files[i].location)
             }
+            dbConnect.collection('product').updateOne(
+                { _id: ObjectId(body.id) },
+                { $set: {
+                    name: body.productName,
+                    category: body.productCategory,
+                    price: Number(body.productPrice),
+                    description: body.productDesc,
+                    image: productImage,
+                    updateAt: new Date()
+                }},
+                { upsert: true }
+            )
+        } else {
+            dbConnect.collection('product').updateOne(
+                { _id: ObjectId(body.id) },
+                { $set: {
+                    name: body.productName,
+                    category: body.productCategory,
+                    price: Number(body.productPrice),
+                    description: body.productDesc,
+                    updateAt: new Date()
+                }},
+                { upsert: true }
+            )
         }
         
-        dbConnect.collection('product').updateOne(
-            { _id: ObjectId(body.id) },
-            { $set: {
-                name: body.productName,
-                category: body.productCategory,
-                price: Number(body.productPrice),
-                description: body.productDesc,
-                image: productImage,
-                updateAt: new Date()
-            }},
-            { upsert: true }
-        )
+
     }
 }
 

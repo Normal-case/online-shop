@@ -67,10 +67,9 @@ export default function Product() {
     }, [router])
 
     const handleResponse = (data: Object) => {
-        console.log(data.product)
         const product = data?.product
         const username = getCookie('user')
-        setProduct(product)
+        setProduct(data?.product)
 
         let rate
         if(product.reviews === 0) {
@@ -96,7 +95,7 @@ export default function Product() {
     }
 
     const reviewResponse = (data:Object) => {
-        setReviewList(data.review)
+        setReviewList(data?.review)
     }
 
     const minus = () => {
@@ -352,7 +351,6 @@ export default function Product() {
     }
 
     const reviewDelete = (review: Object) => {
-        console.log(review)
         const body = {
             reviewId: review._id,
             productId: review.productId,
@@ -404,11 +402,15 @@ export default function Product() {
                     <div className={styles.postedInfo}>
                         <div className={styles.posted}>작성자 : {product?.posted}</div>
                         <div className={styles.createAt}>동록일자 : {product?.createAt.split('T')[0]}</div>
-                        <div className={styles.productManageFunc}>
-                            <span onClick={() => setProductModal(true)}>
-                                상품수정
-                            </span>
-                        </div>
+                        {
+                            user === product?.postedUsername ?
+                            <div className={styles.productManageFunc}>
+                                <span onClick={() => setProductModal(true)}>
+                                    상품수정
+                                </span>
+                            </div> : null
+                        }
+
                     </div>
                     {/* 구매 수량 및 금액 */}
                     <div className={styles.selectProduct}>
@@ -468,7 +470,7 @@ export default function Product() {
                 {/* 리뷰 목록 */}
                 <table className={styles.reviewTable}>
                     <tbody>
-                        {
+                        { reviewList.length === 0 ? null :
                             reviewList?.map((review, idx) => {
                                 return (
                                     <tr>
@@ -490,8 +492,7 @@ export default function Product() {
                                                 user === review.username ?
                                                 <div className={styles.ownReview}>
                                                     <span 
-                                                        onClick={                               () => reviewUpdate(review)
-                                                        }
+                                                        onClick={() => reviewUpdate(review)}
                                                     >
                                                         수정하기
                                                     </span>

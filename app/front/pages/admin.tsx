@@ -12,13 +12,7 @@ export default function Admin() {
     const menuData = ['결제완료', '상품준비중', '출고시작', '배송중', '배송완료']
     const [menuIdx, setMenuIdx] = useState(0)
     const [orderList, setOrderList] = useState()
-    const orderStatus = {
-        'paied': '결제완료',
-        'preparing': '상품준비중',
-        'depart': '출고시작',
-        'shipping': '배송중',
-        'delivered': '배송완료'
-    }
+
     const statusIdx = {
         0: 'paied',
         1: 'preparing',

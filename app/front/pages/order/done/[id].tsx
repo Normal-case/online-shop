@@ -23,7 +23,11 @@ export default function OrderDetail() {
     }
 
     const orderStatus = {
-        'paied': '결제완료'
+        'paied': '결제완료',
+        'preparing': '상품준비중',
+        'depart': '출고시작',
+        'shipping': '배송중',
+        'delivered': '배송완료'
     }
 
     useEffect(() => {
@@ -36,6 +40,7 @@ export default function OrderDetail() {
     }, [])
 
     const handleResponse = (data) => {
+        console.log(data.order)
         setOrder(data.order)
         setProductList(data.detail)
         var tmpPrice = 0

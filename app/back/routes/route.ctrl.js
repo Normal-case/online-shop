@@ -102,12 +102,12 @@ const process = {
 
     profile: async (req, res) => {
         const profile = await UserStorage.profileUpdate(req.file, req.body)
-        if(req.file) {
-            // file rename
-            fs.rename(req.file.path, 'files/profile/' + profile.username + 'Profile.jpg', (err) => {
-                if(err) throw err
-            })
-        }
+        // if(req.file) {
+        //     // file rename
+        //     fs.rename(req.file.path, 'files/profile/' + profile.username + 'Profile.jpg', (err) => {
+        //         if(err) throw err
+        //     })
+        // }
 
         return res.status(200)
     },
@@ -118,11 +118,11 @@ const process = {
         const product = new Product(req.body)
         const id = await product.create(req.files, req.user)
 
-        if(req.files) {
-            for(var i=0;i<req.files.length;i++) {
-                fs.rename(req.files[i].path, `files/product/${id}_${i}.jpg`, (err) => {if(err) throw err})
-            }
-        }
+        // if(req.files) {
+        //     for(var i=0;i<req.files.length;i++) {
+        //         fs.rename(req.files[i].path, `files/product/${id}_${i}.jpg`, (err) => {if(err) throw err})
+        //     }
+        // }
 
         return res.status(200).json({ success: true })
     },
@@ -204,17 +204,16 @@ const update = {
         if(tmpProduct.postedUsername !== req.user.username) {
             return res.status(400).json({ success: false, type: 'authority' })
         }
-        
         const product = new Product(req.body)
-        product.update(req.files)
+        await product.update(req.files)
 
-        if(req.files) {
-            for(let i=0;i<req.files.length;i++) {
-                fs.rename(
-                    req.files[i].path, `files/product/${req.body.id}_${i}.jpg`, (err) => {if(err) throw err}
-                )
-            }
-        }
+        // if(req.files) {
+        //     for(let i=0;i<req.files.length;i++) {
+        //         fs.rename(
+        //             req.files[i].path, `files/product/${req.body.id}_${i}.jpg`, (err) => {if(err) throw err}
+        //         )
+        //     }
+        // }
         return res.status(200).json({ success: true })
     },
 

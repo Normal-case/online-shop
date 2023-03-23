@@ -77,7 +77,7 @@ class UserStorage {
         const profile = await dbConnect.collection('profile').findOne({ username: body.username })
         var imagePath = profile.pImage
         if(file) {
-            imagePath = `${domain}/profile/${profile.username}Profile.jpg`
+            imagePath = file.location
         }
 
         // update profile using orm

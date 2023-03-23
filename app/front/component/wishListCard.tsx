@@ -67,6 +67,14 @@ export default function WishListCard(props) {
             productId: props.element.productId
         }
 
+        // 체크된 상품 제거 시 상품 수량과 금액 줄임
+        if(boxCheck) {
+            props.setSelectTotalAmount(props.selectTotalAmount - amount)
+            props.setTotalPrice(
+                props.totalPrice - props.element.productPrice * amount
+            )
+        }
+
         API.wishListDelete(data)
             .then(res => {
                 if(res.data.success) {

@@ -30,6 +30,42 @@ const imageUploader = multer({
     })
 })
 
+const profileUploader = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'onlineshopimage',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        key: (req, file, callback) => {
+            const uploadDirectory = 'profile'
+            const extension = path.extname(file.originalname)
+            if(!allowedExtensions.includes(extension)) {
+                return callback(new Error('wrong extension'))
+            }
+            callback(null, `${uploadDirectory}/${Date.now()}_${file.originalname}`)
+        },
+        acl: 'public-read'
+    })
+})
+
+const productUploader = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'onlineshopimage',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        key: (req, file, callback) => {
+            const uploadDirectory = 'product'
+            const extension = path.extname(file.originalname)
+            if(!allowedExtensions.includes(extension)) {
+                return callback(new Error('wrong extension'))
+            }
+            callback(null, `${uploadDirectory}/${Date.now()}_${file.originalname}`)
+        },
+        acl: 'public-read'
+    })
+})
+
 module.exports = {
-    imageUploader
+    imageUploader,
+    profileUploader,
+    productUploader
 } 
