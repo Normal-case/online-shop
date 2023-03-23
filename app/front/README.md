@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 클라이언트
 
-## Getting Started
+이 온라인쇼핑몰 프로젝트의 프론트엔드 개발에 주로 쓰인 프레임워크는 NextJs이다.
+NextJs는 서버사이드렌더링(SSR)과 클라이언트사이드렌더링(CSR)을 동시에 지원하는 React 기반 웹 프레임워크이다.
 
-First, run the development server:
+### NextJs 사용 이유?
+- 편리한 라우팅 <br />
+라우팅을 나누는 방법이 기존 React를 사용하는 것보다 더 편리하기 때문이다. NextJs의 경우 pages/ 하위폴더에 파일을 경로로 바로 인식한다.
+- 동적 라우팅 <br />
+동적 라우팅 역시 pages/product/[id].tsx 파일을 만들면 쉽게 해당 아이디를 가진 화면으로 접근가능하다.
+- SSR, SSG <br />
+CSR만 제공하는 React와 달리 상황에 따라 NextJs는 SSR, SSG를 사용할 수 있다.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 화면 설계서
+<img width="700" src="https://user-images.githubusercontent.com/66524625/226581045-d5bd51c3-467f-49b1-9a65-f4aef1c6ac65.png" alt='' />
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+화면 설계서를 전체를 확인하려면 해당 [링크](https://docs.google.com/presentation/d/1lqBBX0RLJ0iQNehNoJ3FCF2Lbl057L4YfKKwcS4XekY/edit?usp=sharing)를 클릭하세요.
