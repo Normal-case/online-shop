@@ -13,23 +13,6 @@ const s3 = new AWS.S3()
 
 const allowedExtensions = ['.png', '.jpg', '.jpeg', '.bmp']
 
-const imageUploader = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: 'onlineshopimage',
-        contentType: multerS3.AUTO_CONTENT_TYPE,
-        key: (req, file, callback) => {
-            const uploadDirectory = 'test'
-            const extension = path.extname(file.originalname)
-            if(!allowedExtensions.includes(extension)) {
-                return callback(new Error('wrong extension'))
-            }
-            callback(null, `${uploadDirectory}/${Date.now()}_${file.originalname}`)
-        },
-        acl: 'public-read'
-    })
-})
-
 const profileUploader = multer({
     storage: multerS3({
         s3: s3,
@@ -64,8 +47,25 @@ const productUploader = multer({
     })
 })
 
+const reviewUploader = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'onlineshopimage',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        key: (req, file, callback) => {
+            const uploadDirectory = 'review'
+            const extension = path.extname(file.originalname)
+            if(!allowedExtensions.includes(extension)) {
+                return callback(new Error('wrong extension'))
+            }
+            callback(null, `${uploadDirectory}/${Date.now()}_${file.originalname}`)
+        },
+        acl: 'public-read'
+    })
+})
+
 module.exports = {
-    imageUploader,
     profileUploader,
-    productUploader
+    productUploader,
+    reviewUploader
 } 

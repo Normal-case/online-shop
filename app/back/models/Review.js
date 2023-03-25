@@ -30,7 +30,7 @@ class Review {
 
         let reviewImage = []
         for(let i=0;i<files.length;i++) {
-            reviewImage.push(`${domain}/review/${id}_${i}.jpg`)
+            reviewImage.push(files[i].location)
         }
         const payload = await ReviewStorage.createReviewInfo(body, reviewImage, id, username)
         dbConnect.collection('review').insertOne(payload)
@@ -58,7 +58,7 @@ class Review {
 
         let reviewImage = []
         for(let i=0;i<files.length;i++) {
-            reviewImage.push(`${domain}/review/${body.reviewId}_${i}.jpg`)
+            reviewImage.push(files[i].location)
         }
         const rId = ObjectId(body.reviewId)
 

@@ -155,20 +155,8 @@ const process = {
         const result = await review.create(req.files, req.user.username)
         
         if(result.success) {
-            if(req.files) {
-                for(let i=0;i<req.files.length;i++) {
-                    fs.rename(req.files[i].path, `files/review/${result.id}_${i}.jpg`, (err) => {if(err) throw err})
-                }
-            }
-
             return res.status(200).json({ success: true })
         } else {
-            if(req.files) {
-                for(let i=0;i<req.files.length;i++) {
-                    fs.unlink(req.files[i].path, err => {if(err) throw err})
-                }
-            }
-
             if(result.type === 'exist') {
                 return res.status(400).json({ success: false, type: 'exist' })
             } else {
@@ -222,20 +210,8 @@ const update = {
         const result = await review.update(req.files, req.user.username)
 
         if(result.success) {
-            if(req.files) {
-                for(let i=0;i<req.files.length;i++) {
-                    fs.rename(req.files[i].path, `files/review/${req.body.reviewId}_${i}.jpg`, (err) => {if(err) throw err})
-                }
-            }
-
             return res.status(200).json({ success: true })
         } else {
-            if(req.files) {
-                for(let i=0;i<req.files.length;i++) {
-                    fs.unlink(req.files[i].path, err => {if(err) throw err})
-                }
-            }
-
             return res.status(400).json({ success: false, type: 'exist' })
         }
     }
