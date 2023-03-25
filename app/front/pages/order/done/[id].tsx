@@ -37,7 +37,7 @@ export default function OrderDetail() {
                 .then(res => handleResponse(res.data.data))
                 .catch(console.log)
         }
-    }, [])
+    }, [router])
 
     const handleResponse = (data) => {
         console.log(data.order)

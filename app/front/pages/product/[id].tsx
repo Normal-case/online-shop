@@ -19,6 +19,7 @@ export default function Product() {
     const [amount, setAmount] = useState(1)
     const [modal, setModal] = useState(false)
     const [heart, setHeart] = useState(false)
+    const [author, setAuthor] = useState('')
 
     // 상품 모달
     const [productModal, setProductModal] = useState(false)
@@ -70,6 +71,7 @@ export default function Product() {
         const product = data?.product
         const username = getCookie('user')
         setProduct(data?.product)
+        setAuthor(data?.product.postedUsername)
 
         let rate
         if(product.reviews === 0) {
@@ -388,7 +390,6 @@ export default function Product() {
                 {/* 사진 부분 */}
                 <div className={styles.imageContainer}>
                     <ImageSlider product={product} />
-                    
                 </div>
                 {/* 내용 부분 */}
                 <div className={styles.contents}>
@@ -403,7 +404,7 @@ export default function Product() {
                         <div className={styles.posted}>작성자 : {product?.posted}</div>
                         <div className={styles.createAt}>동록일자 : {product?.createAt.split('T')[0]}</div>
                         {
-                            user === product?.postedUsername ?
+                            user === author ?
                             <div className={styles.productManageFunc}>
                                 <span onClick={() => setProductModal(true)}>
                                     상품수정
@@ -468,78 +469,71 @@ export default function Product() {
                 </div>
 
                 {/* 리뷰 목록 */}
-                <table className={styles.reviewTable}>
-                    <tbody>
-                        { reviewList.length === 0 ? null :
-                            reviewList?.map((review, idx) => {
-                                return (
-                                    <tr>
-                                        <td className={styles.left}>
-                                            <div className={styles.profile}>
-                                                <div>
-                                                    <img 
-                                                        src={review.pImage}
-                                                        width={80}
-                                                        height={80}
-                                                        className={styles.profileImg}
-                                                    />
-                                                </div>
-                                                <div className={styles.username}>
-                                                    {review.nickname}
-                                                </div>
-                                            </div>
-                                            {
-                                                user === review.username ?
-                                                <div className={styles.ownReview}>
-                                                    <span 
-                                                        onClick={() => reviewUpdate(review)}
-                                                    >
-                                                        수정하기
-                                                    </span>
-                                                    <span
-                                                        onClick={
-                                                            () => reviewDelete(review)
-                                                        }
-                                                    >
-                                                        삭제하기
-                                                    </span>
-                                                </div> : null
-                                            }
-                                        </td>
-                                        <td className={styles.right}>
-                                            <ul className={styles.heartDisplay}>
-                                                {
-                                                    reviewRateRendering(review.rating, false)
-                                                }
-                                            </ul>
-                                            <span>
-                                                {review.contents}
+                <div>
+                    {
+                        reviewList?.map((review, idx) => {
+                            return (
+                                <div className={styles.reviewComponent}>
+                                    <div className={styles.left}>
+                                        <div className={styles.profile}>
+                                            <img
+                                                src={review.pImage}
+                                                width={80}
+                                                height={80}
+                                                className={styles.profileImg}
+                                            />
+                                            <span className={styles.username}>
+                                                {review.nickname}
                                             </span>
-                                            <div className={styles.productImgContainer}>
-                                                {
-                                                    review.image.map((img) => {
-                                                        return (
-                                                            <img
-                                                                src={img}
-                                                                width={130}
-                                                                height={150}
-                                                                className={
-                                                                    styles.productImg
-                                                                }
-                                                            />
-                                                        )            
-                                                    })
-                                                }
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                        
-                    </tbody>
-                </table>
+                                        </div>
 
+                                        {
+                                            user === review.username ?
+                                            <div className={styles.ownReview}>
+                                                <span
+                                                    onClick={() => reviewUpdate(review)}
+                                                >
+                                                    수정하기
+                                                </span>
+                                                <span
+                                                    onClick={() => reviewDelete(review)}
+                                                >
+                                                    삭제하기
+                                                </span>
+                                            </div> : null
+                                        }
+                                    </div>
+                                    <div className={styles.right}>
+                                        <ul className={styles.heartDisplay}>
+                                            {
+                                                reviewRateRendering(review.rating, false)
+                                            }
+                                        </ul>
+                                        <span>
+                                            {review.contents}
+                                        </span>
+                                        <div className={styles.productImgContainer}>
+                                            {
+                                                review.image.map((img) => {
+                                                    return (
+                                                        <img
+                                                            src={img}
+                                                            width={130}
+                                                            height={150}
+                                                            className={
+                                                                styles.productImg
+                                                            }
+                                                        />
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
             {/* 장바구니 등록 모달 */}
             {

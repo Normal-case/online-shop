@@ -331,19 +331,12 @@
     border: 1px solid #aaaaaa;
 }
 
-.reviewTable {
-    border-top: 1px solid #dcdcdc;
-    border-collapse: collapse;
-    margin-top: 100px;
+.reviewComponent {
+    display: flex;
     width: 1200px;
-}
-
-.reviewTable tr {
+    margin: 50px 0;
     border-top: 1px solid #dcdcdc;
-}
-
-.reviewTable td {
-    padding: 50px 20px;
+    padding: 30px 5px;
 }
 
 .left {
@@ -352,6 +345,7 @@
 }
 
 .right {
+    width: 700px;
     text-align: left;
 }
 
