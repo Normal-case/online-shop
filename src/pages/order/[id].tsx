@@ -190,7 +190,7 @@ export default function Order() {
                             {
                                 productList.map((product, idx) => {
                                     return (
-                                        <tr>
+                                        <tr key={idx}>
                                             <td className={styles.imageTd}>
                                                 <img src={product.image} width={110} height={110} alt='' />
                                             </td>

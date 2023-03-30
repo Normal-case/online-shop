@@ -210,7 +210,8 @@ export default function Cart() {
                         menuIdx === 0 && wishList.length > 0 ?
                         wishList.map((wish, idx) => {
                             return (
-                                <WishListCard 
+                                <WishListCard
+                                    key={idx}
                                     index={idx}
                                     element={wish} 
                                     selectTotalAmount={selectTotalAmount}
@@ -229,6 +230,7 @@ export default function Cart() {
                         likedList.map((liked, idx) => {
                             return (
                                 <LikedCard
+                                    key={idx}
                                     index={idx}
                                     element={liked}
                                     selectTotalAmount={selectTotalAmount}

@@ -76,7 +76,7 @@ export default function OrderDetail() {
                             {
                                 productList.map((product, idx) => {
                                     return (
-                                        <tr>
+                                        <tr key={idx}>
                                             <td className={styles.imageTd}>
                                                 <img 
                                                     src={product.image}

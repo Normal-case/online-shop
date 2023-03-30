@@ -473,7 +473,7 @@ export default function Product() {
                     {
                         reviewList?.map((review, idx) => {
                             return (
-                                <div className={styles.reviewComponent}>
+                                <div className={styles.reviewComponent} key={idx}>
                                     <div className={styles.left}>
                                         <div className={styles.profile}>
                                             <img
@@ -518,6 +518,7 @@ export default function Product() {
                                                     return (
                                                         <img
                                                             src={img}
+                                                            key={idx}
                                                             width={130}
                                                             height={150}
                                                             className={
