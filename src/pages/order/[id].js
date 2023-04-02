@@ -71,37 +71,37 @@ export default function Order() {
         setModal(true)
     }
 
-    const handleComplete = (data: Object) => {
+    const handleComplete = (data) => {
         setModal(false)
         setAddress(data.address)
         setZoneCode(data.zonecode)
     }
 
-    const nicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nicknameChange = (e) => {
         setNickname(e.target.value)
     }
 
-    const phoneFChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const phoneFChange = (e) => {
         setPhoneF(e.target.value)
     }
 
-    const phoneSChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const phoneSChange = (e) => {
         setPhoneS(e.target.value)
     }
 
-    const phoneTChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const phoneTChange = (e) => {
         setPhoneT(e.target.value)
     }
 
-    const emailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const emailChange = (e) => {
         setEmail(e.target.value)
     }
 
-    const detailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const detailChange = (e) => {
         setDetail(e.target.value)
     }
 
-    const menoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const menoChange = (e) => {
         setMemo(e.target.value)
     }
 

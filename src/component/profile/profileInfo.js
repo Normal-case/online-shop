@@ -5,7 +5,7 @@ import styles from '../../styles/Profile.module.css'
 import { getCookie } from 'cookies-next'
 import API from '../../api-server'
 
-export default function ProfileInfo(props: any) {
+export default function ProfileInfo(props) {
     /* props
     variable
     profile: 프로필 내용
@@ -32,12 +32,12 @@ export default function ProfileInfo(props: any) {
         
     }, [profile])
 
-    const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleProfileImage = (e) => {
         setFile(e.target.files[0])
         setProfileImage(URL.createObjectURL(e.target.files[0]))
     }
 
-    const changeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeNickname = (e) => {
         setNickname(e.target.value)
     }
 
@@ -46,7 +46,7 @@ export default function ProfileInfo(props: any) {
         props.function.setModal(true)
     }
 
-    const detailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const detailChange = (e) => {
         props.function.setDetail(e.target.value)
     }
 

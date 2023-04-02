@@ -57,7 +57,7 @@ export default function Cart() {
         setLikedListAmount(tmpLikedList)
     }, [menuIdx])
 
-    const handleWishListAmount = (amount: Number, id: string, checkBox: boolean, index: Number) => {
+    const handleWishListAmount = (amount, id, checkBox, index) => {
         let newArr = [...wishListAmount]
         newArr[index].amount = amount
         newArr[index].productId = id
@@ -65,7 +65,7 @@ export default function Cart() {
         setWishListAmount(newArr)
     }
 
-    const handleLikedListAmount = (amount: Number, id: string, checkBox: boolean, index: Number) => {
+    const handleLikedListAmount = (amount, id, checkBox, index) => {
         let newArr = [...likedListAmount]
         newArr[index].amount = amount
         newArr[index].productId = id

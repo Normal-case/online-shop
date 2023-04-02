@@ -48,7 +48,7 @@ export default function Profile() {
             .catch(console.log)
     }, [])
 
-    const handleResponse = (res: any) => {
+    const handleResponse = (res) => {
         if(res.data.accesstoken) {
             setToken(res.data.accesstoken)
         }
@@ -63,7 +63,7 @@ export default function Profile() {
         setDetail(profile.detail)
     }
 
-    const handleComplete = (data: Object) => {
+    const handleComplete = (data) => {
         setModal(false)
         setAddress(data.address)
         setZoneCode(data.zonecode)

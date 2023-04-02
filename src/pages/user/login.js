@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import API from '../../api-server'
-import { setToken, tokenCheck } from '../../module/Token'
+import { setToken } from '../../module/Token'
 
 export default function Login() {
     const router = useRouter()
@@ -19,10 +19,10 @@ export default function Login() {
             .catch(console.log)
     }, [])
 
-    const sendLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const sendLoginForm = (e) => {
         e.preventDefault()
-        const formData = e.target as HTMLFormElement
-        const body: Object = {
+        const formData = e.target
+        const body = {
             username: formData.username.value,
             password: formData.password.value
         }

@@ -67,7 +67,7 @@ export default function Product() {
         }
     }, [router])
 
-    const handleResponse = (data: Object) => {
+    const handleResponse = (data) => {
         const product = data?.product
         const username = getCookie('user')
         setProduct(data?.product)
@@ -96,7 +96,7 @@ export default function Product() {
             .catch(console.log)  
     }
 
-    const reviewResponse = (data:Object) => {
+    const reviewResponse = (data) => {
         setReviewList(data?.review)
     }
 
@@ -208,11 +208,11 @@ export default function Product() {
         setReviewModal(true)
     }
 
-    const rateChange = (idx: number) => {
+    const rateChange = (idx) => {
         setReviewRating(idx+1)
     }
 
-    const reviewRateRendering = (rate: number, click: boolean) => {
+    const reviewRateRendering = (rate, click) => {
         var result = []
         for(var i=0;i<5;i++) {
             var heart
@@ -259,11 +259,11 @@ export default function Product() {
         return result
     }
 
-    const changeDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeDesc = (e) => {
         setReviewContents(e.target.value) 
     }
 
-    const changeProductImage = (e: any) => {
+    const changeProductImage = (e) => {
         let files = e.target.files
         let tmpImageList = []
         let tmpFileList = []
@@ -275,7 +275,7 @@ export default function Product() {
         setFileList(tmpFileList)
     }
 
-    const onSubmitReviewUpdate = (id: string, prevRating: number) => {
+    const onSubmitReviewUpdate = (id, prevRating) => {
         if(reviewContents.replace(/(\s*)/g, "").length < 10) {
             alert('리뷰를 10글자 이상 작성해주세요.')
             return
@@ -344,7 +344,7 @@ export default function Product() {
             })
     }
 
-    const reviewUpdate = (review: Object) => {
+    const reviewUpdate = (review) => {
         setReviewForUdpate(review)
         setReviewContents(review.contents)
         setImageList(review.image)
@@ -352,7 +352,7 @@ export default function Product() {
         setReviewModal(true)
     }
 
-    const reviewDelete = (review: Object) => {
+    const reviewDelete = (review) => {
         const body = {
             reviewId: review._id,
             productId: review.productId,

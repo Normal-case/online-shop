@@ -40,7 +40,6 @@ export default function OrderDetail() {
     }, [router])
 
     const handleResponse = (data) => {
-        console.log(data.order)
         setOrder(data.order)
         setProductList(data.detail)
         var tmpPrice = 0

@@ -70,7 +70,7 @@ export default class API {
         })
     }
 
-    static productUpdate(body) {
+    static productUpdate(body: any) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
         return axios.put(`${domain}/product`, body, {
@@ -234,7 +234,7 @@ export default class API {
         }) 
     }
 
-    static createReview(body) {
+    static createReview(body: any) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
         return axios.post(`${domain}/review`, body, {
@@ -258,7 +258,7 @@ export default class API {
         })
     }
 
-    static updateReview(body) {
+    static updateReview(body: any) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
         return axios.put(`${domain}/review`, body, {
@@ -270,7 +270,7 @@ export default class API {
         })
     }
 
-    static deleteReview(body) {
+    static deleteReview(body: any) {
         const accesstoken = getCookie('accesstoken')
         const refreshtoken = getCookie('refreshtoken')
         return axios.delete(`${domain}/review`, { data: body, headers: {

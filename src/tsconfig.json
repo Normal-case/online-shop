@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.js", "pages/admin.js", "pages/user/register.js", "pages/user/profile.js", "pages/user/login.js", "pages/user/cart.js", "pages/product/[id].js", "pages/order/[id].js", "pages/order/done/[id].js", "pages/list/[option].js", "module/Token.js", "component/wishListCard.js", "component/likedCard.js", "component/ImageSlider.js", "component/header.js", "component/footer.js", "component/profile/profileInfo.js", "component/profile/productStatus.js", "component/profile/createProduct.js", "component/modal/reviewModal.js", "component/main/grid.js"],
   "exclude": ["node_modules"]
 }

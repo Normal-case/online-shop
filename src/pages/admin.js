@@ -11,7 +11,7 @@ export default function Admin() {
     const router = useRouter()
     const menuData = ['결제완료', '상품준비중', '출고시작', '배송중', '배송완료']
     const [menuIdx, setMenuIdx] = useState(0)
-    const [orderList, setOrderList] = useState()
+    const [orderList, setOrderList] = useState([])
 
     const statusIdx = {
         0: 'paied',

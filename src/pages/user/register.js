@@ -6,10 +6,10 @@ export default function Register() {
 
     const [errorMsg, setErrorMsg] = useState("")
 
-    const sendRegisterForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const sendRegisterForm = (e) => {
         e.preventDefault()
-        const formData = e.target as HTMLFormElement
-        const body: Object = {
+        const formData = e.target
+        const body = {
             name: formData.name.value,
             username: formData.username.value,
             password: formData.password.value
@@ -20,7 +20,7 @@ export default function Register() {
         }
     }
 
-    const handleGetResponse = (res: Object) => {
+    const handleGetResponse = (res) => {
         if(res.data.success) {
             alert('회원가입이 완료되었습니다.')
             location.href = '/user/login'
@@ -29,7 +29,7 @@ export default function Register() {
         }
     }
 
-    const formErrorHandler = (formData: HTMLFormElement) => {
+    const formErrorHandler = (formData) => {
         const name = formData.name.value
         const username = formData.username.value
         const psword = formData.password.value
@@ -49,7 +49,7 @@ export default function Register() {
 
     }
 
-    const passwordPolicy = (psword: String, pswordConfirm: String) => {
+    const passwordPolicy = (psword, pswordConfirm) => {
         // password is required
         if (!psword || !pswordConfirm) {
             setErrorMsg('비밀번호를 입력해주세요')

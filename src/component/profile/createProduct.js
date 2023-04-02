@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import styles from '../../styles/component/CreateProduct.module.css'
 import API from '../../api-server'
 
-export default function CreateProduct(props: any) {
+export default function CreateProduct(props) {
     /* setMenuIdx: form 초기화를 위한 메뉴 인덱스 함수 */ 
     const router = useRouter()
     const selectOptions = [
@@ -42,17 +42,6 @@ export default function CreateProduct(props: any) {
         }
 
         if(fileList.length === 0 && props.type === 'update') {
-            // let tmpFileList = []
-            // for(let i=0;i<imgList.length;i++) {
-            //     console.log(imgList)
-            //     const response = await fetch(imgList[i])
-            //     const blob = await response.blob()
-            //     const imgFile = new File([blob], 'image.jpg', { type: blob.type })
-            //     tmpFileList.push(imgFile)
-            // }
-            // tmpFileList.forEach(image => {
-            //     formData.append('img', image)
-            // })
             formData.append('id', props.product._id)
         } else if(fileList.length !== 0 && props.type === 'update') {
             fileList.forEach(image => {
@@ -95,7 +84,7 @@ export default function CreateProduct(props: any) {
         
     }
 
-    const changeProductName = (e: any) => {
+    const changeProductName = (e) => {
         const value = e.target.value
         setProductName(value)
 
@@ -106,7 +95,7 @@ export default function CreateProduct(props: any) {
         }
     }
 
-    const changeCategory = (e: any) => {
+    const changeCategory = (e) => {
         const value = e.target.value
         setProductCategory(value)
 
@@ -117,7 +106,7 @@ export default function CreateProduct(props: any) {
         }
     }
 
-    const changePrice = (e: any) => {
+    const changePrice = (e) => {
         const value = e.target.value
         setProductPrice(value)
 
@@ -128,7 +117,7 @@ export default function CreateProduct(props: any) {
         }
     }
 
-    const changeDesc = (e: any) => {
+    const changeDesc = (e) => {
         const value = e.target.value
         setProductDesc(value)
 
@@ -139,7 +128,7 @@ export default function CreateProduct(props: any) {
         }
     }
 
-    const changeProductImage = (e: any) => {
+    const changeProductImage = (e) => {
         let files = e.target.files
         let tmpImageList = []
         let tmpFileList = []

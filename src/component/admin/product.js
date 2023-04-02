@@ -16,6 +16,7 @@ export default function ProductStatus({ orderArr, status, idx, setMenuIdx }) {
         'shipping': '배송중',
         'delivered': '배송완료'
     }
+
     const nextStatus = {
         'paied': 'preparing',
         'preparing': 'depart',
@@ -34,9 +35,13 @@ export default function ProductStatus({ orderArr, status, idx, setMenuIdx }) {
     }, [])
 
     useEffect(() => {
-        const result = cardIdx.reduce(function add(sum, value) {
-            return sum + value
-        }, 0)
+        // const result = cardIdx.reduce(function add(sum, value) {
+        //     return sum + value
+        // }, 0)
+        var result = 0
+        for(var i=0;i<cardIdx.length;i++) {
+            if(cardIdx) result = result + 1
+        }
         setSumIdx(result)
     }, [cardIdx])
 
@@ -51,7 +56,7 @@ export default function ProductStatus({ orderArr, status, idx, setMenuIdx }) {
         setSumIdx(0)
     }, [idx])
 
-    const clickCard = (idx: number) => {
+    const clickCard = (idx) => {
         var newArr = [...cardIdx]
         newArr[idx] = !cardIdx[idx]
         setCardIdx(newArr)

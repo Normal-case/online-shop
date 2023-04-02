@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react'
 import styles from '../../styles/component/ProductStatus.module.css'
-import API from '../../api-server'
 import Link from 'next/link'
 
 export default function ProductStatus({ orderArr, status }) {
