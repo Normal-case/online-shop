@@ -13,7 +13,7 @@ export default function Home() {
       <Header />
       {/* 홈페이지에 노출되는 메인 카드 */}
       <div className={styles.mainCard}>
-        <Image src='/img/banner.webp' layout='fill' alt='' objectFit='contain' />
+        <Image src='/img/banner.png' layout='fill' alt='' objectFit='contain' />
       </div>
       {/* 전체 상품들 그리드 형태로 제공 */}
       <div className={styles.subtitle}>
