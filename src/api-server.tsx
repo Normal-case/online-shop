@@ -2,7 +2,7 @@ import axios from 'axios'
 import { deleteCookie, getCookie } from 'cookies-next'
 
 // const domain: string = "http://localhost:8000"
-const domain: string = "http://13.209.42.103:8000"
+const domain: string = "https://norm-onlineshop-api.shop"
 
 export default class API {
     static tokenVerify() {
