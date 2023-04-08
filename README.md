@@ -54,12 +54,16 @@
 
 # 4. GET START
 URL: [https://norm-onlineshop.shop](https://norm-onlineshop.shop)
+사이트의 다양한 기능을 체험하기 위해서는 로그인을 해야합니다. 아래의 계정을 사용해서 사이트의 기능을 이용해주세요.
 ### 관리자 아이디
 - username: manager
 - password: skxcnr1122
 ### 유저 아이디
 - username: user
 - password: skxcnr1122
+위의 계정 외에 직접 회원가입 후 사이트를 체험도 가능합니다.
+비밀번호 정책의 경우 영문과 숫자 동시에 사용하여 8자 이상 20자 이하의 비밀번호를 만들어주세요.
+
 # 5. 다음 업데이트 📃
 - [x] 로컬 이미지 저장소를 aws s3 버킷으로 변경
 - [x] aws ec2 서버, 클라이언트 배포
