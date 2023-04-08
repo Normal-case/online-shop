@@ -60,7 +60,8 @@ URL: [https://norm-onlineshop.shop](https://norm-onlineshop.shop) <br />
 - password: skxcnr1122
 ### 유저 아이디
 - username: user
-- password: skxcnr1122 <br />
+- password: skxcnr1122
+<br />
 위의 계정 외에 직접 회원가입 후 사이트를 체험도 가능합니다. <br />
 비밀번호 정책의 경우 영문과 숫자 동시에 사용하여 8자 이상 20자 이하의 비밀번호를 만들어주세요.
 
