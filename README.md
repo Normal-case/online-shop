@@ -54,6 +54,10 @@
 
 # 4. GET START
 URL: [https://norm-onlineshop.shop](https://norm-onlineshop.shop)
+### 관리자 아이디
+username: 
+password: 
+### 유저 아이디
 
 # 5. 다음 업데이트 📃
 - [x] 로컬 이미지 저장소를 aws s3 버킷으로 변경
