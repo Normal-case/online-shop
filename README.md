@@ -53,15 +53,15 @@
 화면설계서를 확인하고 싶다면 해당 [링크](https://docs.google.com/presentation/d/1lqBBX0RLJ0iQNehNoJ3FCF2Lbl057L4YfKKwcS4XekY/edit?usp=sharing)를 클릭해주세요.
 
 # 4. GET START
-URL: [https://norm-onlineshop.shop](https://norm-onlineshop.shop)
+URL: [https://norm-onlineshop.shop](https://norm-onlineshop.shop) <br />
 사이트의 다양한 기능을 체험하기 위해서는 로그인을 해야합니다. 아래의 계정을 사용해서 사이트의 기능을 이용해주세요.
 ### 관리자 아이디
 - username: manager
 - password: skxcnr1122
 ### 유저 아이디
 - username: user
-- password: skxcnr1122
-위의 계정 외에 직접 회원가입 후 사이트를 체험도 가능합니다.
+- password: skxcnr1122 <br />
+위의 계정 외에 직접 회원가입 후 사이트를 체험도 가능합니다. <br />
 비밀번호 정책의 경우 영문과 숫자 동시에 사용하여 8자 이상 20자 이하의 비밀번호를 만들어주세요.
 
 # 5. 다음 업데이트 📃
