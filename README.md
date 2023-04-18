@@ -30,9 +30,9 @@ Backend: [https://github.com/Normal-case/online-shop-api](https://github.com/Nor
 </div>
 
 # 3. 시스템 아키텍처
-<img src="https://user-images.githubusercontent.com/66524625/232783746-ead03ff7-19bb-4143-bf63-b55d39171cd8.png" />
+<img width="700" src="https://user-images.githubusercontent.com/66524625/232783746-ead03ff7-19bb-4143-bf63-b55d39171cd8.png" />
 
-# 3.주요기능 :computer:
+# 4.주요기능 :computer:
 ### :sunny: 사용자 계정 생성 및 수정
 - 회원가입을 통해 사용자 계정을 생성
 - 생성된 계정 로그인, 로그아웃
@@ -57,7 +57,7 @@ Backend: [https://github.com/Normal-case/online-shop-api](https://github.com/Nor
 자세한 기능은 해당 [링크](https://docs.google.com/presentation/d/1YVXrlAsAW4Gnq5_Ei3MVjYumWakKSC7tnccBu6Twus0/edit?usp=sharing)를 클릭해주세요. <br />
 화면설계서를 확인하고 싶다면 해당 [링크](https://docs.google.com/presentation/d/1lqBBX0RLJ0iQNehNoJ3FCF2Lbl057L4YfKKwcS4XekY/edit?usp=sharing)를 클릭해주세요.
 
-# 4. GET START
+# 5. GET START
 URL: [https://norm-onlineshop.shop](https://norm-onlineshop.shop) <br />
 사이트의 다양한 기능을 체험하기 위해서는 로그인을 해야합니다. 아래의 계정을 사용해서 사이트의 기능을 이용해주세요.
 ### 관리자 아이디
@@ -70,7 +70,7 @@ URL: [https://norm-onlineshop.shop](https://norm-onlineshop.shop) <br />
 위의 계정 외에 직접 회원가입 후 사이트를 체험도 가능합니다. <br />
 <strong>비밀번호 정책의 경우 영문과 숫자 동시에 사용하여 8자 이상 20자 이하의 비밀번호</strong>를 만들어주세요.
 
-# 5. 다음 업데이트 📃
+# 6. 다음 업데이트 📃
 - [x] 로컬 이미지 저장소를 aws s3 버킷으로 변경
 - [x] aws ec2 서버, 클라이언트 배포
 - [x] 배포 웹 사이트 url 적용
