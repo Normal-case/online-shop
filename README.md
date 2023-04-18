@@ -29,7 +29,8 @@ Backend: [https://github.com/Normal-case/online-shop-api](https://github.com/Nor
   <img src="https://img.shields.io/badge/AWS EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
 </div>
 
-
+# 3. 시스템 아키텍처
+<img src="https://user-images.githubusercontent.com/66524625/232783746-ead03ff7-19bb-4143-bf63-b55d39171cd8.png" />
 
 # 3.주요기능 :computer:
 ### :sunny: 사용자 계정 생성 및 수정
