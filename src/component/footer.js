@@ -22,9 +22,9 @@ export default function Footer() {
                 <div className={styles.title}>
                     Connect
                 </div>
-                <p className={styles.descripton}>
+                {/* <p className={styles.descripton}>
                     이메일: 8282chan94@gmail.com
-                </p>
+                </p> */}
                 <p className={styles.descripton}>
                     github: &nbsp;
                     <span onClick={() => {
